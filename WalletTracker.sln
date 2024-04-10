@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WalletTracker.Application",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WalletTracker.Infrastructure", "WalletTracker.Infrastructure\WalletTracker.Infrastructure.csproj", "{AF5764AC-D838-40AD-87E5-4DE7687D75D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WalletTracker.MVC", "WalletTracker.MVC\WalletTracker.MVC.csproj", "{9BC3464F-75FB-40B1-B28D-B93B3B07408D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WalletTracker.MVC", "WalletTracker.MVC\WalletTracker.MVC.csproj", "{9BC3464F-75FB-40B1-B28D-B93B3B07408D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
