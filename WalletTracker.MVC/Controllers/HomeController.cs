@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using WalletTracker.Models;
+using WalletTracker.MVC.Models;
 
-namespace WalletTracker.Controllers
+namespace WalletTracker.MVC.Controllers
 {
     public class HomeController : Controller
     {

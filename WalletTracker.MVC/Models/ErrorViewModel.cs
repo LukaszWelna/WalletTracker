@@ -1,4 +1,4 @@
-namespace WalletTracker.Models
+namespace WalletTracker.MVC.Models
 {
     public class ErrorViewModel
     {
