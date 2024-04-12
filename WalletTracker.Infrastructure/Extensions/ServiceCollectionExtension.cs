@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WalletTracker.Infrastructure.Persistence;
+using WalletTracker.Infrastructure.Seeders;
 
 namespace WalletTracker.Infrastructure.Extensions
 {
@@ -21,8 +22,10 @@ namespace WalletTracker.Infrastructure.Extensions
 
             services.AddDefaultIdentity<IdentityUser>()
                 .AddEntityFrameworkStores<WalletTrackerDbContext>();
+
+            services.AddScoped<IncomeCategoriesDefaultSeeder>();
+            services.AddScoped<ExpenseCategoriesDefaultSeeder>();
+            services.AddScoped<PaymentMethodsDefaultSeeder>();
         }
-
-
     }
 }

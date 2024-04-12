@@ -7,12 +7,13 @@ using System.Threading.Tasks;
 
 namespace WalletTracker.Domain.Entities
 {
-    public class PaymentMethodsAssignedToUsers
+    public class ExpenseCategoryAssignedToUser
     {
         public int Id { get; set; }
         public string UserId { get; set; } = default!;
         public IdentityUser User { get; set; } = default!;
         public string Name { get; set; } = default!;
-        public List<Expenses> Expenses { get; set; } = new List<Expenses>();
+        public List<Expense> Expenses { get; set; } = new List<Expense>();
+        public decimal? Limit { get; set; }
     }
 }
