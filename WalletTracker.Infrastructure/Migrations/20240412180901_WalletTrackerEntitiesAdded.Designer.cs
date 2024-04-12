@@ -12,7 +12,7 @@ using WalletTracker.Infrastructure.Persistence;
 namespace WalletTracker.Infrastructure.Migrations
 {
     [DbContext(typeof(WalletTrackerDbContext))]
-    [Migration("20240412164655_WalletTrackerEntitiesAdded")]
+    [Migration("20240412180901_WalletTrackerEntitiesAdded")]
     partial class WalletTrackerEntitiesAdded
     {
         /// <inheritdoc />
@@ -227,51 +227,7 @@ namespace WalletTracker.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("WalletTracker.Domain.Entities.ExpenseCategoriesAssignedToUsers", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<decimal?>("Limit")
-                        .HasPrecision(10, 2)
-                        .HasColumnType("decimal(10,2)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("varchar(50)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("ExpenseCategoriesAssignedToUsers");
-                });
-
-            modelBuilder.Entity("WalletTracker.Domain.Entities.ExpenseCategoriesDefault", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("varchar(50)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ExpenseCategoriesDefault");
-                });
-
-            modelBuilder.Entity("WalletTracker.Domain.Entities.Expenses", b =>
+            modelBuilder.Entity("WalletTracker.Domain.Entities.Expense", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -313,13 +269,17 @@ namespace WalletTracker.Infrastructure.Migrations
                     b.ToTable("Expenses");
                 });
 
-            modelBuilder.Entity("WalletTracker.Domain.Entities.IncomeCategoriesAssignedToUsers", b =>
+            modelBuilder.Entity("WalletTracker.Domain.Entities.ExpenseCategoryAssignedToUser", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<decimal?>("Limit")
+                        .HasPrecision(10, 2)
+                        .HasColumnType("decimal(10,2)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -333,10 +293,10 @@ namespace WalletTracker.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("IncomeCategoriesAssignedToUsers");
+                    b.ToTable("ExpenseCategoriesAssignedToUsers");
                 });
 
-            modelBuilder.Entity("WalletTracker.Domain.Entities.IncomeCategoriesDefault", b =>
+            modelBuilder.Entity("WalletTracker.Domain.Entities.ExpenseCategoryDefault", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -350,10 +310,10 @@ namespace WalletTracker.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("IncomeCategoriesDefault");
+                    b.ToTable("ExpenseCategoriesDefault");
                 });
 
-            modelBuilder.Entity("WalletTracker.Domain.Entities.Incomes", b =>
+            modelBuilder.Entity("WalletTracker.Domain.Entities.Income", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -390,7 +350,47 @@ namespace WalletTracker.Infrastructure.Migrations
                     b.ToTable("Incomes");
                 });
 
-            modelBuilder.Entity("WalletTracker.Domain.Entities.PaymentMethodsAssignedToUsers", b =>
+            modelBuilder.Entity("WalletTracker.Domain.Entities.IncomeCategoryAssignedToUser", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("IncomeCategoriesAssignedToUsers");
+                });
+
+            modelBuilder.Entity("WalletTracker.Domain.Entities.IncomeCategoryDefault", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("IncomeCategoriesDefault");
+                });
+
+            modelBuilder.Entity("WalletTracker.Domain.Entities.PaymentMethodAssignedToUser", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -413,7 +413,7 @@ namespace WalletTracker.Infrastructure.Migrations
                     b.ToTable("PaymentMethodsAssignedToUsers");
                 });
 
-            modelBuilder.Entity("WalletTracker.Domain.Entities.PaymentMethodsDefault", b =>
+            modelBuilder.Entity("WalletTracker.Domain.Entities.PaymentMethodDefault", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -481,26 +481,15 @@ namespace WalletTracker.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("WalletTracker.Domain.Entities.ExpenseCategoriesAssignedToUsers", b =>
+            modelBuilder.Entity("WalletTracker.Domain.Entities.Expense", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("WalletTracker.Domain.Entities.Expenses", b =>
-                {
-                    b.HasOne("WalletTracker.Domain.Entities.ExpenseCategoriesAssignedToUsers", "Category")
+                    b.HasOne("WalletTracker.Domain.Entities.ExpenseCategoryAssignedToUser", "Category")
                         .WithMany("Expenses")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WalletTracker.Domain.Entities.PaymentMethodsAssignedToUsers", "Payment")
+                    b.HasOne("WalletTracker.Domain.Entities.PaymentMethodAssignedToUser", "Payment")
                         .WithMany("Expenses")
                         .HasForeignKey("PaymentId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -519,7 +508,7 @@ namespace WalletTracker.Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("WalletTracker.Domain.Entities.IncomeCategoriesAssignedToUsers", b =>
+            modelBuilder.Entity("WalletTracker.Domain.Entities.ExpenseCategoryAssignedToUser", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
                         .WithMany()
@@ -530,9 +519,9 @@ namespace WalletTracker.Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("WalletTracker.Domain.Entities.Incomes", b =>
+            modelBuilder.Entity("WalletTracker.Domain.Entities.Income", b =>
                 {
-                    b.HasOne("WalletTracker.Domain.Entities.IncomeCategoriesAssignedToUsers", "Category")
+                    b.HasOne("WalletTracker.Domain.Entities.IncomeCategoryAssignedToUser", "Category")
                         .WithMany("Incomes")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -549,7 +538,18 @@ namespace WalletTracker.Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("WalletTracker.Domain.Entities.PaymentMethodsAssignedToUsers", b =>
+            modelBuilder.Entity("WalletTracker.Domain.Entities.IncomeCategoryAssignedToUser", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("WalletTracker.Domain.Entities.PaymentMethodAssignedToUser", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
                         .WithMany()
@@ -560,17 +560,17 @@ namespace WalletTracker.Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("WalletTracker.Domain.Entities.ExpenseCategoriesAssignedToUsers", b =>
+            modelBuilder.Entity("WalletTracker.Domain.Entities.ExpenseCategoryAssignedToUser", b =>
                 {
                     b.Navigation("Expenses");
                 });
 
-            modelBuilder.Entity("WalletTracker.Domain.Entities.IncomeCategoriesAssignedToUsers", b =>
+            modelBuilder.Entity("WalletTracker.Domain.Entities.IncomeCategoryAssignedToUser", b =>
                 {
                     b.Navigation("Incomes");
                 });
 
-            modelBuilder.Entity("WalletTracker.Domain.Entities.PaymentMethodsAssignedToUsers", b =>
+            modelBuilder.Entity("WalletTracker.Domain.Entities.PaymentMethodAssignedToUser", b =>
                 {
                     b.Navigation("Expenses");
                 });
