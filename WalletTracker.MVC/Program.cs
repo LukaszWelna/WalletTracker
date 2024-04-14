@@ -2,8 +2,10 @@ using Microsoft.EntityFrameworkCore;
 using WalletTracker.Infrastructure.Persistence;
 using WalletTracker.Infrastructure.Extensions;
 using WalletTracker.Infrastructure.Seeders;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
+var connectionString = builder.Configuration.GetConnectionString("WalletTracker");
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
