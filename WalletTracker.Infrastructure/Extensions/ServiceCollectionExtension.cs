@@ -26,6 +26,13 @@ namespace WalletTracker.Infrastructure.Extensions
             services.AddScoped<IncomeCategoriesDefaultSeeder>();
             services.AddScoped<ExpenseCategoriesDefaultSeeder>();
             services.AddScoped<PaymentMethodsDefaultSeeder>();
+
+            // Configure Identity options
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequiredLength = 8;
+            });
         }
     }
 }
