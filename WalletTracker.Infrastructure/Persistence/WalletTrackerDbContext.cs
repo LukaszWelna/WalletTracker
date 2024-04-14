@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -6,11 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WalletTracker.Domain.Entities;
+using WalletTracker.Domain.Models;
 
 namespace WalletTracker.Infrastructure.Persistence
 {
     // DbContext configuration
-    public class WalletTrackerDbContext : IdentityDbContext
+    public class WalletTrackerDbContext : IdentityDbContext<ApplicationUser>
     {
         // Db sets
         public DbSet<IncomeCategoryDefault> IncomeCategoriesDefault { get; set; }
