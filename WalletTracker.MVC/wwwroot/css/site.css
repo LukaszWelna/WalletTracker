@@ -61,3 +61,11 @@ body {
 a {
     text-decoration: none;
 }
+
+.btn-link {
+    box-shadow: none !important;
+}
+
+textarea {
+    resize: none;
+}

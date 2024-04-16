@@ -3,6 +3,7 @@ using WalletTracker.Infrastructure.Persistence;
 using WalletTracker.Infrastructure.Extensions;
 using WalletTracker.Infrastructure.Seeders;
 using Microsoft.AspNetCore.Identity;
+using WalletTracker.Application.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("WalletTracker");
@@ -12,6 +13,9 @@ builder.Services.AddControllersWithViews();
 
 // Infrastructure project - services configuration by extension method
 builder.Services.AddInfrastructure(builder.Configuration);
+
+// Application project - services configuration by extension method
+builder.Services.AddApplication();
 
 var app = builder.Build();
 

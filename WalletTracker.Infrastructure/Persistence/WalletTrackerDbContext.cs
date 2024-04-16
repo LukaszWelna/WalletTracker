@@ -39,7 +39,7 @@ namespace WalletTracker.Infrastructure.Persistence
             modelBuilder.Entity<IncomeCategoryDefault>(eb =>
             {
                 eb.Property(i => i.Name)
-                .HasColumnType("varchar(50)");
+                .HasColumnType("varchar(25)");
             });
             
             modelBuilder.Entity<IncomeCategoryAssignedToUser>(eb =>
@@ -49,7 +49,7 @@ namespace WalletTracker.Infrastructure.Persistence
                 .HasForeignKey(i => i.UserId);
 
                 eb.Property(i => i.Name)
-                .HasColumnType("varchar(50)");
+                .HasColumnType("varchar(25)");
             });
 
             modelBuilder.Entity<Income>(eb =>
@@ -67,13 +67,13 @@ namespace WalletTracker.Infrastructure.Persistence
                 .HasPrecision(10, 2);
 
                 eb.Property(i => i.Comment)
-                .HasColumnType("varchar(100)");
+                .HasColumnType("varchar(25)");
             });
 
             modelBuilder.Entity<ExpenseCategoryDefault>(eb =>
             {
                 eb.Property(e => e.Name)
-                .HasColumnType("varchar(50)");
+                .HasColumnType("varchar(25)");
             });
 
             modelBuilder.Entity<ExpenseCategoryAssignedToUser>(eb =>
@@ -83,7 +83,7 @@ namespace WalletTracker.Infrastructure.Persistence
                 .HasForeignKey(e => e.UserId);
 
                 eb.Property(e => e.Name)
-                .HasColumnType("varchar(50)");
+                .HasColumnType("varchar(25)");
 
                 eb.Property(e => e.Limit)
                 .HasPrecision(10, 2);
@@ -108,13 +108,13 @@ namespace WalletTracker.Infrastructure.Persistence
                 .HasPrecision(10, 2);
 
                 eb.Property(e => e.Comment)
-                .HasColumnType("varchar(100)");
+                .HasColumnType("varchar(25)");
             });
 
             modelBuilder.Entity<PaymentMethodDefault>(eb =>
             {
                 eb.Property(p => p.Name)
-                .HasColumnType("varchar(50)");
+                .HasColumnType("varchar(25)");
             });
 
             modelBuilder.Entity<PaymentMethodAssignedToUser>(eb =>
@@ -125,7 +125,7 @@ namespace WalletTracker.Infrastructure.Persistence
                 .OnDelete(DeleteBehavior.NoAction);
 
                 eb.Property(p => p.Name)
-                .HasColumnType("varchar(50)");
+                .HasColumnType("varchar(25)");
             });
         }
     }
