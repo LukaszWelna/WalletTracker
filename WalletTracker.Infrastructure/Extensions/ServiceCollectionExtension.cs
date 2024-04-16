@@ -7,8 +7,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WalletTracker.Domain.Interfaces;
 using WalletTracker.Domain.Models;
 using WalletTracker.Infrastructure.Persistence;
+using WalletTracker.Infrastructure.Repositories;
 using WalletTracker.Infrastructure.Seeders;
 
 namespace WalletTracker.Infrastructure.Extensions
@@ -21,15 +23,20 @@ namespace WalletTracker.Infrastructure.Extensions
             services.AddDbContext<WalletTrackerDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("WalletTracker")));
 
+            // Identity configuration
             services.AddDefaultIdentity<ApplicationUser>(options =>
             {
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequiredLength = 8;
             }).AddEntityFrameworkStores<WalletTrackerDbContext>();
 
+            // Seeders
             services.AddScoped<IncomeCategoriesDefaultSeeder>();
             services.AddScoped<ExpenseCategoriesDefaultSeeder>();
             services.AddScoped<PaymentMethodsDefaultSeeder>();
+
+            // Add repositories
+            services.AddScoped<IIncomeRepository, IncomeRepository>();
         }
     }
 }

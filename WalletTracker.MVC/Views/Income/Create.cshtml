@@ -1,0 +1,37 @@
+﻿@using WalletTracker.Domain.Entities
+@model Income
+
+@{
+    ViewData["Title"] = "Add income";
+}
+
+<div class="container col-xl-10 col-xxl-10 px-4 py-5">
+    <div class="row align-items-center">
+        <div class="col-md-10 mx-auto col-lg-6 p-4 rounded-3 form-column">
+            <form id="incomeForm" action="/Income/Create" method="post">
+                <h2 class="form-header">Add income</h2>
+                <hr />
+                <div class="form-floating mb-3">
+                    <input asp-for="Amount" class="form-control" autocomplete="amount" aria-required="true" placeholder="amount" />
+                    <label class="control-label" asp-for="Amount">Amount</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="date" class="form-control" id="incomeDate" placeholder="Date" name="dateOfIncome">
+                    <label for="incomeDate">Date</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <select class="form-select form-select-md mb-3" id="incomeSource" name="incomeCategoryAssignedToUserId">
+                        <option value="">Choose option</option> 
+                     </select>
+                     <label for="incomeSource">Category</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <textarea class="form-control" id="incomeComment" placeholder="Comment" maxlength="25"
+                              name="incomeComment"></textarea>
+                    <label for="incomeComment">Comment</label>
+                </div>
+                <button id="incomeSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Add</button>
+            </form>
+        </div>
+    </div>
+</div>
