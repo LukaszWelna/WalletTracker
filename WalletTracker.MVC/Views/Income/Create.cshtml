@@ -1,5 +1,7 @@
-﻿@using WalletTracker.Domain.Entities
-@model Income
+﻿@using WalletTracker.Application.Income
+@using WalletTracker.Application.Income.Commands.CreateIncome
+
+@model CreateIncomeCommand
 
 @{
     ViewData["Title"] = "Add income";
@@ -10,28 +12,46 @@
         <div class="col-md-10 mx-auto col-lg-6 p-4 rounded-3 form-column">
             <form id="incomeForm" action="/Income/Create" method="post">
                 <h2 class="form-header">Add income</h2>
-                <hr />
+                <hr />     
                 <div class="form-floating mb-3">
-                    <input asp-for="Amount" class="form-control" autocomplete="amount" aria-required="true" placeholder="amount" />
-                    <label class="control-label" asp-for="Amount">Amount</label>
+                    <input asp-for="Amount" class="form-control" placeholder="amount"/>
+                    <label asp-for="Amount" class="control-label">Amount</label>
+                    <span asp-validation-for="Amount" class="text-danger" id="amountSpan"></span>
                 </div>
                 <div class="form-floating mb-3">
-                    <input type="date" class="form-control" id="incomeDate" placeholder="Date" name="dateOfIncome">
-                    <label for="incomeDate">Date</label>
+                    <input asp-for="IncomeDate" type="date" class="form-control" placeholder="Date"
+                           value="@Model.IncomeDate.ToString("yyyy-MM-dd")">
+                    <label asp-for="IncomeDate" class="control-label">Date</label>
+                    <span asp-validation-for="IncomeDate" class="text-danger" id="incomeDateSpan"></span>
                 </div>
                 <div class="form-floating mb-3">
-                    <select class="form-select form-select-md mb-3" id="incomeSource" name="incomeCategoryAssignedToUserId">
-                        <option value="">Choose option</option> 
-                     </select>
-                     <label for="incomeSource">Category</label>
+                    <select asp-for="CategoryId" asp-items="@(new SelectList(Model.UserCategoryDtos,
+                        nameof(IncomeCategoryAssignedToUserDto.Id), 
+                        nameof(IncomeCategoryAssignedToUserDto.Name)))"
+                            class="form-select form-select-md">
+                        <option value="0">Please select one</option>
+                    </select>
+                    <label asp-for="CategoryId">Category</label>
+                    <span asp-validation-for="CategoryId" class="text-danger" id="categoryIdSpan"></span>
                 </div>
                 <div class="form-floating mb-3">
-                    <textarea class="form-control" id="incomeComment" placeholder="Comment" maxlength="25"
-                              name="incomeComment"></textarea>
-                    <label for="incomeComment">Comment</label>
+                    <textarea asp-for="Comment" class="form-control" 
+                        placeholder="Comment" maxlength="25"></textarea>
+                    <label asp-for="Comment">Comment</label>
                 </div>
                 <button id="incomeSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Add</button>
             </form>
         </div>
     </div>
 </div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script src="~/js/replaceDotsToCommas.js"></script>
+    <script src="~/js/validateAmount.js"></script>
+    <script src="~/js/validateDate.js"></script>
+    <script src="~/js/incomeCreate.js"></script>
+}

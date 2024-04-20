@@ -12,5 +12,6 @@ namespace WalletTracker.Domain.Interfaces
         public Task Create(Income income);
         public Task<List<IncomeCategoryDefault>> GetDefaultCategories();
         public Task SeedDefaultCategoriesToUser(List<IncomeCategoryAssignedToUser> incomeCategoriesAssignedToUser);
+        public Task<List<IncomeCategoryAssignedToUser>> GetCategoriesAssignedToLoggedUser();
     }
 }

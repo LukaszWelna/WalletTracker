@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WalletTracker.Application.Income;
+using WalletTracker.Domain.Entities;
 
 namespace WalletTracker.Application.Mappings
 {
@@ -13,6 +14,12 @@ namespace WalletTracker.Application.Mappings
         public IncomeMappingProfile()
         {
             CreateMap<IncomeDto, Domain.Entities.Income>();
+
+            CreateMap<IncomeCategoryAssignedToUser, IncomeCategoryAssignedToUserDto>();
+
+            CreateMap<List<IncomeCategoryAssignedToUser>, IncomeDto>()
+                .ForMember(i => i.IncomeDate, opt => opt.MapFrom(src => DateOnly.FromDateTime(DateTime.UtcNow)))
+                .ForMember(i => i.UserCategoryDtos, opt => opt.MapFrom(src => src));
         }
     }
 }

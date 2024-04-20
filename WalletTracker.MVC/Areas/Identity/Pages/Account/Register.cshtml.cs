@@ -10,6 +10,7 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading;
 using System.Threading.Tasks;
+using MediatR;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -19,7 +20,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using WalletTracker.Application.Services;
+using WalletTracker.Application.Income.Commands.SeedIncomeCategories;
 using WalletTracker.Domain.Entities;
 using WalletTracker.Domain.Models;
 using WalletTracker.Infrastructure.Persistence;
@@ -34,7 +35,7 @@ namespace WalletTracker.MVC.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<ApplicationUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
-        private readonly IIncomeService _incomeService;
+        private readonly IMediator _mediator;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
@@ -42,7 +43,7 @@ namespace WalletTracker.MVC.Areas.Identity.Pages.Account
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
-            IIncomeService incomeService)
+            IMediator mediator)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -50,7 +51,7 @@ namespace WalletTracker.MVC.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
-            _incomeService = incomeService;
+            _mediator = mediator;
         }
 
         /// <summary>
@@ -143,7 +144,7 @@ namespace WalletTracker.MVC.Areas.Identity.Pages.Account
                     var userId = await _userManager.GetUserIdAsync(user);
 
                     // Seed income default categories to new registered user
-                    await _incomeService.SeedDefaultCategoriesToUser(userId);
+                    await _mediator.Send(new SeedIncomeCategoriesToNewUserCommand(userId));
                    
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
