@@ -1,29 +1,40 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using WalletTracker.Application.Income;
-using WalletTracker.Application.Services;
+using WalletTracker.Application.Income.Commands.CreateIncome;
+using WalletTracker.Application.Income.Queries.GetCategoriesAssignedToLoggedUse;
+using WalletTracker.Application.Income.Queries.GetCategoriesAssignedToLoggedUser;
 using WalletTracker.Domain.Entities;
 
 namespace WalletTracker.MVC.Controllers
 {
     public class IncomeController : Controller
     {
-        private readonly IIncomeService _incomeService;
+        private readonly IMediator _mediator;
 
-        public IncomeController(IIncomeService incomeService)
+        public IncomeController(IMediator mediator)
         {
-            _incomeService = incomeService;
+            _mediator = mediator;
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            return View();
+            var command = await _mediator.Send(new GetDefaultIncomeFormDataQuery());
+            return View(command);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(IncomeDto incomeDto)
+        public async Task<IActionResult> Create(CreateIncomeCommand command)
         {
-            await _incomeService.Create(incomeDto);
+            if (!ModelState.IsValid)
+            {
+                var commandAfterValidation = await _mediator.Send(new GetIncomeFormAfterValidationQuery(command));
+
+                return View(commandAfterValidation);
+            }
+
+            await _mediator.Send(command);
             return RedirectToAction(nameof(Create));
         }
     }

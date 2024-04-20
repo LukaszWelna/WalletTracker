@@ -1,41 +1,26 @@
-﻿using AutoMapper;
+﻿using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WalletTracker.Application.Income;
 using WalletTracker.Domain.Entities;
 using WalletTracker.Domain.Interfaces;
 
-namespace WalletTracker.Application.Services
+namespace WalletTracker.Application.Income.Commands.SeedIncomeCategories
 {
-    public interface IIncomeService
-    {
-        public Task Create(IncomeDto incomeDto);
-        public Task SeedDefaultCategoriesToUser(string userId); 
-    }
-
-    public class IncomeService : IIncomeService
+    public class SeedIncomeCategoriesToNewUserCommandHandler : IRequestHandler<SeedIncomeCategoriesToNewUserCommand>
     {
         private readonly IIncomeRepository _incomeRepository;
-        private readonly IMapper _mapper;
 
-        public IncomeService(IIncomeRepository incomeRepository, IMapper mapper)
+        public SeedIncomeCategoriesToNewUserCommandHandler(IIncomeRepository incomeRepository)
         {
             _incomeRepository = incomeRepository;
-            _mapper = mapper;
-        }
-        public async Task Create(IncomeDto incomeDto)
-        {
-            var income = _mapper.Map<Domain.Entities.Income>(incomeDto);
-
-            await _incomeRepository.Create(income);
         }
 
-        public async Task SeedDefaultCategoriesToUser(string userId)
+        public async Task Handle(SeedIncomeCategoriesToNewUserCommand request, CancellationToken cancellationToken)
         {
-            if (string.IsNullOrEmpty(userId))
+            if (string.IsNullOrEmpty(request.UserId))
             {
                 throw new InvalidOperationException("User Id cannot be null or empty");
             }
@@ -43,12 +28,12 @@ namespace WalletTracker.Application.Services
             var incomeCategoriesAssignedToUserId = new List<IncomeCategoryAssignedToUser>();
             var incomeCategoriesDefault = await _incomeRepository.GetDefaultCategories();
 
-            foreach(var category in incomeCategoriesDefault)
+            foreach (var category in incomeCategoriesDefault)
             {
                 incomeCategoriesAssignedToUserId.Add(
                     new IncomeCategoryAssignedToUser()
                     {
-                        UserId = userId,
+                        UserId = request.UserId,
                         Name = category.Name
                     });
             }
