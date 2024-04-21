@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Expense\Queries\" />
     <Folder Include="Services\" />
   </ItemGroup>
 

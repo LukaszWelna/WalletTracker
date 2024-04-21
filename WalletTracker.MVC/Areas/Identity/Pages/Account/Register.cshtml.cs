@@ -20,6 +20,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using WalletTracker.Application.Expense.Commands.SeedExpenseCategories;
+using WalletTracker.Application.Expense.Commands.SeedPaymentMethods;
 using WalletTracker.Application.Income.Commands.SeedIncomeCategories;
 using WalletTracker.Domain.Entities;
 using WalletTracker.Domain.Models;
@@ -143,8 +145,10 @@ namespace WalletTracker.MVC.Areas.Identity.Pages.Account
 
                     var userId = await _userManager.GetUserIdAsync(user);
 
-                    // Seed income default categories to new registered user
+                    // Seed default data to new registered user
                     await _mediator.Send(new SeedIncomeCategoriesToNewUserCommand(userId));
+                    await _mediator.Send(new SeedExpenseCategoriesToNewUserCommand(userId));
+                    await _mediator.Send(new SeedPaymentMethodsToNewUserCommand(userId));
                    
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
