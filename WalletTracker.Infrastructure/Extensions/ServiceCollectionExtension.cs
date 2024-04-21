@@ -37,6 +37,7 @@ namespace WalletTracker.Infrastructure.Extensions
 
             // Add repositories
             services.AddScoped<IIncomeRepository, IncomeRepository>();
+            services.AddScoped<IExpenseRepository, ExpenseRepository>();
         }
     }
 }
