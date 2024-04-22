@@ -16,10 +16,6 @@ namespace WalletTracker.Application.Mappings
             CreateMap<IncomeDto, Domain.Entities.Income>();
 
             CreateMap<IncomeCategoryAssignedToUser, IncomeCategoryAssignedToUserDto>();
-
-            CreateMap<List<IncomeCategoryAssignedToUser>, IncomeDto>()
-                .ForMember(i => i.IncomeDate, opt => opt.MapFrom(src => DateOnly.FromDateTime(DateTime.UtcNow)))
-                .ForMember(i => i.UserCategoryDtos, opt => opt.MapFrom(src => src));
         }
     }
 }

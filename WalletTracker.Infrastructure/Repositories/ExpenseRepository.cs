@@ -39,5 +39,33 @@ namespace WalletTracker.Infrastructure.Repositories
             _dbContext.PaymentMethodsAssignedToUsers.AddRange(paymentMethodsAssignedToUser);
             await _dbContext.SaveChangesAsync();
         }
+
+        public async Task<List<ExpenseCategoryAssignedToUser>> GetCategoriesAssignedToLoggedUser()
+        {
+            var userId = _userContextService.GetCurrentUser().Id;
+
+            var categoriesAssignedToUser = await _dbContext
+                .ExpenseCategoriesAssignedToUsers
+                .Where(c => c.UserId == userId).ToListAsync();
+
+            return categoriesAssignedToUser;
+        }
+
+        public async Task<List<PaymentMethodAssignedToUser>> GetPaymentMethodsAssignedToLoggedUser()
+        {
+            var userId = _userContextService.GetCurrentUser().Id;
+
+            var paymentMethodsAssignedToUser = await _dbContext
+                .PaymentMethodsAssignedToUsers
+                .Where(c => c.UserId == userId).ToListAsync();
+
+            return paymentMethodsAssignedToUser;
+        }
+
+        public async Task Create(Expense expense)
+        {
+            _dbContext.Expenses.Add(expense);
+            await _dbContext.SaveChangesAsync();
+        }
     }
 }

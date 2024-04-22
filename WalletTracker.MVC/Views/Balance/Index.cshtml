@@ -1,0 +1,22 @@
+﻿@{
+    ViewData["Title"] = "Show balance";
+}
+
+<div class="px-4 my-4 text-center">
+    <div class="col-lg-3 col-md-5 col-sm-6 mx-auto mt-3">
+        <form class="mt-1" method="post" action="/balance/showResults" id="formChoosePeriod">
+            <div class="form-floating mt-3" id="divChoosePeriod">
+                <select class="form-select form-select-md mt-3 form-choose-period" id="idChoosePeriod" aria-label="choose period"
+                        name="choosePeriod">
+                    <option value="1">Current month</option>
+                    <option value="2">Previous month</option>
+                    <option value="3">Current year</option>
+                    <option value="" data-bs-toggle="modal" data-bs-target="#periodModal">Another</option>
+                </select>
+                <label for="idChoosePeriod">Choose period</label>
+                <button class="w-100 btn btn-lg btn-primary mt-2" id="submitForm" type="submit">Apply</button>
+            </div>
+        </form>
+    </div>
+</div>
+

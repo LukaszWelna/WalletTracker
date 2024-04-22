@@ -8,11 +8,11 @@ using WalletTracker.Application.Income.Commands.CreateIncome;
 
 namespace WalletTracker.Application.Income.Queries.GetCategoriesAssignedToLoggedUse
 {
-    public class GetIncomeFormAfterValidationQuery : IRequest<CreateIncomeCommand>
+    public class GetIncomeFormDataAfterValidationQuery : IRequest<CreateIncomeCommand>
     {
         public CreateIncomeCommand CreateIncomeCommand { get; set; }
 
-        public GetIncomeFormAfterValidationQuery(CreateIncomeCommand createIncomeCommand)
+        public GetIncomeFormDataAfterValidationQuery(CreateIncomeCommand createIncomeCommand)
         {
             CreateIncomeCommand = createIncomeCommand;
         }
