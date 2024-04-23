@@ -10,11 +10,11 @@ namespace WalletTracker.Domain.Interfaces
     public interface IExpenseRepository
     {
         public Task Create(Expense expense);
-        public Task<List<ExpenseCategoryDefault>> GetDefaultCategories();
-        public Task SeedDefaultCategoriesToUser(List<ExpenseCategoryAssignedToUser> expenseCategoriesAssignedToUser);
-        public Task<List<PaymentMethodDefault>> GetDefaultPaymentMethods();
-        public Task SeedDefaultPaymentMethodsToUser(List<PaymentMethodAssignedToUser> paymentMethodsAssignedToUser);
-        public Task<List<ExpenseCategoryAssignedToUser>> GetCategoriesAssignedToLoggedUser();
-        public Task<List<PaymentMethodAssignedToUser>> GetPaymentMethodsAssignedToLoggedUser();
+        public Task<IEnumerable<ExpenseCategoryDefault>> GetDefaultCategories();
+        public Task SeedDefaultCategoriesToUser(IEnumerable<ExpenseCategoryAssignedToUser> expenseCategoriesAssignedToUser);
+        public Task<IEnumerable<PaymentMethodDefault>> GetDefaultPaymentMethods();
+        public Task SeedDefaultPaymentMethodsToUser(IEnumerable<PaymentMethodAssignedToUser> paymentMethodsAssignedToUser);
+        public Task<IEnumerable<ExpenseCategoryAssignedToUser>> GetCategoriesAssignedToLoggedUser();
+        public Task<IEnumerable<PaymentMethodAssignedToUser>> GetPaymentMethodsAssignedToLoggedUser();
     }
 }

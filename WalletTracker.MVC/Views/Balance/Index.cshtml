@@ -1,22 +1,76 @@
-﻿@{
-    ViewData["Title"] = "Show balance";
+﻿@model IEnumerable<IEnumerable<WalletTracker.Application.Income.GetIncomeDto>>
+
+@{
+    ViewData["Title"] = "Index";
 }
 
-<div class="px-4 my-4 text-center">
-    <div class="col-lg-3 col-md-5 col-sm-6 mx-auto mt-3">
-        <form class="mt-1" method="post" action="/balance/showResults" id="formChoosePeriod">
-            <div class="form-floating mt-3" id="divChoosePeriod">
-                <select class="form-select form-select-md mt-3 form-choose-period" id="idChoosePeriod" aria-label="choose period"
-                        name="choosePeriod">
-                    <option value="1">Current month</option>
-                    <option value="2">Previous month</option>
-                    <option value="3">Current year</option>
-                    <option value="" data-bs-toggle="modal" data-bs-target="#periodModal">Another</option>
-                </select>
-                <label for="idChoosePeriod">Choose period</label>
-                <button class="w-100 btn btn-lg btn-primary mt-2" id="submitForm" type="submit">Apply</button>
+<div class="my-4">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="col-lg-12 table-container p-3 rounded-2 mb-4">
+                <h3 class="text-center mb-3">Incomes</h3>
+                <table class="table table-borderless mb-0 table-balance">
+                    <tbody>
+                        @foreach (var group in Model)
+                        {
+                            <tr class="border-top">
+                                <th class="py-2 balance-date" colspan="4">@group.FirstOrDefault()?.IncomeDate</th>
+                            </tr>
+                            @foreach (var item in group)
+                            {
+                                <tr class="border-bottom">
+                                    <td>
+                                        @item.CategoryName
+                                    </td>
+                                    <td class="comment">
+                                        @item.Comment
+                                    </td>
+                                    <td align="right">
+                                        @item.Amount PLN
+                                    </td>
+                                    <td align="right">
+                                        <a class="bi bi-pencil mx-1" href="#"></a>
+                                        <a class="bi bi-trash mx-1" href="#"></a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
             </div>
-        </form>
+        </div>
+        <div class="col-lg-6">
+            <div class="col-lg-12 table-container p-3 rounded-2 mb-4">
+                <h3 class="text-center mb-3">Expenses</h3>
+                <table class="table table-borderless mb-0 table-balance">
+                    <tbody>
+                        @foreach (var group in Model)
+                        {
+                            <tr class="border-top">
+                                <th class="py-2 balance-date" colspan="4">@group.FirstOrDefault()?.IncomeDate</th>
+                            </tr>
+                            @foreach (var item in group)
+                            {
+                                <tr class="border-bottom">
+                                    <td>
+                                        @item.CategoryName
+                                    </td>
+                                    <td class="comment">
+                                        @item.Comment
+                                    </td>
+                                    <td align="right">
+                                        @item.Amount PLN
+                                    </td>
+                                    <td align="right">
+                                        <a class="bi bi-pencil mx-1" href="#"></a>
+                                        <a class="bi bi-trash mx-1" href="#"></a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
-

@@ -22,25 +22,25 @@ namespace WalletTracker.Infrastructure.Repositories
             _dbContext = dbContext;
             _userContextService = userContextService;
         }
-        public async Task<List<ExpenseCategoryDefault>> GetDefaultCategories()
+        public async Task<IEnumerable<ExpenseCategoryDefault>> GetDefaultCategories()
             => await _dbContext.ExpenseCategoriesDefault.ToListAsync();
 
-        public async Task SeedDefaultCategoriesToUser(List<ExpenseCategoryAssignedToUser> expenseCategoriesAssignedToUser)
+        public async Task SeedDefaultCategoriesToUser(IEnumerable<ExpenseCategoryAssignedToUser> expenseCategoriesAssignedToUser)
         {
             _dbContext.ExpenseCategoriesAssignedToUsers.AddRange(expenseCategoriesAssignedToUser);
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<List<PaymentMethodDefault>> GetDefaultPaymentMethods()
+        public async Task<IEnumerable<PaymentMethodDefault>> GetDefaultPaymentMethods()
             => await _dbContext.PaymentMethodsDefault.ToListAsync();
 
-        public async Task SeedDefaultPaymentMethodsToUser(List<PaymentMethodAssignedToUser> paymentMethodsAssignedToUser)
+        public async Task SeedDefaultPaymentMethodsToUser(IEnumerable<PaymentMethodAssignedToUser> paymentMethodsAssignedToUser)
         {
             _dbContext.PaymentMethodsAssignedToUsers.AddRange(paymentMethodsAssignedToUser);
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<List<ExpenseCategoryAssignedToUser>> GetCategoriesAssignedToLoggedUser()
+        public async Task<IEnumerable<ExpenseCategoryAssignedToUser>> GetCategoriesAssignedToLoggedUser()
         {
             var userId = _userContextService.GetCurrentUser().Id;
 
@@ -51,7 +51,7 @@ namespace WalletTracker.Infrastructure.Repositories
             return categoriesAssignedToUser;
         }
 
-        public async Task<List<PaymentMethodAssignedToUser>> GetPaymentMethodsAssignedToLoggedUser()
+        public async Task<IEnumerable<PaymentMethodAssignedToUser>> GetPaymentMethodsAssignedToLoggedUser()
         {
             var userId = _userContextService.GetCurrentUser().Id;
 

@@ -28,15 +28,15 @@ namespace WalletTracker.Infrastructure.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<List<IncomeCategoryDefault>> GetDefaultCategories()
+        public async Task<IEnumerable<IncomeCategoryDefault>> GetDefaultCategories()
             => await _dbContext.IncomeCategoriesDefault.ToListAsync();
 
-        public async Task SeedDefaultCategoriesToUser(List<IncomeCategoryAssignedToUser> incomeCategoriesAssignedToUser)
+        public async Task SeedDefaultCategoriesToUser(IEnumerable<IncomeCategoryAssignedToUser> incomeCategoriesAssignedToUser)
         {
             _dbContext.IncomeCategoriesAssignedToUsers.AddRange(incomeCategoriesAssignedToUser);
             await _dbContext.SaveChangesAsync();
         }
-        public async Task<List<IncomeCategoryAssignedToUser>> GetCategoriesAssignedToLoggedUser()
+        public async Task<IEnumerable<IncomeCategoryAssignedToUser>> GetCategoriesAssignedToLoggedUser()
         {
             var userId = _userContextService.GetCurrentUser().Id;
 
@@ -47,5 +47,20 @@ namespace WalletTracker.Infrastructure.Repositories
             return categoriesAssignedToUser;
         }
 
+        public async Task<IEnumerable<IEnumerable<Income>>> GetUserIncomesFromPeriod()
+        {
+            var userId = _userContextService.GetCurrentUser().Id;
+
+            var incomes = await _dbContext.Incomes
+                .AsNoTracking()
+                .Include(i => i.Category)
+                .Where(i => i.UserId == userId)
+                .GroupBy(i => i.IncomeDate)
+                .OrderByDescending(g => g.Key)
+                .Select(g => g.OrderByDescending(i => i.CreatedAt).ToList())
+                .ToListAsync();
+
+            return incomes;
+        }
     }
 }

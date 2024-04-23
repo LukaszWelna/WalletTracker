@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using WalletTracker.Application.Income.Queries.GetIncomesFromPeriod;
 
 namespace WalletTracker.MVC.Controllers
 {
@@ -13,9 +14,11 @@ namespace WalletTracker.MVC.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var incomeDtos = await _mediator.Send(new GetUserIncomesFromPeriodQuery());
+
+            return View(incomeDtos);
         }
 
 

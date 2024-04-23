@@ -13,9 +13,12 @@ namespace WalletTracker.Application.Mappings
     {
         public IncomeMappingProfile()
         {
-            CreateMap<IncomeDto, Domain.Entities.Income>();
+            CreateMap<CreateIncomeDto, Domain.Entities.Income>();
 
             CreateMap<IncomeCategoryAssignedToUser, IncomeCategoryAssignedToUserDto>();
+
+            CreateMap<Domain.Entities.Income, GetIncomeDto>()
+                .ForMember(dto => dto.CategoryName, opt => opt.MapFrom(src => src.Category.Name));
         }
     }
 }

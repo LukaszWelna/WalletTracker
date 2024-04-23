@@ -79,3 +79,25 @@ input[type="number"]::-webkit-inner-spin-button {
 input[type="number"] {
     -moz-appearance: textfield;
 }
+
+.balance-date {
+    font-size: 80%;
+    background-color: #f9f9f9 !important;
+}
+
+.table-container {
+    background-color: white !important;
+}
+
+.table-balance {
+    box-shadow: none;
+}
+
+tr td:last-child {
+    width: 1%;
+    white-space: nowrap;
+}
+
+.comment {
+    color: #6f6f6f !important;
+}
