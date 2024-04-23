@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WalletTracker.Application.Income.Commands.CreateIncome
 {
-    public class CreateIncomeCommand : IncomeDto, IRequest
+    public class CreateIncomeCommand : CreateIncomeDto, IRequest
     {
 
     }
