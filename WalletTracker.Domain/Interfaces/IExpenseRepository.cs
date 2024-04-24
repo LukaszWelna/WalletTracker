@@ -16,5 +16,9 @@ namespace WalletTracker.Domain.Interfaces
         public Task SeedDefaultPaymentMethodsToUser(IEnumerable<PaymentMethodAssignedToUser> paymentMethodsAssignedToUser);
         public Task<IEnumerable<ExpenseCategoryAssignedToUser>> GetCategoriesAssignedToLoggedUser();
         public Task<IEnumerable<PaymentMethodAssignedToUser>> GetPaymentMethodsAssignedToLoggedUser();
+        public Task<IEnumerable<IEnumerable<Expense>>> GetUserExpensesFromPeriod();
+        public Task DeleteExpenseById(int expenseId);
+        public Task<Expense> GetExpenseById(int expenseId);
+        public Task Commit();
     }
 }

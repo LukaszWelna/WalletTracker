@@ -11,7 +11,7 @@
 <div class="container col-xl-10 col-xxl-10 px-4 py-5">
     <div class="row align-items-center">
         <div class="col-md-10 mx-auto col-lg-6 p-4 rounded-3 form-column">
-            <form id="incomeForm" action="/Income/Create" method="post">
+            <form id="incomeForm" asp-action="Create" method="post">
                 <h2 class="form-header">Add income</h2>
                 <hr />     
                 <div class="form-floating mb-3">
@@ -54,5 +54,5 @@
     <script src="~/js/replaceDotsToCommas.js"></script>
     <script src="~/js/validateAmount.js"></script>
     <script src="~/js/validateDate.js"></script>
-    <script src="~/js/incomeCreate.js"></script>
+    <script src="~/js/incomeFormValidation.js"></script>
 }

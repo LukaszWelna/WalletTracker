@@ -23,8 +23,8 @@ namespace WalletTracker.MVC.Controllers
         [HttpGet]
         public async Task<IActionResult> Create()
         {
-            var command = await _mediator.Send(new GetDefaultIncomeFormDataQuery());
-            return View(command);
+            var income = await _mediator.Send(new GetDefaultIncomeFormDataQuery());
+            return View(income);
         }
 
         [HttpPost]

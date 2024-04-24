@@ -101,3 +101,26 @@ tr td:last-child {
 .comment {
     color: #6f6f6f !important;
 }
+
+.table-balance {
+    font-size: .85rem;
+}
+
+.payment-method {
+    font-size: 80%;
+    color: #6f6f6f;
+}
+
+.icon-form {
+    display: inline;
+}
+
+.icon-button-form {
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.back {
+    text-decoration: underline;
+}

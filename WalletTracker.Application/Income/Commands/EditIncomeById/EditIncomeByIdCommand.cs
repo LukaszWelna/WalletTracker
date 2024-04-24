@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WalletTracker.Application.Expense.Commands.CreateExpense
+namespace WalletTracker.Application.Income.Commands.EditIncomeById
 {
-    public class CreateExpenseCommand : CreateExpenseDto, IRequest
+    public class EditIncomeByIdCommand : CreateIncomeDto, IRequest
     {
 
     }
