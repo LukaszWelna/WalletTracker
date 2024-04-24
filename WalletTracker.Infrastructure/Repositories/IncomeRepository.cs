@@ -62,5 +62,20 @@ namespace WalletTracker.Infrastructure.Repositories
 
             return incomes;
         }
+
+        public async Task DeleteIncomeById(int incomeId)
+        {
+            var income = await _dbContext.Incomes.FirstAsync(i => i.Id == incomeId);
+
+            _dbContext.Incomes.Remove(income);
+
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task<Income> GetIncomeById(int incomeId)
+            => await _dbContext.Incomes.FirstAsync(i => i.Id == incomeId);
+
+        public async Task Commit()
+            => await _dbContext.SaveChangesAsync();
     }
 }

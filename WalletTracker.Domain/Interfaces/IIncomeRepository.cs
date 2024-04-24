@@ -14,5 +14,8 @@ namespace WalletTracker.Domain.Interfaces
         public Task SeedDefaultCategoriesToUser(IEnumerable<IncomeCategoryAssignedToUser> incomeCategoriesAssignedToUser);
         public Task<IEnumerable<IncomeCategoryAssignedToUser>> GetCategoriesAssignedToLoggedUser();
         public Task<IEnumerable<IEnumerable<Income>>> GetUserIncomesFromPeriod();
+        public Task DeleteIncomeById (int incomeId);
+        public Task<Income> GetIncomeById (int incomeId);
+        public Task Commit();
     }
 }

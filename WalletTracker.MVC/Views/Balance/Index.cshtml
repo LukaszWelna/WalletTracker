@@ -1,75 +1,89 @@
-﻿@model IEnumerable<IEnumerable<WalletTracker.Application.Income.GetIncomeDto>>
+﻿@model BalanceModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Balance";
+    var today = DateOnly.FromDateTime(DateTime.UtcNow).ToString("yyyy-MM-dd");
 }
 
 <div class="my-4">
     <div class="row">
         <div class="col-lg-6">
-            <div class="col-lg-12 table-container p-3 rounded-2 mb-4">
+            <div class="col-12 table-container p-3 rounded-2 mb-4">
                 <h3 class="text-center mb-3">Incomes</h3>
-                <table class="table table-borderless mb-0 table-balance">
-                    <tbody>
-                        @foreach (var group in Model)
-                        {
-                            <tr class="border-top">
-                                <th class="py-2 balance-date" colspan="4">@group.FirstOrDefault()?.IncomeDate</th>
-                            </tr>
-                            @foreach (var item in group)
+                <div class="table-responsive">
+                    <table class="table table-borderless mb-0 table-balance">
+                        <tbody>
+                            @foreach (var group in Model.Incomes)
                             {
-                                <tr class="border-bottom">
-                                    <td>
-                                        @item.CategoryName
-                                    </td>
-                                    <td class="comment">
-                                        @item.Comment
-                                    </td>
-                                    <td align="right">
-                                        @item.Amount PLN
-                                    </td>
-                                    <td align="right">
-                                        <a class="bi bi-pencil mx-1" href="#"></a>
-                                        <a class="bi bi-trash mx-1" href="#"></a>
-                                    </td>
+                                <tr class="border-top">
+                                    <th class="py-2 balance-date" colspan="4">@group.FirstOrDefault()?.IncomeDate</th>
                                 </tr>
+                                @foreach (var item in group)
+                                {
+                                    <tr class="border-bottom">
+                                        <td>
+                                            @item.CategoryName
+                                        </td>
+                                        <td class="comment">
+                                            @item.Comment
+                                        </td>
+                                        <td align="right">
+                                            @item.Amount PLN
+                                        </td>
+                                        <td align="right">
+                                            <a class="bi bi-pencil mx-1" asp-controller="Balance" asp-action="IncomeEdit" asp-route-id="@item.Id"></a>
+                                            <form class="icon-form" asp-controller="Balance" asp-action="IncomeDelete" asp-route-id="@item.Id" method="post">
+                                                <button type="submit" class="bi bi-trash mx-1 icon-button-form"></button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                }
                             }
-                        }
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
         <div class="col-lg-6">
-            <div class="col-lg-12 table-container p-3 rounded-2 mb-4">
+            <div class="col-12 table-container p-3 rounded-2 mb-4">
                 <h3 class="text-center mb-3">Expenses</h3>
-                <table class="table table-borderless mb-0 table-balance">
-                    <tbody>
-                        @foreach (var group in Model)
-                        {
-                            <tr class="border-top">
-                                <th class="py-2 balance-date" colspan="4">@group.FirstOrDefault()?.IncomeDate</th>
-                            </tr>
-                            @foreach (var item in group)
+                <div class="table-responsive">
+                    <table class="table table-borderless mb-0 table-balance">
+                        <tbody>
+                            @foreach (var group in Model.Expenses)
                             {
-                                <tr class="border-bottom">
-                                    <td>
-                                        @item.CategoryName
-                                    </td>
-                                    <td class="comment">
-                                        @item.Comment
-                                    </td>
-                                    <td align="right">
-                                        @item.Amount PLN
-                                    </td>
-                                    <td align="right">
-                                        <a class="bi bi-pencil mx-1" href="#"></a>
-                                        <a class="bi bi-trash mx-1" href="#"></a>
-                                    </td>
+                                <tr class="border-top">
+                                    <th class="py-2 balance-date" colspan="4">@group.FirstOrDefault()?.ExpenseDate</th>
                                 </tr>
+                                @foreach (var item in group)
+                                {
+                                    <tr class="border-bottom">
+                                        <td>
+                                            <div>
+                                                @item.CategoryName
+                                            </div>
+                                            <div class="payment-method">
+                                                @item.PaymentName
+                                            </div>
+                                        </td>
+                                        <td class="comment align-middle">
+                                            @item.Comment
+                                        </td>
+                                        <td align="right" class="align-middle">
+                                            @item.Amount PLN
+                                        </td>
+                                        <td align="right" class="align-middle">
+                                            <a class="bi bi-pencil mx-1" asp-controller="Balance" asp-action="ExpenseEdit" asp-route-id="@item.Id"></a>
+                                            <form class="icon-form" asp-controller="Balance" asp-action="ExpenseDelete" asp-route-id="@item.Id" method="post">
+                                                <button type="submit" class="bi bi-trash mx-1 icon-button-form"></button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                }
                             }
-                        }
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

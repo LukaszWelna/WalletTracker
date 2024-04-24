@@ -67,5 +67,37 @@ namespace WalletTracker.Infrastructure.Repositories
             _dbContext.Expenses.Add(expense);
             await _dbContext.SaveChangesAsync();
         }
+
+        public async Task<IEnumerable<IEnumerable<Expense>>> GetUserExpensesFromPeriod()
+        {
+            var userId = _userContextService.GetCurrentUser().Id;
+
+            var expenses = await _dbContext.Expenses
+                .AsNoTracking()
+                .Include(e => e.Category)
+                .Include(e => e.Payment)
+                .Where(e => e.UserId == userId)
+                .GroupBy(e => e.ExpenseDate)
+                .OrderByDescending(g => g.Key)
+                .Select(g => g.OrderByDescending(e => e.CreatedAt).ToList())
+                .ToListAsync();
+
+            return expenses;
+        }
+
+        public async Task DeleteExpenseById(int expenseId)
+        {
+            var expense = await _dbContext.Expenses.FirstAsync(i => i.Id == expenseId);
+
+            _dbContext.Expenses.Remove(expense);
+
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task<Expense> GetExpenseById(int expenseId)
+            => await _dbContext.Expenses.FirstAsync(e => e.Id == expenseId);
+
+        public async Task Commit()
+            => await _dbContext.SaveChangesAsync();
     }
 }

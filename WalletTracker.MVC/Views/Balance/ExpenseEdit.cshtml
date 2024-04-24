@@ -1,18 +1,16 @@
 ﻿@using WalletTracker.Application.Expense
-@using WalletTracker.Application.Expense.Commands.CreateExpense
-
-@model CreateExpenseCommand
+@model WalletTracker.Application.Expense.Commands.EditExpenseById.EditExpenseByIdCommand
 
 @{
-    ViewData["Title"] = "Add expense";
+    ViewData["Title"] = "Edit expense";
     var today = DateOnly.FromDateTime(DateTime.UtcNow).ToString("yyyy-MM-dd");
 }
 
 <div class="container col-xl-10 col-xxl-10 px-4 py-5">
     <div class="row align-items-center">
         <div class="col-md-10 mx-auto col-lg-6 p-4 rounded-3 form-column">
-            <form id="expenseForm" asp-action="Create" method="post">
-                <h2 class="form-header">Add expense</h2>
+            <form id="expenseForm" asp-action="ExpenseEdit" method="post">
+                <h2 class="form-header">Edit expense</h2>
                 <hr />
                 <div class="form-floating mb-3">
                     <input asp-for="Amount" class="form-control" placeholder="amount" />
@@ -21,7 +19,7 @@
                 </div>
                 <div class="form-floating mb-3">
                     <input asp-for="ExpenseDate" type="date" class="form-control" placeholder="Date"
-                           value="@Model.ExpenseDate.ToString("yyyy-MM-dd")" min="2000-01-01" max="@today">
+                           value="@Model.ExpenseDate.ToString("yyyy-MM-dd")" >
                     <label asp-for="ExpenseDate" class="control-label">Date</label>
                     <span asp-validation-for="ExpenseDate" class="text-danger" id="expenseDateSpan"></span>
                 </div>
@@ -50,7 +48,8 @@
                               placeholder="Comment" maxlength="25"></textarea>
                     <label asp-for="Comment">Comment</label>
                 </div>
-                <button id="expenseSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Add</button>
+                <button id="expenseSubmit" type="submit" class="w-100 btn btn-lg btn-primary mb-2">Save changes</button>
+                <a class="back" asp-action="Index">Back to balance</a>
             </form>
         </div>
     </div>

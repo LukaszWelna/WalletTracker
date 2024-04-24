@@ -8,8 +8,9 @@ using WalletTracker.Domain.Entities;
 
 namespace WalletTracker.Application.Expense
 {
-    public class ExpenseDto
+    public class CreateExpenseDto
     {
+        public int Id { get; set; }
         public decimal Amount { get; set; }
         public DateOnly ExpenseDate { get; set; }
         public int CategoryId { get; set; }
