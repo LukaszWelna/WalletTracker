@@ -88,7 +88,8 @@ namespace WalletTracker.Infrastructure.Repositories
 
         public async Task DeleteExpenseById(int expenseId)
         {
-            var expense = await _dbContext.Expenses.FirstAsync(i => i.Id == expenseId);
+            var expense = await _dbContext.Expenses
+                .FirstAsync(i => i.Id == expenseId);
 
             _dbContext.Expenses.Remove(expense);
 
@@ -105,7 +106,8 @@ namespace WalletTracker.Infrastructure.Repositories
         {
             var userId = _userContextService.GetCurrentUser().Id;
 
-            var totalAmountInCategories = await _dbContext.Expenses
+            var totalAmountInCategories = await _dbContext
+                .Expenses
                 .Include(e => e.Category)
                 .Where(e => e.UserId == userId)
                 .GroupBy(e => e.Category.Name )
@@ -117,6 +119,17 @@ namespace WalletTracker.Infrastructure.Repositories
                 .ToListAsync();
 
             return totalAmountInCategories;
+        }
+
+        public decimal GetTotalIncomesAmountFromPeriod()
+        {
+            var userId = _userContextService.GetCurrentUser().Id;
+
+            var totalAmount = _dbContext.Expenses
+                .Where(e => e.UserId == userId)
+                .Sum(i => i.Amount);
+
+            return totalAmount;
         }
     }
 }

@@ -9,16 +9,16 @@ using WalletTracker.Domain.Models;
 
 namespace WalletTracker.Application.Income.Queries.GetTotalAmountInCategories
 {
-    public class GetTotalIncomeAmountInCategoriesQuerHandler : IRequestHandler<GetTotalIncomeAmountInCategoriesQuery, IEnumerable<IncomeTotalAmountInCategoryDto>>
+    public class GetTotalIncomesAmountInCategoriesQuerHandler : IRequestHandler<GetTotalIncomesAmountInCategoriesQuery, IEnumerable<IncomeTotalAmountInCategoryDto>>
     {
         private readonly IIncomeRepository _incomeRepository;
 
-        public GetTotalIncomeAmountInCategoriesQuerHandler(IIncomeRepository incomeRepository)
+        public GetTotalIncomesAmountInCategoriesQuerHandler(IIncomeRepository incomeRepository)
         {
             _incomeRepository = incomeRepository;
         }
 
-        public async Task<IEnumerable<IncomeTotalAmountInCategoryDto>> Handle(GetTotalIncomeAmountInCategoriesQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<IncomeTotalAmountInCategoryDto>> Handle(GetTotalIncomesAmountInCategoriesQuery request, CancellationToken cancellationToken)
         {
             var totalAmountInCategories = await _incomeRepository.GetTotalAmountInCategories();
 

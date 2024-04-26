@@ -8,7 +8,7 @@ using WalletTracker.Domain.Models;
 
 namespace WalletTracker.Application.Expense.Queries.GetTotalAmountInCategories
 {
-    public class GetTotalExpenseAmountInCategoriesQuery : IRequest<IEnumerable<ExpenseTotalAmountInCategoryDto>>
+    public class GetTotalExpensesAmountInCategoriesQuery : IRequest<IEnumerable<ExpenseTotalAmountInCategoryDto>>
     {
 
     }

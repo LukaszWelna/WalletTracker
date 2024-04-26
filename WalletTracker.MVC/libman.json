@@ -16,6 +16,13 @@
         "font/bootstrap-icons.json",
         "font/bootstrap-icons.min.css"
       ]
+    },
+    {
+      "library": "canvasjs@1.7.0",
+      "destination": "wwwroot/lib/canvasjs/",
+      "files": [
+        "canvasjs.min.js"
+      ]
     }
   ]
 }

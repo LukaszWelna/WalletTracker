@@ -3,6 +3,13 @@
 @{
     ViewData["Title"] = "Balance";
     var today = DateOnly.FromDateTime(DateTime.UtcNow).ToString("yyyy-MM-dd");
+    var balance = Model.TotalIncomesAmount - Model.TotalExpensesAmount;
+    System.Diagnostics.Debug.WriteLine("Start");
+    foreach(var item in Model.ExpenseTotalAmountInCategories)
+    {
+        System.Diagnostics.Debug.WriteLine(item.);
+    }
+    
 }
 
 <div class="my-4">
@@ -42,9 +49,7 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
-            <div class="col-12 table-container p-3 rounded-2 mb-4">
-                <h3 class="text-center mb-3">Incomes summary</h3>
+                <h3 class="text-center mb-3 mt-4">Summary</h3>
                 <div class="table-responsive">
                     <table class="table table-borderless mb-0 table-balance">
                         <tbody>
@@ -104,9 +109,7 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
-            <div class="col-12 table-container p-3 rounded-2 mb-4">
-                <h3 class="text-center mb-3">Expenses summary</h3>
+                <h3 class="text-center mb-3 mt-4">Summary</h3>
                 <div class="table-responsive">
                     <table class="table table-borderless mb-0 table-balance">
                         <tbody>
@@ -128,3 +131,96 @@
         </div>
     </div>
 </div>
+
+<div class="my-4">
+    <div class="row">
+        <div class="col-lg-8 mx-auto table-container p-3 rounded-2 mb-4">
+            <h3 class="text-center mb-3">Overview</h3>
+            <div class="table-responsive">
+                <table class="table table-borderless mb-0 table-balance">
+                    <tbody>
+                        <tr class="border-bottom">
+                            <td>
+                                Incomes
+                            </td>
+                            <td align="right">
+                                @Model.TotalIncomesAmount PLN
+                            </td>
+                        </tr>
+                        <tr class="border-bottom">
+                            <td>
+                                Expenses
+                            </td>
+                            <td align="right">
+                                @Model.TotalExpensesAmount PLN
+                            </td>
+                        </tr>
+                        <tr class="border-bottom">
+                            <td>
+                                <strong>Balance</strong>
+                            </td>
+                            <td align="right" class="@(balance >= 0 ? "balance-green" : "balance-red")">
+                                <strong>@balance PLN</strong>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            @if (balance >= 0)
+            {
+                <p class="text-center mt-4">
+                    Congratulations! You manage your budget well.
+                </p>
+            } else
+            {
+                <p class="text-center mt-4">
+                    Consider managing your budget more effectively.
+                </p>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/lib/canvasjs/canvasjs.min.js"></script>
+
+    <script>
+
+        var groupedExpenses = JSON.parse('{{ groupedUserExpenses|json_encode|raw }}');
+
+        const colorSet = [];
+
+        for (i = 0; i < groupedExpenses.length; i++) {
+            const r = Math.floor(Math.random() * 255);
+            const g = Math.floor(Math.random() * 255);
+            const b = Math.floor(Math.random() * 255);
+
+            colorSet.push("rgba(" + r + ", " + g + ", " + b + ", 0.8)");
+        }
+
+        // Pie chart - expenses in defined period
+        window.onload = function () {
+
+            CanvasJS.addColorSet("randomSet", colorSet);
+
+            var chart = new CanvasJS.Chart("chartContainer", {
+                animationEnabled: true,
+                backgroundColor: "transparent",
+                colorSet: "randomSet",
+                data: [{
+                    type: "pie",
+                    indexLabelFontColor: "white",
+                    indexLabelFontSize: 10,
+                    startAngle: 240,
+                    yValueFormatString: "##0.00\" PLN\"",
+                    indexLabel: "{label} {y}",
+                    dataPoints: groupedExpenses
+                }]
+            });
+            chart.render();
+
+        }
+
+    </script>
+}
+
