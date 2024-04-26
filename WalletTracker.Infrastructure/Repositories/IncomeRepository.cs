@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using WalletTracker.Application.ApplicationUser;
 using WalletTracker.Domain.Entities;
 using WalletTracker.Domain.Interfaces;
+using WalletTracker.Domain.Models;
 using WalletTracker.Infrastructure.Persistence;
 
 namespace WalletTracker.Infrastructure.Repositories
@@ -77,5 +78,23 @@ namespace WalletTracker.Infrastructure.Repositories
 
         public async Task Commit()
             => await _dbContext.SaveChangesAsync();
+
+        public async Task<IEnumerable<IncomeTotalAmountInCategoryDto>> GetTotalAmountInCategories()
+        {
+            var userId = _userContextService.GetCurrentUser().Id;
+
+            var totalAmountInCategories = await _dbContext.Incomes
+                .Include(e => e.Category)
+                .Where(e => e.UserId == userId)
+                .GroupBy(e => e.Category.Name)
+                .Select(g => new IncomeTotalAmountInCategoryDto
+                {
+                    CategoryName = g.Key,
+                    TotalAmount = g.Sum(c => c.Amount)
+                })
+                .ToListAsync();
+
+            return totalAmountInCategories;
+        }
     }
 }
