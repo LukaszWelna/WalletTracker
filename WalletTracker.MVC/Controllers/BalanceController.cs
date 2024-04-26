@@ -6,11 +6,13 @@ using WalletTracker.Application.Expense.Queries.EditExpenseById;
 using WalletTracker.Application.Expense.Queries.GetEditExpenseFormDataAfterValidationQuery;
 using WalletTracker.Application.Expense.Queries.GetExpensesFromPeriod;
 using WalletTracker.Application.Expense.Queries.GetTotalAmountInCategories;
+using WalletTracker.Application.Expense.Queries.GetTotalExpensesAmountFromPeriod;
 using WalletTracker.Application.Income.Commands.DeleteIncomeById;
 using WalletTracker.Application.Income.Commands.EditIncomeById;
 using WalletTracker.Application.Income.Queries.EditIncomeById;
 using WalletTracker.Application.Income.Queries.GetEditIncomeFormDataAfterValidation;
 using WalletTracker.Application.Income.Queries.GetIncomesFromPeriod;
+using WalletTracker.Application.Income.Queries.GetTotalAmountFromPeriod;
 using WalletTracker.Application.Income.Queries.GetTotalAmountInCategories;
 using WalletTracker.MVC.Extensions;
 using WalletTracker.MVC.Models;
@@ -33,16 +35,21 @@ namespace WalletTracker.MVC.Controllers
 
             var userExpenseDtos = await _mediator.Send(new GetUserExpensesFromPeriodQuery());
 
-            var incomeTotalAmountInCategories = await _mediator.Send(new GetTotalIncomeAmountInCategoriesQuery());
+            var incomeTotalAmountInCategories = await _mediator.Send(new GetTotalIncomesAmountInCategoriesQuery());
 
-            var expenseTotalAmountInCategories = await _mediator.Send(new GetTotalExpenseAmountInCategoriesQuery());
+            var expenseTotalAmountInCategories = await _mediator.Send(new GetTotalExpensesAmountInCategoriesQuery());
 
+            var totalIncomesAmount = await _mediator.Send(new GetTotalIncomesAmountFromPeriodQuery());
+            var totalExpensesAmount = await _mediator.Send(new GetTotalExpensesAmountFromPeriodQuery());
+            
             var balanceModel = new BalanceModel()
             {
                 Incomes = userIncomeDtos,
                 Expenses = userExpenseDtos,
                 IncomeTotalAmountInCategories = incomeTotalAmountInCategories,
-                ExpenseTotalAmountInCategories = expenseTotalAmountInCategories
+                ExpenseTotalAmountInCategories = expenseTotalAmountInCategories,
+                TotalIncomesAmount = totalIncomesAmount,
+                TotalExpensesAmount = totalExpensesAmount
             };
 
             return View(balanceModel);

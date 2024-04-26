@@ -96,5 +96,16 @@ namespace WalletTracker.Infrastructure.Repositories
 
             return totalAmountInCategories;
         }
+
+        public decimal GetTotalIncomesAmountFromPeriod()
+        {
+            var userId = _userContextService.GetCurrentUser().Id;
+
+            var totalAmount = _dbContext.Incomes
+                .Where(e => e.UserId == userId)
+                .Sum(i => i.Amount);
+
+            return totalAmount;
+        } 
     }
 }

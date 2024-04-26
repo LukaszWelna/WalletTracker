@@ -10,5 +10,7 @@ namespace WalletTracker.MVC.Models
         public IEnumerable<IEnumerable<GetExpenseDto>> Expenses { get; set; } = new List<List<GetExpenseDto>>();
         public IEnumerable<IncomeTotalAmountInCategoryDto> IncomeTotalAmountInCategories { get; set; } = new List<IncomeTotalAmountInCategoryDto>();
         public IEnumerable<ExpenseTotalAmountInCategoryDto> ExpenseTotalAmountInCategories { get; set; } = new List<ExpenseTotalAmountInCategoryDto>();
+        public decimal TotalIncomesAmount { get; set; }
+        public decimal TotalExpensesAmount { get; set; }
     }
 }
