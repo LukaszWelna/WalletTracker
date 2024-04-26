@@ -43,6 +43,26 @@
                     </table>
                 </div>
             </div>
+            <div class="col-12 table-container p-3 rounded-2 mb-4">
+                <h3 class="text-center mb-3">Incomes summary</h3>
+                <div class="table-responsive">
+                    <table class="table table-borderless mb-0 table-balance">
+                        <tbody>
+                            @foreach (var item in Model.IncomeTotalAmountInCategories)
+                            {
+                                <tr class="border-bottom">
+                                    <td>
+                                        @item.CategoryName
+                                    </td>
+                                    <td align="right">
+                                        @item.TotalAmount PLN
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
         <div class="col-lg-6">
             <div class="col-12 table-container p-3 rounded-2 mb-4">
@@ -80,6 +100,26 @@
                                         </td>
                                     </tr>
                                 }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-12 table-container p-3 rounded-2 mb-4">
+                <h3 class="text-center mb-3">Expenses summary</h3>
+                <div class="table-responsive">
+                    <table class="table table-borderless mb-0 table-balance">
+                        <tbody>
+                            @foreach (var item in Model.ExpenseTotalAmountInCategories)
+                            {
+                                <tr class="border-bottom">
+                                    <td>
+                                        @item.CategoryName
+                                    </td>
+                                    <td align="right">
+                                        @item.TotalAmount PLN
+                                    </td>
+                                </tr>
                             }
                         </tbody>
                     </table>

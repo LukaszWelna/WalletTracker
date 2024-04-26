@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WalletTracker.Domain.Entities;
+using WalletTracker.Domain.Models;
 
 namespace WalletTracker.Domain.Interfaces
 {
@@ -20,5 +21,6 @@ namespace WalletTracker.Domain.Interfaces
         public Task DeleteExpenseById(int expenseId);
         public Task<Expense> GetExpenseById(int expenseId);
         public Task Commit();
+        public Task<IEnumerable<ExpenseTotalAmountInCategoryDto>> GetTotalAmountInCategories();
     }
 }
