@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using WalletTracker.Application.Balance.Queries.GetBalanceData;
 using WalletTracker.Application.Expense.Commands.DeleteExpenseById;
 using WalletTracker.Application.Expense.Commands.EditExpenseById;
 using WalletTracker.Application.Expense.Queries.EditExpenseById;
@@ -40,7 +41,10 @@ namespace WalletTracker.MVC.Controllers
             var expenseTotalAmountInCategories = await _mediator.Send(new GetTotalExpensesAmountInCategoriesQuery());
 
             var totalIncomesAmount = await _mediator.Send(new GetTotalIncomesAmountFromPeriodQuery());
+
             var totalExpensesAmount = await _mediator.Send(new GetTotalExpensesAmountFromPeriodQuery());
+
+            var balanceDtos = await _mediator.Send(new GetBalanceDataQuery(expenseTotalAmountInCategories));
             
             var balanceModel = new BalanceModel()
             {
@@ -49,7 +53,8 @@ namespace WalletTracker.MVC.Controllers
                 IncomeTotalAmountInCategories = incomeTotalAmountInCategories,
                 ExpenseTotalAmountInCategories = expenseTotalAmountInCategories,
                 TotalIncomesAmount = totalIncomesAmount,
-                TotalExpensesAmount = totalExpensesAmount
+                TotalExpensesAmount = totalExpensesAmount,
+                BalanceDtos = balanceDtos
             };
 
             return View(balanceModel);

@@ -1,18 +1,13 @@
-﻿@model BalanceModel
+﻿@using Newtonsoft.Json
+@model BalanceModel
 
 @{
     ViewData["Title"] = "Balance";
     var today = DateOnly.FromDateTime(DateTime.UtcNow).ToString("yyyy-MM-dd");
     var balance = Model.TotalIncomesAmount - Model.TotalExpensesAmount;
-    System.Diagnostics.Debug.WriteLine("Start");
-    foreach(var item in Model.ExpenseTotalAmountInCategories)
-    {
-        System.Diagnostics.Debug.WriteLine(item.);
-    }
-    
 }
 
-<div class="my-4">
+<div class="mt-4">
     <div class="row">
         <div class="col-lg-6">
             <div class="col-12 table-container p-3 rounded-2 mb-4">
@@ -132,51 +127,55 @@
     </div>
 </div>
 
-<div class="my-4">
+<div class="m-0">
     <div class="row">
-        <div class="col-lg-8 mx-auto table-container p-3 rounded-2 mb-4">
-            <h3 class="text-center mb-3">Overview</h3>
-            <div class="table-responsive">
-                <table class="table table-borderless mb-0 table-balance">
-                    <tbody>
-                        <tr class="border-bottom">
-                            <td>
-                                Incomes
-                            </td>
-                            <td align="right">
-                                @Model.TotalIncomesAmount PLN
-                            </td>
-                        </tr>
-                        <tr class="border-bottom">
-                            <td>
-                                Expenses
-                            </td>
-                            <td align="right">
-                                @Model.TotalExpensesAmount PLN
-                            </td>
-                        </tr>
-                        <tr class="border-bottom">
-                            <td>
-                                <strong>Balance</strong>
-                            </td>
-                            <td align="right" class="@(balance >= 0 ? "balance-green" : "balance-red")">
-                                <strong>@balance PLN</strong>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+        <div class="col-lg-8 mx-auto">
+            <div class="col-lg-12 table-container p-3 rounded-2 mb-2">
+                <h3 class="text-center mb-3">Overview</h3>
+                <div class="table-responsive">
+                    <table class="table table-borderless mb-0 table-balance">
+                        <tbody>
+                            <tr class="border-bottom">
+                                <td>
+                                    Incomes
+                                </td>
+                                <td align="right">
+                                    @Model.TotalIncomesAmount PLN
+                                </td>
+                            </tr>
+                            <tr class="border-bottom">
+                                <td>
+                                    Expenses
+                                </td>
+                                <td align="right">
+                                    @Model.TotalExpensesAmount PLN
+                                </td>
+                            </tr>
+                            <tr class="border-bottom">
+                                <td>
+                                    <strong>Balance</strong>
+                                </td>
+                                <td align="right" class="@(balance >= 0 ? "balance-green" : "balance-red")">
+                                    <strong>@balance PLN</strong>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                @if (balance >= 0)
+                {
+                    <p class="text-center mt-4">
+                        Congratulations! You manage your budget well.
+                    </p>
+                } else
+                {
+                    <p class="text-center mt-4">
+                        Consider managing your budget more effectively.
+                    </p>
+                }
+                <h3 class="mb-3 mt-4 text-center">Your expenses</h3>
+                <div class="mx-auto" id="chartContainer" style="height: 300px;"></div>
             </div>
-            @if (balance >= 0)
-            {
-                <p class="text-center mt-4">
-                    Congratulations! You manage your budget well.
-                </p>
-            } else
-            {
-                <p class="text-center mt-4">
-                    Consider managing your budget more effectively.
-                </p>
-            }
         </div>
     </div>
 </div>
@@ -186,7 +185,7 @@
 
     <script>
 
-        var groupedExpenses = JSON.parse('{{ groupedUserExpenses|json_encode|raw }}');
+        var groupedExpenses = @Html.Raw(JsonConvert.SerializeObject(Model.BalanceDtos));
 
         const colorSet = [];
 
@@ -209,7 +208,7 @@
                 colorSet: "randomSet",
                 data: [{
                     type: "pie",
-                    indexLabelFontColor: "white",
+                    indexLabelFontColor: "black",
                     indexLabelFontSize: 10,
                     startAngle: 240,
                     yValueFormatString: "##0.00\" PLN\"",
@@ -218,9 +217,7 @@
                 }]
             });
             chart.render();
-
         }
-
     </script>
 }
 
