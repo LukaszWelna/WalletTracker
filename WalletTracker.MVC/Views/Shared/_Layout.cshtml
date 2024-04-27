@@ -49,6 +49,9 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark @(currentController == "Balance" && currentAction == "Index" ? "active" : "")" asp-area="" asp-controller="Balance" asp-action="Index">Show balance</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark @(currentController == "Settings" ? "active" : "")" asp-area="" asp-controller="Settings" asp-action="AddIncomeCategory">Settings</a>
+                            </li>
                         }
                     </ul>
                     <partial name="_LoginPartial" />

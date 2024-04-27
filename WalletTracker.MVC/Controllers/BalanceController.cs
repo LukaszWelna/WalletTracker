@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WalletTracker.Application.Balance.Queries.GetBalanceData;
 using WalletTracker.Application.Expense.Commands.DeleteExpenseById;
@@ -20,6 +21,7 @@ using WalletTracker.MVC.Models;
 
 namespace WalletTracker.MVC.Controllers
 {
+    [Authorize]
     public class BalanceController : Controller
     {
         private readonly IMediator _mediator;
@@ -59,76 +61,5 @@ namespace WalletTracker.MVC.Controllers
 
             return View(balanceModel);
         }
-
-        [HttpPost]
-        public async Task<IActionResult> IncomeDelete(int id)
-        {
-            await _mediator.Send(new DeleteIncomeByIdCommand(id));
-
-            this.SetNotification("warning", "Income deleted");
-
-            return RedirectToAction(nameof(Index));
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> ExpenseDelete(int id)
-        {
-            await _mediator.Send(new DeleteExpenseByIdCommand(id));
-
-            this.SetNotification("warning", "Expense deleted");
-
-            return RedirectToAction(nameof(Index));
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> IncomeEdit(int id)
-        {
-            var income = await _mediator.Send(new EditIncomeByIdQuery(id));
-
-            return View(income);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> IncomeEdit(int id, EditIncomeByIdCommand command)
-        {
-            if (!ModelState.IsValid)
-            {
-                var commandAfterValidation = await _mediator.Send(new GetEditIncomeFormDataAfterValidationQuery(command));
-
-                return View(commandAfterValidation);
-            }
-
-            await _mediator.Send(command);
-
-            this.SetNotification("success", "Income edited");
-
-            return RedirectToAction(nameof(Index));
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> ExpenseEdit(int id)
-        {
-            var expense = await _mediator.Send(new EditExpenseByIdQuery(id));
-
-            return View(expense);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> ExpenseEdit(int id, EditExpenseByIdCommand command)
-        {
-            if (!ModelState.IsValid)
-            {
-                var commandAfterValidation = await _mediator.Send(new GetEditExpenseFormDataAfterValidationQuery(command));
-
-                return View(commandAfterValidation);
-            }
-
-            await _mediator.Send(command);
-
-            this.SetNotification("success", "Expense edited");
-
-            return RedirectToAction(nameof(Index));
-        }
-
     }
 }

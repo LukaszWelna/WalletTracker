@@ -37,6 +37,7 @@ namespace WalletTracker.Infrastructure.Repositories
             _dbContext.IncomeCategoriesAssignedToUsers.AddRange(incomeCategoriesAssignedToUser);
             await _dbContext.SaveChangesAsync();
         }
+
         public async Task<IEnumerable<IncomeCategoryAssignedToUser>> GetCategoriesAssignedToLoggedUser()
         {
             var userId = _userContextService.GetCurrentUser().Id;
