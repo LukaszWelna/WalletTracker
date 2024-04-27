@@ -1,0 +1,32 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var currentController = ViewContext.RouteData.Values["Controller"]?.ToString();
+    var currentAction = ViewContext.RouteData.Values["Action"]?.ToString();
+}
+
+<div class="container col-xl-10 px-4 py-4">
+    <div class="row">
+        <h1 class="text-center">Manage categories</h1>
+        <hr class="mb-4" />
+        <div class="col-lg-4 px-0">
+            <ul class="col-md-8 mx-auto nav nav-pills flex-column mb-3 px-0">
+                <li class="nav-item"><a class="nav-link @(currentController == "Settings" && currentAction == "AddIncomeCategory" ? "active" : "")" asp-controller="Settings" asp-action="AddIncomeCategory">Add income category</a></li>
+                <li class="nav-item"><a class="nav-link @(currentController == "Settings" && currentAction == "EditIncomeCategory" ? "active" : "")" asp-controller="Settings" asp-action="EditIncomeCategory">Edit income category</a></li>
+                <li class="nav-item"><a class="nav-link @(currentController == "Settings" && currentAction == "DeleteIncomeCategory" ? "active" : "")" asp-controller="Settings" asp-action="DeleteIncomeCategory">Delete income category</a></li>
+                <li class="nav-item"><a class="nav-link @(currentController == "Settings" && currentAction == "AddExpenseCategory" ? "active" : "")" asp-controller="Settings" asp-action="AddExpenseCategory">Add expense category</a></li>
+                <li class="nav-item"><a class="nav-link @(currentController == "Settings" && currentAction == "EditExpenseCategory" ? "active" : "")" asp-controller="Settings" asp-action="EditExpenseCategory">Edit expense category</a></li>
+                <li class="nav-item"><a class="nav-link @(currentController == "Settings" && currentAction == "DeleteExpenseCategory" ? "active" : "")" asp-controller="Settings" asp-action="DeleteExpenseCategory">Delete expense category</a></li>
+                <li class="nav-item"><a class="nav-link @(currentController == "Settings" && currentAction == "AddPaymentMethod" ? "active" : "")" asp-controller="Settings" asp-action="AddPaymentMethod">Add payment method</a></li>
+                <li class="nav-item"><a class="nav-link @(currentController == "Settings" && currentAction == "EditPaymentMethod" ? "active" : "")" asp-controller="Settings" asp-action="EditPaymentMethod">Edit payment method</a></li>
+                <li class="nav-item"><a class="nav-link @(currentController == "Settings" && currentAction == "DeletePaymentMethod" ? "active" : "")" asp-controller="Settings" asp-action="DeletePaymentMethod">Delete payment method</a></li>
+            </ul>
+        </div>
+        <div class="col-lg-8">
+            @RenderBody()
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+}

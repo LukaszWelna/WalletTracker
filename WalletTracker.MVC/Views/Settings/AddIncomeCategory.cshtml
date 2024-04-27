@@ -1,0 +1,28 @@
+﻿@model WalletTracker.Application.Settings.Commands.CreateIncomeCategory.CreateIncomeCategoryCommand
+
+@{
+    ViewData["Title"] = "AddIncomeCategory";
+    Layout = "~/Views/Shared/_SettingsLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-10 mx-auto p-4 rounded-3 form-column">
+        <h3 class="text-center">Add category</h3>
+        <form id="addIncomeCategoryForm" method="post">
+            <div class="form-floating mb-3">
+                <input asp-for="Name" class="form-control"  placeholder="Name" />
+                <label asp-for="Name" class="control-label"></label>
+                <span asp-validation-for="Name" class="text-danger" id="nameSpan"></span>
+            </div>
+            <button type="submit" class="w-100 btn btn-lg btn-primary">Add</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script src="~/js/addIncomeCategory.js"></script>
+}
