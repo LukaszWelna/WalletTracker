@@ -7,3 +7,8 @@ $("#Amount").on("input", function () {
     let value = $(this).val();
     $(this).val(value.replace(/\./g, ','));
 });
+
+$("#Limit").on("input", function () {
+    let value = $(this).val();
+    $(this).val(value.replace(/\./g, ','));
+});

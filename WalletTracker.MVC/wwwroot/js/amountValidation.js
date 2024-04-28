@@ -16,6 +16,11 @@ $.validator.addMethod("amountMin", function (value, element) {
     return (normalizedValue > 0);
 }, "This field is required.");
 
+$.validator.addMethod("limitMin", function (value, element) {
+    var normalizedValue = parseFloat(value.replace(',', '.'));
+    return (normalizedValue >= 0);
+}, "Limit must be greater or equal to 0.");
+
 $.validator.addMethod("amountMax", function (value, element) {
     var normalizedValue = parseFloat(value.replace(',', '.'));
     return (normalizedValue < 100000000);

@@ -1,14 +1,15 @@
 ﻿@model WalletTracker.Application.Settings.Commands.CreateIncomeCategory.CreateIncomeCategoryCommand
 
 @{
-    ViewData["Title"] = "AddIncomeCategory";
+    ViewData["Title"] = "Add income category";
     Layout = "~/Views/Shared/_SettingsLayout.cshtml";
 }
 
 <div class="row">
     <div class="col-md-10 mx-auto p-4 rounded-3 form-column">
-        <h3 class="text-center">Add category</h3>
         <form id="addIncomeCategoryForm" method="post">
+            <h2 class="form-header">Add income category</h2>
+            <hr />
             <div class="form-floating mb-3">
                 <input asp-for="Name" class="form-control"  placeholder="Name" />
                 <label asp-for="Name" class="control-label"></label>

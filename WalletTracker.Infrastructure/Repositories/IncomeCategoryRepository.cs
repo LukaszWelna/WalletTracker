@@ -49,10 +49,9 @@ namespace WalletTracker.Infrastructure.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
-        public Task Commit()
-        {
-            throw new NotImplementedException();
-        }
+        public async Task Commit()
+            => await _dbContext.SaveChangesAsync();
+
         public async Task DeleteById(int id)
         {
             var category = await _dbContext.IncomeCategoriesAssignedToUsers.FirstAsync(c => c.Id == id);
@@ -62,8 +61,19 @@ namespace WalletTracker.Infrastructure.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<IncomeCategoryAssignedToUser?> GetByName(string name) 
+        public async Task<IncomeCategoryAssignedToUser?> GetByName(string name)
+        {
+            var userId = _userContextService.GetCurrentUser().Id;
+
+            var category = await _dbContext.IncomeCategoriesAssignedToUsers
+                .Where(c => c.UserId == userId)
+                .FirstOrDefaultAsync(c => c.Name.ToLower() == name.ToLower());
+
+            return category;
+        }
+
+        public async Task<IncomeCategoryAssignedToUser> GetById(int id)
             => await _dbContext.IncomeCategoriesAssignedToUsers
-            .FirstOrDefaultAsync(c => c.Name.ToLower() == name.ToLower());
+            .FirstAsync(c => c.Id == id);
     }
 }

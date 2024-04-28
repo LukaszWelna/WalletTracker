@@ -3,10 +3,21 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.Blazor;
 using WalletTracker.Application.Income.Queries.GetCategoriesAssignedToLoggedUse;
+using WalletTracker.Application.Settings.Commands.CreateExpenseCategory;
 using WalletTracker.Application.Settings.Commands.CreateIncomeCategory;
+using WalletTracker.Application.Settings.Commands.CreatePaymentMethod;
+using WalletTracker.Application.Settings.Commands.DeleteExpenseCategoryById;
 using WalletTracker.Application.Settings.Commands.DeleteIncomeCategory;
+using WalletTracker.Application.Settings.Commands.EditExpenseCategoryById;
+using WalletTracker.Application.Settings.Commands.EditIncomeCategoryById;
+using WalletTracker.Application.Settings.Queries.GetExpenseCategoryById;
+using WalletTracker.Application.Settings.Queries.GetExpenseCategoryByName;
+using WalletTracker.Application.Settings.Queries.GetExpenseCategoryFormToDelete;
+using WalletTracker.Application.Settings.Queries.GetExpenseCategoryFormToEdit;
 using WalletTracker.Application.Settings.Queries.GetIncomeCategoriesAssignedToLoggedUser;
 using WalletTracker.Application.Settings.Queries.GetIncomeCategoryByName;
+using WalletTracker.Application.Settings.Queries.GetIncomeCategoryFormToEdit;
+using WalletTracker.Application.Settings.Queries.GetPaymentMethodByName;
 using WalletTracker.MVC.Extensions;
 
 namespace WalletTracker.MVC.Controllers
@@ -19,6 +30,21 @@ namespace WalletTracker.MVC.Controllers
         public SettingsController(IMediator mediator)
         {
             _mediator = mediator;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CheckIncomeCategoryNameExists(int id, string name)
+        {
+            var category = await _mediator.Send(new GetIncomeCategoryByNameQuery(name));
+
+            if (category != null && category.Id != id)
+            {
+                return Json("Category name already exists in the database.");
+            }
+            else
+            {
+                return Json(true);
+            }
         }
 
         [HttpGet]
@@ -42,24 +68,35 @@ namespace WalletTracker.MVC.Controllers
             return RedirectToAction(nameof(AddIncomeCategory));
         }
 
-        [HttpPost]
-        public async Task<IActionResult> CheckIncomeCategoryNameExists(string name)
+        [HttpGet]
+        public async Task<IActionResult> EditIncomeCategory()
         {
-            var category = await _mediator.Send(new GetIncomeCategoryByNameQuery(name));
+            var incomeCategories = await _mediator.Send(new GetIncomeCategoryFormToEditQuery());
 
-            if (category == null)
+            return View(incomeCategories);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditIncomeCategory(EditIncomeCategoryByIdCommand command)
+        {
+            if (!ModelState.IsValid)
             {
-                return Json(true);
-            } else
-            {
-                return Json("Category name already exists in the database.");
+                command = await _mediator.Send(new GetIncomeCategoryFormToEditQuery());
+
+                return View(command);
             }
+
+            await _mediator.Send(command);
+
+            this.SetNotification("success", "Income category edited");
+
+            return RedirectToAction(nameof(EditIncomeCategory));
         }
 
         [HttpGet]
         public async Task<IActionResult> DeleteIncomeCategory()
         {
-            var incomeCategories = await _mediator.Send(new GetIncomeCategoriesAssignedToLoggedUserQuery());
+            var incomeCategories = await _mediator.Send(new GetIncomeCategoryFormToDeleteQuery());
 
             return View(incomeCategories);
         }
@@ -69,7 +106,7 @@ namespace WalletTracker.MVC.Controllers
         {
             if (!ModelState.IsValid)
             {
-                command = await _mediator.Send(new GetIncomeCategoriesAssignedToLoggedUserQuery());
+                command = await _mediator.Send(new GetIncomeCategoryFormToDeleteQuery());
 
                 return View(command);
             }
@@ -81,6 +118,134 @@ namespace WalletTracker.MVC.Controllers
             return RedirectToAction(nameof(DeleteIncomeCategory));
         }
 
+        [HttpPost]
+        public async Task<IActionResult> CheckExpenseCategoryNameExists(int id, string name)
+        {
+            var category = await _mediator.Send(new GetExpenseCategoryByNameQuery(name));
 
+            if (category != null && category.Id != id)
+            {
+                return Json("Category name already exists in the database.");
+            }
+            else
+            {
+                return Json(true);
+            }
+        }
+
+        [HttpGet]
+        public IActionResult AddExpenseCategory()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddExpenseCategory(CreateExpenseCategoryCommand command)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(command);
+            }
+
+            await _mediator.Send(command);
+
+            this.SetNotification("success", "Expense category created");
+
+            return RedirectToAction(nameof(AddExpenseCategory));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditExpenseCategory()
+        {
+            var expenseCategories = await _mediator.Send(new GetExpenseCategoryFormToEditQuery());
+
+            return View(expenseCategories);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditExpenseCategory(EditExpenseCategoryByIdCommand command)
+        {
+            if (!ModelState.IsValid)
+            {
+                command = await _mediator.Send(new GetExpenseCategoryFormToEditQuery());
+
+                return View(command);
+            }
+
+            await _mediator.Send(command);
+
+            this.SetNotification("success", "Expense category edited");
+
+            return RedirectToAction(nameof(EditExpenseCategory));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> DeleteExpenseCategory()
+        {
+            var incomeCategories = await _mediator.Send(new GetExpenseCategoryFormToDeleteQuery());
+
+            return View(incomeCategories);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteExpenseCategory(DeleteExpenseCategoryByIdCommand command)
+        {
+            if (!ModelState.IsValid)
+            {
+                command = await _mediator.Send(new GetExpenseCategoryFormToDeleteQuery());
+
+                return View(command);
+            }
+
+            await _mediator.Send(command);
+
+            this.SetNotification("warning", "Expense category deleted");
+
+            return RedirectToAction(nameof(DeleteExpenseCategory));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetExpenseCategoryById(int id)
+        {
+            var data = await _mediator.Send(new GetExpenseCategoryByIdQuery(id));
+
+            return Ok(data);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CheckPaymentMethodNameExists(int id, string name)
+        {
+            var paymentMethod = await _mediator.Send(new GetPaymentMethodByNameQuery(name));
+
+            if (paymentMethod != null && paymentMethod.Id != id)
+            {
+                return Json("Payment method name already exists in the database.");
+            }
+            else
+            {
+                return Json(true);
+            }
+        }
+
+        [HttpGet]
+        public IActionResult AddPaymentMethod()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddPaymentMethod(CreatePaymentMethodCommand command)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(command);
+            }
+
+            await _mediator.Send(command);
+
+            this.SetNotification("success", "Payment method created");
+
+            return RedirectToAction(nameof(AddPaymentMethod));
+        }
     }
 }

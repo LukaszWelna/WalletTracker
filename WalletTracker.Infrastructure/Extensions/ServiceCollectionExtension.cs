@@ -40,6 +40,7 @@ namespace WalletTracker.Infrastructure.Extensions
             services.AddScoped<IExpenseRepository, ExpenseRepository>();
             services.AddScoped<IIncomeCategoryRepository, IncomeCategoryRepository>();
             services.AddScoped<IExpenseCategoryRepository, ExpenseCategoryRepository>();
+            services.AddScoped<IPaymentMethodRepository, PaymentMethodRepository>();
         }
     }
 }

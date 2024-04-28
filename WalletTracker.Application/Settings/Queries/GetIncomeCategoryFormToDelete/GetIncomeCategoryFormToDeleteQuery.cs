@@ -8,7 +8,7 @@ using WalletTracker.Application.Settings.Commands.DeleteIncomeCategory;
 
 namespace WalletTracker.Application.Settings.Queries.GetIncomeCategoriesAssignedToLoggedUser
 {
-    public class GetIncomeCategoriesAssignedToLoggedUserQuery : IRequest<DeleteIncomeCategoryByIdCommand>
+    public class GetIncomeCategoryFormToDeleteQuery : IRequest<DeleteIncomeCategoryByIdCommand>
     {
 
     }

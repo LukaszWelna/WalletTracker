@@ -9,6 +9,9 @@ $("#addIncomeCategoryForm").validate({
                 url: "/Settings/CheckIncomeCategoryNameExists",
                 type: "post",
                 data: {
+                    id: function () {
+                        return 0;
+                    },
                     name: function () {
                         return $("#Name").val();
                     }

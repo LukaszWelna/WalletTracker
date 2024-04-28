@@ -12,19 +12,19 @@ using WalletTracker.Application.Settings.Commands.DeleteIncomeCategory;
 
 namespace WalletTracker.Application.Settings.Queries.GetIncomeCategoriesAssignedToLoggedUser
 {
-    public class GetIncomeCategoriesAssignedToLoggedUserQueryHandler : IRequestHandler<GetIncomeCategoriesAssignedToLoggedUserQuery, DeleteIncomeCategoryByIdCommand>
+    public class GetIncomeCategoryFormToDeleteQueryHandler : IRequestHandler<GetIncomeCategoryFormToDeleteQuery, DeleteIncomeCategoryByIdCommand>
     {
         private readonly IIncomeCategoryRepository _incomeCategoryRepository;
         private readonly IMapper _mapper;
 
-        public GetIncomeCategoriesAssignedToLoggedUserQueryHandler(IIncomeCategoryRepository incomeCategoryRepository,
+        public GetIncomeCategoryFormToDeleteQueryHandler(IIncomeCategoryRepository incomeCategoryRepository,
             IMapper mapper)
         {
             _incomeCategoryRepository = incomeCategoryRepository;
             _mapper = mapper;
         }
 
-        public async Task<DeleteIncomeCategoryByIdCommand> Handle(GetIncomeCategoriesAssignedToLoggedUserQuery request, CancellationToken cancellationToken)
+        public async Task<DeleteIncomeCategoryByIdCommand> Handle(GetIncomeCategoryFormToDeleteQuery request, CancellationToken cancellationToken)
         {
             var categoriesAssignedToUser = await _incomeCategoryRepository
                     .GetCategoriesAssignedToLoggedUser();
