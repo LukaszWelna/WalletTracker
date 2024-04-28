@@ -1,5 +1,7 @@
 ﻿@using Newtonsoft.Json
-@model BalanceModel
+@using WalletTracker.Application.Balance
+
+@model BalanceDto
 
 @{
     ViewData["Title"] = "Balance";
@@ -185,7 +187,7 @@
 
     <script>
 
-        var groupedExpenses = @Html.Raw(JsonConvert.SerializeObject(Model.BalanceDtos));
+        var groupedExpenses = @Html.Raw(JsonConvert.SerializeObject(Model.BalanceCanvasDtos));
 
         const colorSet = [];
 

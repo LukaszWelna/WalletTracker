@@ -11,7 +11,6 @@ $.validator.addMethod("dateTime", function (value, element) {
 }, "Must be a valid date.");
 
 $.validator.addMethod("dateNotGreaterThanToday", function (value, element) {
-
     var selectedDate = new Date(value);
     selectedDate.setHours(0, 0, 0, 0);
     var currentDate = new Date(new Date().toDateString());

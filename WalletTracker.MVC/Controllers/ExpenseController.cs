@@ -72,7 +72,7 @@ namespace WalletTracker.MVC.Controllers
 
             this.SetNotification("success", "Expense edited");
 
-            return RedirectToAction("Index", "Balance", new { area = "" });
+            return RedirectToAction("Index", "Balance");
         }
 
         [HttpPost]
@@ -82,7 +82,7 @@ namespace WalletTracker.MVC.Controllers
 
             this.SetNotification("warning", "Expense deleted");
 
-            return RedirectToAction("Index", "Balance", new { area = "" });
+            return RedirectToAction("Index", "Balance");
         }
     }
 }

@@ -14,11 +14,15 @@ namespace WalletTracker.Application.Income.Queries.EditIncomeById
     public class EditIncomeByIdQueryHandler : IRequestHandler<EditIncomeByIdQuery, EditIncomeByIdCommand>
     {
         private readonly IIncomeRepository _incomeRepository;
+        private readonly IIncomeCategoryRepository _incomeCategoryRepository;
         private readonly IMapper _mapper;
 
-        public EditIncomeByIdQueryHandler(IIncomeRepository incomeRepository, IMapper mapper)
+        public EditIncomeByIdQueryHandler(IIncomeRepository incomeRepository,
+            IIncomeCategoryRepository incomeCategoryRepository,
+            IMapper mapper)
         {
             _incomeRepository = incomeRepository;
+            _incomeCategoryRepository = incomeCategoryRepository;
             _mapper = mapper;
         }
 
@@ -28,7 +32,7 @@ namespace WalletTracker.Application.Income.Queries.EditIncomeById
 
             var command = _mapper.Map<EditIncomeByIdCommand>(income);
 
-            var categoriesAssignedToUser = await _incomeRepository
+            var categoriesAssignedToUser = await _incomeCategoryRepository
                 .GetCategoriesAssignedToLoggedUser();
 
             var categoryAssignedToUserDtos = _mapper.Map<List<IncomeCategoryAssignedToUserDto>>(categoriesAssignedToUser);

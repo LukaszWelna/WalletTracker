@@ -11,11 +11,11 @@ namespace WalletTracker.Application.Income.Commands.SeedIncomeCategories
 {
     public class SeedIncomeCategoriesToNewUserCommandHandler : IRequestHandler<SeedIncomeCategoriesToNewUserCommand>
     {
-        private readonly IIncomeRepository _incomeRepository;
+        private readonly IIncomeCategoryRepository _incomeCategoryRepository;
 
-        public SeedIncomeCategoriesToNewUserCommandHandler(IIncomeRepository incomeRepository)
+        public SeedIncomeCategoriesToNewUserCommandHandler(IIncomeCategoryRepository incomeCategoryRepository)
         {
-            _incomeRepository = incomeRepository;
+            _incomeCategoryRepository = incomeCategoryRepository;
         }
 
         public async Task Handle(SeedIncomeCategoriesToNewUserCommand request, CancellationToken cancellationToken)
@@ -26,7 +26,7 @@ namespace WalletTracker.Application.Income.Commands.SeedIncomeCategories
             }
 
             var incomeCategoriesAssignedToUserId = new List<IncomeCategoryAssignedToUser>();
-            var incomeCategoriesDefault = await _incomeRepository.GetDefaultCategories();
+            var incomeCategoriesDefault = await _incomeCategoryRepository.GetDefaultCategories();
 
             foreach (var category in incomeCategoriesDefault)
             {
@@ -38,7 +38,7 @@ namespace WalletTracker.Application.Income.Commands.SeedIncomeCategories
                     });
             }
 
-            await _incomeRepository.SeedDefaultCategoriesToUser(incomeCategoriesAssignedToUserId);
+            await _incomeCategoryRepository.SeedDefaultCategoriesToUser(incomeCategoriesAssignedToUserId);
         }
     }
 }

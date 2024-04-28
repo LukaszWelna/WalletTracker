@@ -12,7 +12,7 @@ $("#deleteIncomeCategoryForm").validate({
         }
     },
     errorPlacement: function (error, element) {
-        if (element.attr("name") == "Id")
+        if ($(element).attr("name") == "Id")
             $("#idSpan").text(error.text());
     },
     success: function (label, element) {
