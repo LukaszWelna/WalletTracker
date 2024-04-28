@@ -1,0 +1,40 @@
+﻿@using WalletTracker.Application.Income
+@model WalletTracker.Application.Settings.Commands.EditIncomeCategoryById.EditIncomeCategoryByIdCommand
+
+@{
+    ViewData["Title"] = "Edit income category";
+    Layout = "~/Views/Shared/_SettingsLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-10 mx-auto p-4 rounded-3 form-column">
+        <form id="editIncomeCategoryForm" method="post">
+            <h2 class="form-header">Edit income category</h2>
+            <hr />
+            <div class="form-floating mb-3">
+                <select asp-for="Id" asp-items="@(new SelectList(Model.UserCategoryDtos,
+                        nameof(IncomeCategoryAssignedToUserDto.Id),
+                        nameof(IncomeCategoryAssignedToUserDto.Name)))"
+                        class="form-select form-select-md">
+                    <option value="0">Please select one</option>
+                </select>
+                <label asp-for="Id">Category</label>
+                <span asp-validation-for="Id" class="text-danger" id="idSpan"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Name" class="form-control" placeholder="Name" />
+                <label asp-for="Name" class="control-label"></label>
+                <span asp-validation-for="Name" class="text-danger" id="nameSpan"></span>
+            </div>
+            <button type="submit" class="w-100 btn btn-lg btn-primary">Save changes</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script src="~/js/editIncomeCategoryValidation.js"></script>
+}

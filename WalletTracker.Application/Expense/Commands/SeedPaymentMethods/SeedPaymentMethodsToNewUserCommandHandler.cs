@@ -11,11 +11,11 @@ namespace WalletTracker.Application.Expense.Commands.SeedPaymentMethods
 {
     public class SeedPaymentMethodsToNewUserCommandHandler : IRequestHandler<SeedPaymentMethodsToNewUserCommand>
     {
-        private readonly IExpenseCategoryRepository _expenseCategoryRepository;
+        private readonly IPaymentMethodRepository _paymentMethodRepository;
 
-        public SeedPaymentMethodsToNewUserCommandHandler(IExpenseCategoryRepository expenseCategoryRepository)
+        public SeedPaymentMethodsToNewUserCommandHandler(IPaymentMethodRepository paymentMethodRepository)
         {
-            _expenseCategoryRepository = expenseCategoryRepository;
+            _paymentMethodRepository = paymentMethodRepository;
         }
 
         public async Task Handle(SeedPaymentMethodsToNewUserCommand request, CancellationToken cancellationToken)
@@ -26,7 +26,7 @@ namespace WalletTracker.Application.Expense.Commands.SeedPaymentMethods
             }
 
             var paymentMethodsAssignedToUserId = new List<PaymentMethodAssignedToUser>();
-            var paymentMethodsDefault = await _expenseCategoryRepository.GetDefaultPaymentMethods();
+            var paymentMethodsDefault = await _paymentMethodRepository.GetDefaultPaymentMethods();
 
             foreach (var method in paymentMethodsDefault)
             {
@@ -38,7 +38,7 @@ namespace WalletTracker.Application.Expense.Commands.SeedPaymentMethods
                     });
             }
 
-            await _expenseCategoryRepository.SeedDefaultPaymentMethodsToUser(paymentMethodsAssignedToUserId);
+            await _paymentMethodRepository.SeedDefaultPaymentMethodsToUser(paymentMethodsAssignedToUserId);
         }
     }
 }

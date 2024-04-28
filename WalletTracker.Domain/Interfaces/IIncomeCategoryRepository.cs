@@ -16,5 +16,6 @@ namespace WalletTracker.Domain.Interfaces
         public Task DeleteById(int id);
         public Task Commit();
         public Task<IncomeCategoryAssignedToUser?> GetByName(string name);
+        public Task<IncomeCategoryAssignedToUser> GetById(int id);
     }
 }

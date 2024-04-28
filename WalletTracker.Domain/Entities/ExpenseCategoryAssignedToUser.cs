@@ -17,5 +17,6 @@ namespace WalletTracker.Domain.Entities
         public string Name { get; set; } = default!;
         public List<Expense> Expenses { get; set; } = new List<Expense>();
         public decimal? Limit { get; set; }
+        public bool LimitIsActive { get; set; }
     }
 }

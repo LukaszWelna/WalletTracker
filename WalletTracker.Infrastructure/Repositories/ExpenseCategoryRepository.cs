@@ -31,15 +31,6 @@ namespace WalletTracker.Infrastructure.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<PaymentMethodDefault>> GetDefaultPaymentMethods()
-            => await _dbContext.PaymentMethodsDefault.ToListAsync();
-
-        public async Task SeedDefaultPaymentMethodsToUser(IEnumerable<PaymentMethodAssignedToUser> paymentMethodsAssignedToUser)
-        {
-            _dbContext.PaymentMethodsAssignedToUsers.AddRange(paymentMethodsAssignedToUser);
-            await _dbContext.SaveChangesAsync();
-        }
-
         public async Task<IEnumerable<ExpenseCategoryAssignedToUser>> GetCategoriesAssignedToLoggedUser()
         {
             var userId = _userContextService.GetCurrentUser().Id;
@@ -51,30 +42,38 @@ namespace WalletTracker.Infrastructure.Repositories
             return categoriesAssignedToUser;
         }
 
-        public async Task<IEnumerable<PaymentMethodAssignedToUser>> GetPaymentMethodsAssignedToLoggedUser()
+        public async Task Commit()
+            => await _dbContext.SaveChangesAsync();
+
+        public async Task Create(ExpenseCategoryAssignedToUser category)
+        {
+            _dbContext.ExpenseCategoriesAssignedToUsers.Add(category);
+
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task DeleteById(int id)
+        {
+            var category = await _dbContext.ExpenseCategoriesAssignedToUsers.FirstAsync(c => c.Id == id);
+
+            _dbContext.ExpenseCategoriesAssignedToUsers.Remove(category);
+
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task<ExpenseCategoryAssignedToUser?> GetByName(string name)
         {
             var userId = _userContextService.GetCurrentUser().Id;
 
-            var paymentMethodsAssignedToUser = await _dbContext
-                .PaymentMethodsAssignedToUsers
-                .Where(c => c.UserId == userId).ToListAsync();
+            var category = await _dbContext.ExpenseCategoriesAssignedToUsers
+                .Where(c => c.UserId == userId)
+                .FirstOrDefaultAsync(c => c.Name.ToLower() == name.ToLower());
 
-            return paymentMethodsAssignedToUser;
+            return category;
         }
 
-        public Task Commit()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task Create(ExpenseCategoryAssignedToUser category)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task Delete(int categoryId)
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<ExpenseCategoryAssignedToUser> GetById(int id)
+            => await _dbContext.ExpenseCategoriesAssignedToUsers
+                .FirstAsync(c => c.Id == id);
     }
 }

@@ -30,7 +30,7 @@ body {
     background-color: white;
 }
 
-.remember-me {
+.remember-me, .activate-limit {
     box-shadow: none !important;
     outline: none !important;
 }

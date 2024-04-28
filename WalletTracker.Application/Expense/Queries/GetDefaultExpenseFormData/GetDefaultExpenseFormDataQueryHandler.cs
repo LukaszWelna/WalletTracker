@@ -15,11 +15,15 @@ namespace WalletTracker.Application.Expense.Queries.GetDefaultExpenseFormData
     public class GetDefaultExpenseFormDataQueryHandler : IRequestHandler<GetDefaultExpenseFormDataQuery, CreateExpenseCommand>
     {
         private readonly IExpenseCategoryRepository _expenseCategoryRepository;
+        private readonly IPaymentMethodRepository _paymentMethodRepository;
         private readonly IMapper _mapper;
 
-        public GetDefaultExpenseFormDataQueryHandler(IExpenseCategoryRepository expenseCategoryRepository, IMapper mapper)
+        public GetDefaultExpenseFormDataQueryHandler(IExpenseCategoryRepository expenseCategoryRepository, 
+            IPaymentMethodRepository paymentMethodRepository,
+            IMapper mapper)
         {
             _expenseCategoryRepository = expenseCategoryRepository;
+            _paymentMethodRepository = paymentMethodRepository;
             _mapper = mapper;
         }
 
@@ -30,7 +34,7 @@ namespace WalletTracker.Application.Expense.Queries.GetDefaultExpenseFormData
 
             var categoryAssignedToUserDtos = _mapper.Map<List<ExpenseCategoryAssignedToUserDto>>(categoriesAssignedToUser);
 
-            var paymentMethodsAssignedToUser = await _expenseCategoryRepository
+            var paymentMethodsAssignedToUser = await _paymentMethodRepository
                 .GetPaymentMethodsAssignedToLoggedUser();
 
             var paymentMethodsAssignedToUserDtos = _mapper.Map<List<PaymentMethodAssignedToUserDto>>(paymentMethodsAssignedToUser);

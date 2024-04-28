@@ -18,11 +18,14 @@ namespace WalletTracker.Application.Settings.Commands.CreateIncomeCategory
                 .MaximumLength(25).WithMessage("This field must contain less than 26 characters")
                 .Custom((value, context) =>
                 {
-                    var existingCategory = incomeCategoryRepository.GetByName(value).Result;
-
-                    if (existingCategory != null)
+                    if (!String.IsNullOrEmpty(value))
                     {
-                        context.AddFailure("Category name already exists in the database.");
+                        var existingCategory = incomeCategoryRepository.GetByName(value).Result;
+
+                        if (existingCategory != null)
+                        {
+                            context.AddFailure("Category name already exists in the database.");
+                        }
                     }
                 });
         }

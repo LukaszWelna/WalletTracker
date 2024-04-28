@@ -16,14 +16,17 @@ namespace WalletTracker.Application.Expense.Queries.EditExpenseById
     {
         private readonly IExpenseRepository _expenseRepository;
         private readonly IExpenseCategoryRepository _expenseCategoryRepository;
+        private readonly IPaymentMethodRepository _paymentMethodRepository;
         private readonly IMapper _mapper;
 
         public EditExpenseByIdQueryHandler(IExpenseRepository expenseRepository,
             IExpenseCategoryRepository expenseCategoryRepository,
+            IPaymentMethodRepository paymentMethodRepository,
             IMapper mapper)
         {
             _expenseRepository = expenseRepository;
             _expenseCategoryRepository = expenseCategoryRepository;
+            _paymentMethodRepository = paymentMethodRepository;
             _mapper = mapper;
         }
 
@@ -38,7 +41,7 @@ namespace WalletTracker.Application.Expense.Queries.EditExpenseById
 
             var categoryAssignedToUserDtos = _mapper.Map<List<ExpenseCategoryAssignedToUserDto>>(categoriesAssignedToUser);
 
-            var paymentMethodsAssignedToUser = await _expenseCategoryRepository
+            var paymentMethodsAssignedToUser = await _paymentMethodRepository
                 .GetPaymentMethodsAssignedToLoggedUser();
 
             var paymentMethodsAssignedToUserDtos = _mapper.Map<List<PaymentMethodAssignedToUserDto>>(paymentMethodsAssignedToUser);

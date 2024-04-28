@@ -1,4 +1,4 @@
-// Validate form responsible for adding new income
+// Validate form responsible for adding new expense
 $("#expenseForm").validate({
     rules: {
         Amount: {
