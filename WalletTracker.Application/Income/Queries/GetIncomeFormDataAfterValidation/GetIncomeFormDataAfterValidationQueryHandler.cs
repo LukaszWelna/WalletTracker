@@ -13,17 +13,17 @@ namespace WalletTracker.Application.Income.Queries.GetCategoriesAssignedToUser
 {
     public class GetIncomeFormDataAfterValidationQueryHandler : IRequestHandler<GetIncomeFormDataAfterValidationQuery, CreateIncomeCommand>
     {
-        private readonly IIncomeRepository _incomeRepository;
+        private readonly IIncomeCategoryRepository _incomeCategoryRepository;
         private readonly IMapper _mapper;
 
-        public GetIncomeFormDataAfterValidationQueryHandler(IIncomeRepository incomeRepository, IMapper mapper)
+        public GetIncomeFormDataAfterValidationQueryHandler(IIncomeCategoryRepository incomeCategoryRepository, IMapper mapper)
         {
-            _incomeRepository = incomeRepository;
+            _incomeCategoryRepository = incomeCategoryRepository;
             _mapper = mapper;
         }
         public async Task<CreateIncomeCommand> Handle(GetIncomeFormDataAfterValidationQuery request, CancellationToken cancellationToken)
         {
-            var categoriesAssignedToUser = await _incomeRepository
+            var categoriesAssignedToUser = await _incomeCategoryRepository
                 .GetCategoriesAssignedToLoggedUser();
 
             var categoryAssignedToUserDtos = _mapper.Map<List<IncomeCategoryAssignedToUserDto>>(categoriesAssignedToUser);

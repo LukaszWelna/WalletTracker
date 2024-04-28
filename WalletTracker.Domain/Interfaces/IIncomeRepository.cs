@@ -11,9 +11,6 @@ namespace WalletTracker.Domain.Interfaces
     public interface IIncomeRepository
     {
         public Task Create(Income income);
-        public Task<IEnumerable<IncomeCategoryDefault>> GetDefaultCategories();
-        public Task SeedDefaultCategoriesToUser(IEnumerable<IncomeCategoryAssignedToUser> incomeCategoriesAssignedToUser);
-        public Task<IEnumerable<IncomeCategoryAssignedToUser>> GetCategoriesAssignedToLoggedUser();
         public Task<IEnumerable<IEnumerable<Income>>> GetUserIncomesFromPeriod();
         public Task DeleteIncomeById (int incomeId);
         public Task<Income> GetIncomeById (int incomeId);

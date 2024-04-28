@@ -8,7 +8,6 @@ $("#incomeForm").validate({
             decimalPlaces: true
         },
         IncomeDate: {
-            required: true,
             dateTime: true,
             min: "2000-01-01",
             dateNotGreaterThanToday: true
@@ -27,19 +26,19 @@ $("#incomeForm").validate({
         }
     },
     errorPlacement: function (error, element) {
-        if (element.attr("name") == "Amount")
+        if ($(element).attr("name") == "Amount")
             $("#amountSpan").text(error.text());
-        else if (element.attr("name") == "IncomeDate")
+        else if ($(element).attr("name") == "IncomeDate")
             $("#incomeDateSpan").text(error.text());
-        else if (element.attr("name") == "CategoryId")
+        else if ($(element).attr("name") == "CategoryId")
             $("#categoryIdSpan").text(error.text());
     },
     success: function (label, element) {
         if ($(element).attr("name") == "Amount")
             $("#amountSpan").text("");
-        else if (element.attr("name") == "IncomeDate")
+        else if ($(element).attr("name") == "IncomeDate")
             $("#incomeDateSpan").text("");
-        else if (element.attr("name") == "CategoryId")
+        else if ($(element).attr("name") == "CategoryId")
             $("#categoryIdSpan").text("");
     }
 });

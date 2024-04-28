@@ -22,6 +22,26 @@ namespace WalletTracker.Infrastructure.Repositories
             _userContextService = userContextService;
         }
 
+        public async Task<IEnumerable<IncomeCategoryDefault>> GetDefaultCategories()
+            => await _dbContext.IncomeCategoriesDefault.ToListAsync();
+
+        public async Task SeedDefaultCategoriesToUser(IEnumerable<IncomeCategoryAssignedToUser> incomeCategoriesAssignedToUser)
+        {
+            _dbContext.IncomeCategoriesAssignedToUsers.AddRange(incomeCategoriesAssignedToUser);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<IncomeCategoryAssignedToUser>> GetCategoriesAssignedToLoggedUser()
+        {
+            var userId = _userContextService.GetCurrentUser().Id;
+
+            var categoriesAssignedToUser = await _dbContext
+                .IncomeCategoriesAssignedToUsers
+                .Where(c => c.UserId == userId).ToListAsync();
+
+            return categoriesAssignedToUser;
+        }
+
         public async Task Create(IncomeCategoryAssignedToUser category)
         {
             _dbContext.IncomeCategoriesAssignedToUsers.Add(category);
@@ -45,16 +65,5 @@ namespace WalletTracker.Infrastructure.Repositories
         public async Task<IncomeCategoryAssignedToUser?> GetByName(string name) 
             => await _dbContext.IncomeCategoriesAssignedToUsers
             .FirstOrDefaultAsync(c => c.Name.ToLower() == name.ToLower());
-
-        public async Task<IEnumerable<IncomeCategoryAssignedToUser>> GetCategoriesAssignedToLoggedUser()
-        {
-            var userId = _userContextService.GetCurrentUser().Id;
-
-            var categoriesAssignedToUser = await _dbContext
-                .IncomeCategoriesAssignedToUsers
-                .Where(c => c.UserId == userId).ToListAsync();
-
-            return categoriesAssignedToUser;
-        }
     }
 }

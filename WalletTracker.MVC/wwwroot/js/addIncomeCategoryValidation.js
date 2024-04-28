@@ -24,7 +24,7 @@ $("#addIncomeCategoryForm").validate({
         }
     },
     errorPlacement: function (error, element) {
-        if (element.attr("name") == "Name")
+        if ($(element).attr("name") == "Name")
             $("#nameSpan").text(error.text());
     },
     success: function (label, element) {

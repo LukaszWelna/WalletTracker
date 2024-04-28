@@ -29,26 +29,6 @@ namespace WalletTracker.Infrastructure.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<IncomeCategoryDefault>> GetDefaultCategories()
-            => await _dbContext.IncomeCategoriesDefault.ToListAsync();
-
-        public async Task SeedDefaultCategoriesToUser(IEnumerable<IncomeCategoryAssignedToUser> incomeCategoriesAssignedToUser)
-        {
-            _dbContext.IncomeCategoriesAssignedToUsers.AddRange(incomeCategoriesAssignedToUser);
-            await _dbContext.SaveChangesAsync();
-        }
-
-        public async Task<IEnumerable<IncomeCategoryAssignedToUser>> GetCategoriesAssignedToLoggedUser()
-        {
-            var userId = _userContextService.GetCurrentUser().Id;
-
-            var categoriesAssignedToUser = await _dbContext
-                .IncomeCategoriesAssignedToUsers
-                .Where(c => c.UserId == userId).ToListAsync();
-
-            return categoriesAssignedToUser;
-        }
-
         public async Task<IEnumerable<IEnumerable<Income>>> GetUserIncomesFromPeriod()
         {
             var userId = _userContextService.GetCurrentUser().Id;

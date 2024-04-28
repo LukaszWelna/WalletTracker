@@ -33,23 +33,23 @@ $("#expenseForm").validate({
         }
     },
     errorPlacement: function (error, element) {
-        if (element.attr("name") == "Amount")
+        if ($(element).attr("name") == "Amount")
             $("#amountSpan").text(error.text());
-        else if (element.attr("name") == "ExpenseDate")
+        else if ($(element).attr("name") == "ExpenseDate")
             $("#expenseDateSpan").text(error.text());
-        else if (element.attr("name") == "PaymentId")
+        else if ($(element).attr("name") == "PaymentId")
             $("#paymentIdSpan").text(error.text());
-        else if (element.attr("name") == "CategoryId")
+        else if ($(element).attr("name") == "CategoryId")
             $("#categoryIdSpan").text(error.text());
     },
     success: function (label, element) {
         if ($(element).attr("name") == "Amount")
             $("#amountSpan").text("");
-        else if (element.attr("name") == "IncomeDate")
+        else if ($(element).attr("name") == "IncomeDate")
             $("#incomeDateSpan").text("");
-        else if (element.attr("name") == "PaymentId")
+        else if ($(element).attr("name") == "PaymentId")
             $("#paymentIdSpan").text("");
-        else if (element.attr("name") == "CategoryId")
+        else if ($(element).attr("name") == "CategoryId")
             $("#categoryIdSpan").text("");
     }
 });

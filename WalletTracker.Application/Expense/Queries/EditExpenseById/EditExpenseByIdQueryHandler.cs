@@ -15,11 +15,15 @@ namespace WalletTracker.Application.Expense.Queries.EditExpenseById
     public class EditExpenseByIdQueryHandler : IRequestHandler<EditExpenseByIdQuery, EditExpenseByIdCommand>
     {
         private readonly IExpenseRepository _expenseRepository;
+        private readonly IExpenseCategoryRepository _expenseCategoryRepository;
         private readonly IMapper _mapper;
 
-        public EditExpenseByIdQueryHandler(IExpenseRepository expenseRepository, IMapper mapper)
+        public EditExpenseByIdQueryHandler(IExpenseRepository expenseRepository,
+            IExpenseCategoryRepository expenseCategoryRepository,
+            IMapper mapper)
         {
             _expenseRepository = expenseRepository;
+            _expenseCategoryRepository = expenseCategoryRepository;
             _mapper = mapper;
         }
 
@@ -29,12 +33,12 @@ namespace WalletTracker.Application.Expense.Queries.EditExpenseById
 
             var command = _mapper.Map<EditExpenseByIdCommand>(expense);
 
-            var categoriesAssignedToUser = await _expenseRepository
+            var categoriesAssignedToUser = await _expenseCategoryRepository
                 .GetCategoriesAssignedToLoggedUser();
 
             var categoryAssignedToUserDtos = _mapper.Map<List<ExpenseCategoryAssignedToUserDto>>(categoriesAssignedToUser);
 
-            var paymentMethodsAssignedToUser = await _expenseRepository
+            var paymentMethodsAssignedToUser = await _expenseCategoryRepository
                 .GetPaymentMethodsAssignedToLoggedUser();
 
             var paymentMethodsAssignedToUserDtos = _mapper.Map<List<PaymentMethodAssignedToUserDto>>(paymentMethodsAssignedToUser);

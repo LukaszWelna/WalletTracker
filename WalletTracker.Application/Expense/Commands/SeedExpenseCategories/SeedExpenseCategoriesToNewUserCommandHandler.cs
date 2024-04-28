@@ -11,11 +11,11 @@ namespace WalletTracker.Application.Expense.Commands.SeedExpenseCategories
 {
     public class SeedExpenseCategoriesToNewUserCommandHandler : IRequestHandler<SeedExpenseCategoriesToNewUserCommand>
     {
-        private readonly IExpenseRepository _expenseRepository;
+        private readonly IExpenseCategoryRepository _expenseCategoryRepository;
 
-        public SeedExpenseCategoriesToNewUserCommandHandler(IExpenseRepository expenseRepository)
+        public SeedExpenseCategoriesToNewUserCommandHandler(IExpenseCategoryRepository expenseCategoryRepository)
         {
-            _expenseRepository = expenseRepository;
+            _expenseCategoryRepository = expenseCategoryRepository;
         }
 
         public async Task Handle(SeedExpenseCategoriesToNewUserCommand request, CancellationToken cancellationToken)
@@ -26,7 +26,7 @@ namespace WalletTracker.Application.Expense.Commands.SeedExpenseCategories
             }
 
             var expenseCategoriesAssignedToUserId = new List<ExpenseCategoryAssignedToUser>();
-            var expenseCategoriesDefault = await _expenseRepository.GetDefaultCategories();
+            var expenseCategoriesDefault = await _expenseCategoryRepository.GetDefaultCategories();
 
             foreach (var category in expenseCategoriesDefault)
             {
@@ -38,7 +38,7 @@ namespace WalletTracker.Application.Expense.Commands.SeedExpenseCategories
                     });
             }
 
-            await _expenseRepository.SeedDefaultCategoriesToUser(expenseCategoriesAssignedToUserId);
+            await _expenseCategoryRepository.SeedDefaultCategoriesToUser(expenseCategoriesAssignedToUserId);
         }
     }
 }
