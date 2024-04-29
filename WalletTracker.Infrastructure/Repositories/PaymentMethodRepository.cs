@@ -37,7 +37,7 @@ namespace WalletTracker.Infrastructure.Repositories
 
             var paymentMethodsAssignedToUser = await _dbContext
                 .PaymentMethodsAssignedToUsers
-                .Where(c => c.UserId == userId).ToListAsync();
+                .Where(p => p.UserId == userId).ToListAsync();
 
             return paymentMethodsAssignedToUser;
         }
@@ -49,25 +49,31 @@ namespace WalletTracker.Infrastructure.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
-        public Task DeleteById(int id)
+        public async Task DeleteById(int id)
         {
-            throw new NotImplementedException();
+            var paymentMethod = await _dbContext.PaymentMethodsAssignedToUsers.FirstAsync(p => p.Id == id);
+
+            _dbContext.PaymentMethodsAssignedToUsers.Remove(paymentMethod);
+
+            await _dbContext.SaveChangesAsync();
         }
 
-        public Task Commit()
-        {
-            throw new NotImplementedException();
-        }
+        public async Task Commit()
+            => await _dbContext.SaveChangesAsync();
 
         public async Task<PaymentMethodAssignedToUser?> GetByName(string name)
         {
             var userId = _userContextService.GetCurrentUser().Id;
 
             var paymentMethod = await _dbContext.PaymentMethodsAssignedToUsers
-                .Where(c => c.UserId == userId)
-                .FirstOrDefaultAsync(c => c.Name.ToLower() == name.ToLower());
+                .Where(p => p.UserId == userId)
+                .FirstOrDefaultAsync(p => p.Name.ToLower() == name.ToLower());
 
             return paymentMethod;
         }
+
+        public async Task<PaymentMethodAssignedToUser> GetById(int id)
+            => await _dbContext.PaymentMethodsAssignedToUsers
+                .FirstAsync(p => p.Id == id);
     }
 }

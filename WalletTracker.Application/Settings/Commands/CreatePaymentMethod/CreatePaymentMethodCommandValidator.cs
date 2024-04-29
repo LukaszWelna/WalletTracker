@@ -12,7 +12,7 @@ namespace WalletTracker.Application.Settings.Commands.CreatePaymentMethod
     {
         public CreatePaymentMethodCommandValidator(IPaymentMethodRepository paymentMethodRepository)
         {
-            RuleFor(c => c.Name)
+            RuleFor(p => p.Name)
                 .NotEmpty().WithMessage("This field is required.")
                 .MinimumLength(2).WithMessage("This field must contain at least 2 characters")
                 .MaximumLength(25).WithMessage("This field must contain less than 26 characters")
