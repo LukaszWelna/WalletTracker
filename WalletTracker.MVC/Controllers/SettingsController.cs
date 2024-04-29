@@ -8,8 +8,10 @@ using WalletTracker.Application.Settings.Commands.CreateIncomeCategory;
 using WalletTracker.Application.Settings.Commands.CreatePaymentMethod;
 using WalletTracker.Application.Settings.Commands.DeleteExpenseCategoryById;
 using WalletTracker.Application.Settings.Commands.DeleteIncomeCategory;
+using WalletTracker.Application.Settings.Commands.DeletePaymentMethodById;
 using WalletTracker.Application.Settings.Commands.EditExpenseCategoryById;
 using WalletTracker.Application.Settings.Commands.EditIncomeCategoryById;
+using WalletTracker.Application.Settings.Commands.EditPaymentMethodById;
 using WalletTracker.Application.Settings.Queries.GetExpenseCategoryById;
 using WalletTracker.Application.Settings.Queries.GetExpenseCategoryByName;
 using WalletTracker.Application.Settings.Queries.GetExpenseCategoryFormToDelete;
@@ -18,6 +20,8 @@ using WalletTracker.Application.Settings.Queries.GetIncomeCategoriesAssignedToLo
 using WalletTracker.Application.Settings.Queries.GetIncomeCategoryByName;
 using WalletTracker.Application.Settings.Queries.GetIncomeCategoryFormToEdit;
 using WalletTracker.Application.Settings.Queries.GetPaymentMethodByName;
+using WalletTracker.Application.Settings.Queries.GetPaymentMethodFormToDelete;
+using WalletTracker.Application.Settings.Queries.GetPaymentMethodFormToEdit;
 using WalletTracker.MVC.Extensions;
 
 namespace WalletTracker.MVC.Controllers
@@ -246,6 +250,56 @@ namespace WalletTracker.MVC.Controllers
             this.SetNotification("success", "Payment method created");
 
             return RedirectToAction(nameof(AddPaymentMethod));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditPaymentMethod()
+        {
+            var paymentMethods = await _mediator.Send(new GetPaymentMethodFormToEditQuery());
+
+            return View(paymentMethods);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditPaymentMethod(EditPaymentMethodByIdCommand command)
+        {
+            if (!ModelState.IsValid)
+            {
+                command = await _mediator.Send(new GetPaymentMethodFormToEditQuery());
+
+                return View(command);
+            }
+
+            await _mediator.Send(command);
+
+            this.SetNotification("success", "Payment method edited");
+
+            return RedirectToAction(nameof(EditPaymentMethod));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> DeletePaymentMethod()
+        {
+            var paymentMethods = await _mediator.Send(new GetPaymentMethodFormToDeleteQuery());
+
+            return View(paymentMethods);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeletePaymentMethod(DeletePaymentMethodByIdCommand command)
+        {
+            if (!ModelState.IsValid)
+            {
+                command = await _mediator.Send(new GetPaymentMethodFormToDeleteQuery());
+
+                return View(command);
+            }
+
+            await _mediator.Send(command);
+
+            this.SetNotification("warning", "Payment method deleted");
+
+            return RedirectToAction(nameof(DeletePaymentMethod));
         }
     }
 }
