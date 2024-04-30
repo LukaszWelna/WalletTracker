@@ -8,6 +8,12 @@ using WalletTracker.Application.Extensions;
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("WalletTracker");
 
+builder.Services.AddMvc()
+    .AddViewOptions(options =>
+    {
+        options.HtmlHelperOptions.FormInputRenderMode = Microsoft.AspNetCore.Mvc.Rendering.FormInputRenderMode.AlwaysUseCurrentCulture;
+    });
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 

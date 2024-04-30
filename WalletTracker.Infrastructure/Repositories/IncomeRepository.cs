@@ -29,14 +29,14 @@ namespace WalletTracker.Infrastructure.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<IEnumerable<Income>>> GetUserIncomesFromPeriod()
+        public async Task<IEnumerable<IEnumerable<Income>>> GetUserIncomesFromPeriod(DateOnly startDate, DateOnly endDate)
         {
             var userId = _userContextService.GetCurrentUser().Id;
 
             var incomes = await _dbContext.Incomes
                 .AsNoTracking()
                 .Include(i => i.Category)
-                .Where(i => i.UserId == userId)
+                .Where(i => (i.UserId == userId) && (i.IncomeDate >= startDate && i.IncomeDate <= endDate))
                 .GroupBy(i => i.IncomeDate)
                 .OrderByDescending(g => g.Key)
                 .Select(g => g.OrderByDescending(i => i.CreatedAt).ToList())
@@ -60,14 +60,14 @@ namespace WalletTracker.Infrastructure.Repositories
         public async Task Commit()
             => await _dbContext.SaveChangesAsync();
 
-        public async Task<IEnumerable<IncomeTotalAmountInCategoryDto>> GetTotalAmountInCategories()
+        public async Task<IEnumerable<IncomeTotalAmountInCategoryDto>> GetTotalAmountInCategories(DateOnly startDate, DateOnly endDate)
         {
             var userId = _userContextService.GetCurrentUser().Id;
 
             var totalAmountInCategories = await _dbContext.Incomes
-                .Include(e => e.Category)
-                .Where(e => e.UserId == userId)
-                .GroupBy(e => e.Category.Name)
+                .Include(i => i.Category)
+                .Where(i => i.UserId == userId && (i.IncomeDate >= startDate && i.IncomeDate <= endDate))
+                .GroupBy(i => i.Category.Name)
                 .Select(g => new IncomeTotalAmountInCategoryDto
                 {
                     CategoryName = g.Key,
@@ -77,16 +77,5 @@ namespace WalletTracker.Infrastructure.Repositories
 
             return totalAmountInCategories;
         }
-
-        public decimal GetTotalIncomesAmountFromPeriod()
-        {
-            var userId = _userContextService.GetCurrentUser().Id;
-
-            var totalAmount = _dbContext.Incomes
-                .Where(e => e.UserId == userId)
-                .Sum(i => i.Amount);
-
-            return totalAmount;
-        } 
     }
 }

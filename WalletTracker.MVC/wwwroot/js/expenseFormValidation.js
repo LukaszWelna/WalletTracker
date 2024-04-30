@@ -23,7 +23,7 @@ $("#expenseForm").validate({
     },
     messages: {
         ExpenseDate: {
-            min: "Please enter a date equal or greather than 01-01-2000."
+            min: "Please enter a date equal or greater than 01-01-2000."
         },
         PaymentId: {
             min: "This field is required."

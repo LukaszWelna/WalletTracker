@@ -16,9 +16,9 @@ namespace WalletTracker.MVC.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(GetBalanceDataQuery query)
         {
-            var balanceDto = await _mediator.Send(new GetBalanceDataQuery());
+            var balanceDto = await _mediator.Send(query);
 
             return View(balanceDto);
         }

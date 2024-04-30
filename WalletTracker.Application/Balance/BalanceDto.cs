@@ -18,5 +18,7 @@ namespace WalletTracker.Application.Balance
         public decimal TotalIncomesAmount { get; set; }
         public decimal TotalExpensesAmount { get; set; }
         public IEnumerable<BalanceCanvasDto> BalanceCanvasDtos { get; set; } = new List<BalanceCanvasDto>();
+        public DateOnly StartDate { get; set; } = DateOnly.FromDateTime(new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1));
+        public DateOnly EndDate { get; set; } = DateOnly.FromDateTime(DateTime.Now);
     }
 }

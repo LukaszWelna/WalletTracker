@@ -5,39 +5,42 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WalletTracker.Application.Expense.Queries.GetExpensesFromPeriod;
-using WalletTracker.Application.Expense.Queries.GetTotalAmountInCategories;
-using WalletTracker.Application.Expense.Queries.GetTotalExpensesAmountFromPeriod;
-using WalletTracker.Application.Income.Queries.GetIncomesFromPeriod;
-using WalletTracker.Application.Income.Queries.GetTotalAmountFromPeriod;
-using WalletTracker.Application.Income.Queries.GetTotalAmountInCategories;
+using WalletTracker.Application.Expense;
+using WalletTracker.Application.Income;
+using WalletTracker.Domain.Interfaces;
 
 namespace WalletTracker.Application.Balance.Queries.GetBalanceData
 {
     public class GetBalanceDataQueryHandler : IRequestHandler<GetBalanceDataQuery, BalanceDto>
     {
-        private readonly IMediator _mediator;
+        private readonly IIncomeRepository _incomeRepository;
+        private readonly IExpenseRepository _expenseRepository;
         private readonly IMapper _mapper;
 
-        public GetBalanceDataQueryHandler(IMediator mediator, IMapper mapper)
+        public GetBalanceDataQueryHandler(IIncomeRepository incomeRepository, IExpenseRepository expenseRepository, IMapper mapper)
         {
-            _mediator = mediator;
+            _incomeRepository = incomeRepository;
+            _expenseRepository = expenseRepository;
             _mapper = mapper;
         }
 
         public async Task<BalanceDto> Handle(GetBalanceDataQuery request, CancellationToken cancellationToken)
         {
-            var userIncomeDtos = await _mediator.Send(new GetUserIncomesFromPeriodQuery());
+            var userIncomes = await _incomeRepository.GetUserIncomesFromPeriod(request.StartDate, request.EndDate);
 
-            var userExpenseDtos = await _mediator.Send(new GetUserExpensesFromPeriodQuery());
+            var userIncomeDtos = _mapper.Map<List<List<GetIncomeDto>>>(userIncomes);
 
-            var incomeTotalAmountInCategories = await _mediator.Send(new GetTotalIncomesAmountInCategoriesQuery());
+            var userExpenses = await _expenseRepository.GetUserExpensesFromPeriod(request.StartDate, request.EndDate);
 
-            var expenseTotalAmountInCategories = await _mediator.Send(new GetTotalExpensesAmountInCategoriesQuery());
+            var userExpenseDtos = _mapper.Map<List<List<GetExpenseDto>>>(userExpenses);
 
-            var totalIncomesAmount = await _mediator.Send(new GetTotalIncomesAmountFromPeriodQuery());
+            var incomeTotalAmountInCategories = await _incomeRepository.GetTotalAmountInCategories(request.StartDate, request.EndDate);
 
-            var totalExpensesAmount = await _mediator.Send(new GetTotalExpensesAmountFromPeriodQuery());
+            var expenseTotalAmountInCategories = await _expenseRepository.GetTotalAmountInCategories(request.StartDate, request.EndDate);
+
+            var totalIncomesAmount = userIncomeDtos.Sum(g => g.Sum(i => i.Amount));
+
+            var totalExpensesAmount = userExpenseDtos.Sum(g => g.Sum(e => e.Amount));
 
             var balanceCanvasDtos = _mapper.Map<List<BalanceCanvasDto>>(expenseTotalAmountInCategories);
 
@@ -49,7 +52,9 @@ namespace WalletTracker.Application.Balance.Queries.GetBalanceData
                 ExpenseTotalAmountInCategories = expenseTotalAmountInCategories,
                 TotalIncomesAmount = totalIncomesAmount,
                 TotalExpensesAmount = totalExpensesAmount,
-                BalanceCanvasDtos = balanceCanvasDtos
+                BalanceCanvasDtos = balanceCanvasDtos,
+                StartDate = request.StartDate,
+                EndDate = request.EndDate
             };
 
             return balanceDto;
