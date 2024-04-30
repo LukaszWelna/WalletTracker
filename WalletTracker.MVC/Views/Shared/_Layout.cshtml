@@ -9,6 +9,11 @@
     var notification = TempData["Notification"] != null
         ? (Notification)JsonConvert.DeserializeObject<Notification>(TempData["Notification"]!.ToString()!)!
         : null;
+
+    var todayDateTime = DateTime.Now;
+    var today = DateOnly.FromDateTime(todayDateTime).ToString("yyyy-MM-dd");
+    var firstDayOfCurrentMonth = DateOnly.FromDateTime(new DateTime(todayDateTime.Year, todayDateTime.Month, 1))
+        .ToString("yyyy-MM-dd");
 }
 
 <!DOCTYPE html>
@@ -47,7 +52,7 @@
                                 <a class="nav-link text-dark @(currentController == "Expense" && currentAction == "Create" ? "active" : "")" asp-area="" asp-controller="Expense" asp-action="Create">Add expense</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark @(currentController == "Balance" && currentAction == "Index" ? "active" : "")" asp-area="" asp-controller="Balance" asp-action="Index">Show balance</a>
+                                <a class="nav-link text-dark @(currentController == "Balance" && currentAction == "Index" ? "active" : "")" asp-area="" asp-controller="Balance" asp-action="Index" asp-route-startDate="@firstDayOfCurrentMonth" asp-route-endDate="@today">Show balance</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark @(currentController == "Settings" ? "active" : "")" asp-area="" asp-controller="Settings" asp-action="AddIncomeCategory">Settings</a>

@@ -14,6 +14,36 @@
             <form id="expenseForm" asp-action="Create" method="post">
                 <h2 class="form-header">Add expense</h2>
                 <hr />
+                <div class="table-responsive">
+                    <table class="table table-borderless mb-0 table-balance">
+                        <tbody>
+                            <tr>
+                                <td class="pt-0 pb-1">
+                                    Limit info:
+                                </td>
+                                <td class="pt-0 pb-1" align="right">
+                                     PLN
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="py-1">
+                                    Money spent:
+                                </td>
+                                <td class="py-1" align="right">
+                                    money PLN
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="py-1">
+                                    Money left:
+                                </td>
+                                <td class="pt-1 pb-2" align="right">
+                                    money PLN
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
                 <div class="form-floating mb-3">
                     <input asp-for="Amount" class="form-control" placeholder="amount" />
                     <label asp-for="Amount" class="control-label">Amount</label>
