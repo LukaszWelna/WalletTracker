@@ -81,5 +81,17 @@ namespace WalletTracker.Infrastructure.Repositories
 
             return totalAmountInCategories;
         }
+
+        public decimal GetMoneySpent(int categoryId, DateOnly firstDayOfMonth, DateOnly lastDayOfMonth)
+        {
+            var userId = _userContextService.GetCurrentUser().Id;
+
+            var moneySpent = _dbContext.Expenses
+                .Where(e => e.UserId == userId && (e.ExpenseDate >= firstDayOfMonth && e.ExpenseDate <= lastDayOfMonth) &&
+                    e.CategoryId == categoryId)
+                .Sum(e => e.Amount);
+
+            return moneySpent;
+        }
     }
 }

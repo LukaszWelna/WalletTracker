@@ -16,5 +16,6 @@ namespace WalletTracker.Domain.Interfaces
         public Task<Expense> GetExpenseById(int expenseId);
         public Task Commit();
         public Task<IEnumerable<ExpenseTotalAmountInCategoryDto>> GetTotalAmountInCategories(DateOnly startDate, DateOnly endDate);
+        public decimal GetMoneySpent(int categoryId, DateOnly firstDayOfMonth, DateOnly lastDayOfMonth);
     }
 }

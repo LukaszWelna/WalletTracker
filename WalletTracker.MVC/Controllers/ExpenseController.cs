@@ -6,11 +6,14 @@ using WalletTracker.Application.Expense.Commands.CreateExpense;
 using WalletTracker.Application.Expense.Commands.DeleteExpenseById;
 using WalletTracker.Application.Expense.Commands.EditExpenseById;
 using WalletTracker.Application.Expense.Queries.EditExpenseById;
+using WalletTracker.Application.Expense.Queries.GetCategoryLimitData;
 using WalletTracker.Application.Expense.Queries.GetDefaultExpenseFormData;
 using WalletTracker.Application.Expense.Queries.GetEditExpenseFormDataAfterValidationQuery;
 using WalletTracker.Application.Expense.Queries.GetExpenseFormDataAfterValidation;
+using WalletTracker.Application.Expense.Queries.GetMoneySpentData;
 using WalletTracker.Application.Income.Queries.GetCategoriesAssignedToLoggedUse;
 using WalletTracker.Application.Income.Queries.GetCategoriesAssignedToLoggedUser;
+using WalletTracker.Application.Settings.Queries.GetExpenseCategoryById;
 using WalletTracker.MVC.Extensions;
 using WalletTracker.MVC.Models;
 
@@ -83,6 +86,23 @@ namespace WalletTracker.MVC.Controllers
             this.SetNotification("warning", "Expense deleted");
 
             return RedirectToAction("Index", "Balance");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetCategoryLimit(int id)
+        {
+            var data = await _mediator.Send(new GetCategoryLimitDataQuery(id));
+
+            return Ok(data);
+        }
+
+        [HttpGet]
+        [Route("Expense/GetMoneySpent/{categoryId}/{date}")]
+        public async Task<IActionResult> GetMoneySpent(int categoryId, DateOnly date)
+        {
+            var data = await _mediator.Send(new GetMoneySpentDataQuery(categoryId, date));
+
+            return Ok(data);
         }
     }
 }
