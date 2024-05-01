@@ -1,11 +1,5 @@
 ﻿using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WalletTracker.Application.Expense.Commands.EditExpenseById;
-using WalletTracker.Application.Income.Commands.EditIncomeById;
 
 namespace WalletTracker.Application.Expense.Queries.GetEditExpenseFormDataAfterValidationQuery
 {

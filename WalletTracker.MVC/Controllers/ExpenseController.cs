@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 using WalletTracker.Application.Expense.Commands.CreateExpense;
 using WalletTracker.Application.Expense.Commands.DeleteExpenseById;
 using WalletTracker.Application.Expense.Commands.EditExpenseById;
@@ -11,11 +10,7 @@ using WalletTracker.Application.Expense.Queries.GetDefaultExpenseFormData;
 using WalletTracker.Application.Expense.Queries.GetEditExpenseFormDataAfterValidationQuery;
 using WalletTracker.Application.Expense.Queries.GetExpenseFormDataAfterValidation;
 using WalletTracker.Application.Expense.Queries.GetMoneySpentData;
-using WalletTracker.Application.Income.Queries.GetCategoriesAssignedToLoggedUse;
-using WalletTracker.Application.Income.Queries.GetCategoriesAssignedToLoggedUser;
-using WalletTracker.Application.Settings.Queries.GetExpenseCategoryById;
 using WalletTracker.MVC.Extensions;
-using WalletTracker.MVC.Models;
 
 namespace WalletTracker.MVC.Controllers
 {

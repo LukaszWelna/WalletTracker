@@ -1,10 +1,5 @@
 ﻿using AutoMapper;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WalletTracker.Application.ApplicationUser;
 using WalletTracker.Domain.Entities;
 using WalletTracker.Domain.Interfaces;
@@ -17,7 +12,7 @@ namespace WalletTracker.Application.Settings.Commands.CreatePaymentMethod
         private readonly IUserContextService _userContextService;
         private readonly IMapper _mapper;
 
-        public CreatePaymentMethodCommandHandler(IPaymentMethodRepository paymentMethodRepository, 
+        public CreatePaymentMethodCommandHandler(IPaymentMethodRepository paymentMethodRepository,
             IUserContextService userContextService,
             IMapper mapper)
         {

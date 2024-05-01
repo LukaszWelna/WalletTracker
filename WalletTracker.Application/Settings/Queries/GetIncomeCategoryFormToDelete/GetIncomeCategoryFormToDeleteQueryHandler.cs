@@ -1,14 +1,8 @@
-﻿using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WalletTracker.Application.Income.Commands.CreateIncome;
+﻿using AutoMapper;
+using MediatR;
 using WalletTracker.Application.Income;
-using WalletTracker.Domain.Interfaces;
-using AutoMapper;
 using WalletTracker.Application.Settings.Commands.DeleteIncomeCategory;
+using WalletTracker.Domain.Interfaces;
 
 namespace WalletTracker.Application.Settings.Queries.GetIncomeCategoriesAssignedToLoggedUser
 {

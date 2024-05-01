@@ -1,10 +1,5 @@
 ﻿using AutoMapper;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WalletTracker.Application.ApplicationUser;
 using WalletTracker.Application.Settings.Commands.CreateIncomeCategory;
 using WalletTracker.Domain.Entities;
@@ -18,7 +13,7 @@ namespace WalletTracker.Application.Settings.Commands.CreateCategory
         private readonly IUserContextService _userContextService;
         private readonly IMapper _mapper;
 
-        public CreateIncomeCategoryCommandHandler(IIncomeCategoryRepository incomeCategoryRepository, 
+        public CreateIncomeCategoryCommandHandler(IIncomeCategoryRepository incomeCategoryRepository,
             IUserContextService userContextService,
             IMapper mapper)
         {

@@ -1,13 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WalletTracker.Application.Expense.Commands.CreateExpense;
-using WalletTracker.Application.Income.Commands.CreateIncome;
-using WalletTracker.Application.Income;
 using WalletTracker.Domain.Interfaces;
 
 namespace WalletTracker.Application.Expense.Queries.GetDefaultExpenseFormData
@@ -18,7 +11,7 @@ namespace WalletTracker.Application.Expense.Queries.GetDefaultExpenseFormData
         private readonly IPaymentMethodRepository _paymentMethodRepository;
         private readonly IMapper _mapper;
 
-        public GetDefaultExpenseFormDataQueryHandler(IExpenseCategoryRepository expenseCategoryRepository, 
+        public GetDefaultExpenseFormDataQueryHandler(IExpenseCategoryRepository expenseCategoryRepository,
             IPaymentMethodRepository paymentMethodRepository,
             IMapper mapper)
         {

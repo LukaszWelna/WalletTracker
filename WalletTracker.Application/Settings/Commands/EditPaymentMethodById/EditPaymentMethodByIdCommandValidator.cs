@@ -1,10 +1,4 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WalletTracker.Application.Settings.Commands.EditIncomeCategoryById;
 using WalletTracker.Domain.Interfaces;
 
 namespace WalletTracker.Application.Settings.Commands.EditPaymentMethodById

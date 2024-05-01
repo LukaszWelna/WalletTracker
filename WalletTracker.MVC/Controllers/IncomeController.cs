@@ -1,8 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using WalletTracker.Application.Income;
 using WalletTracker.Application.Income.Commands.CreateIncome;
 using WalletTracker.Application.Income.Commands.DeleteIncomeById;
 using WalletTracker.Application.Income.Commands.EditIncomeById;
@@ -10,9 +8,7 @@ using WalletTracker.Application.Income.Queries.EditIncomeById;
 using WalletTracker.Application.Income.Queries.GetCategoriesAssignedToLoggedUse;
 using WalletTracker.Application.Income.Queries.GetCategoriesAssignedToLoggedUser;
 using WalletTracker.Application.Income.Queries.GetEditIncomeFormDataAfterValidation;
-using WalletTracker.Domain.Entities;
 using WalletTracker.MVC.Extensions;
-using WalletTracker.MVC.Models;
 
 namespace WalletTracker.MVC.Controllers
 {

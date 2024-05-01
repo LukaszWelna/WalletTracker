@@ -1,13 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WalletTracker.Application.Expense.Commands.EditExpenseById;
-using WalletTracker.Application.Income.Commands.EditIncomeById;
-using WalletTracker.Application.Income;
 using WalletTracker.Domain.Interfaces;
 
 namespace WalletTracker.Application.Expense.Queries.EditExpenseById

@@ -1,9 +1,4 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WalletTracker.Application.Settings;
 using WalletTracker.Application.Settings.Commands.CreateExpenseCategory;
 using WalletTracker.Application.Settings.Commands.CreateIncomeCategory;
