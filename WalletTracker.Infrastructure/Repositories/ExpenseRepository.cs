@@ -1,9 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WalletTracker.Application.ApplicationUser;
 using WalletTracker.Domain.Entities;
 using WalletTracker.Domain.Interfaces;
@@ -71,7 +66,7 @@ namespace WalletTracker.Infrastructure.Repositories
                 .Expenses
                 .Include(e => e.Category)
                 .Where(e => e.UserId == userId && (e.ExpenseDate >= startDate && e.ExpenseDate <= endDate))
-                .GroupBy(e => e.Category.Name )
+                .GroupBy(e => e.Category.Name)
                 .Select(g => new ExpenseTotalAmountInCategoryDto
                 {
                     CategoryName = g.Key,

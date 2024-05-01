@@ -1,10 +1,5 @@
 ﻿using AutoMapper;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WalletTracker.Application.Expense.Commands.EditExpenseById;
 using WalletTracker.Domain.Interfaces;
 
@@ -16,7 +11,7 @@ namespace WalletTracker.Application.Expense.Queries.GetEditExpenseFormDataAfterV
         private readonly IPaymentMethodRepository _paymentMethodRepository;
         private readonly IMapper _mapper;
 
-        public GetEditExpenseFormDataAfterValidationQueryHandler(IExpenseCategoryRepository expenseCategoryRepository, 
+        public GetEditExpenseFormDataAfterValidationQueryHandler(IExpenseCategoryRepository expenseCategoryRepository,
             IPaymentMethodRepository paymentMethodRepository,
             IMapper mapper)
         {

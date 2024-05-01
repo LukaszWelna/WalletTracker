@@ -1,11 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WalletTracker.Domain.Entities;
 using WalletTracker.Domain.Models;
 
@@ -28,20 +22,20 @@ namespace WalletTracker.Infrastructure.Persistence
 
         public WalletTrackerDbContext(DbContextOptions<WalletTrackerDbContext> options) : base(options)
         {
-            
+
         }
 
         // Configure relationships and model properties
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            
+
             modelBuilder.Entity<IncomeCategoryDefault>(eb =>
             {
                 eb.Property(i => i.Name)
                 .HasColumnType("varchar(25)");
             });
-            
+
             modelBuilder.Entity<IncomeCategoryAssignedToUser>(eb =>
             {
                 eb.HasOne(i => i.User)

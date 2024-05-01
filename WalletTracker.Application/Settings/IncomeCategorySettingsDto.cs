@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WalletTracker.Application.Income;
+﻿using WalletTracker.Application.Income;
 
 namespace WalletTracker.Application.Settings
 {

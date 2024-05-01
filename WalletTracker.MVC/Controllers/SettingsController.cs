@@ -1,8 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.Blazor;
-using WalletTracker.Application.Income.Queries.GetCategoriesAssignedToLoggedUse;
 using WalletTracker.Application.Settings.Commands.CreateExpenseCategory;
 using WalletTracker.Application.Settings.Commands.CreateIncomeCategory;
 using WalletTracker.Application.Settings.Commands.CreatePaymentMethod;

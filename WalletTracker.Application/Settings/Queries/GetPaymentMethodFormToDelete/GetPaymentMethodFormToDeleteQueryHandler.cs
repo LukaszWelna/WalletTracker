@@ -1,12 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WalletTracker.Application.Expense;
-using WalletTracker.Application.Settings.Commands.DeleteExpenseCategoryById;
 using WalletTracker.Application.Settings.Commands.DeletePaymentMethodById;
 using WalletTracker.Domain.Interfaces;
 
