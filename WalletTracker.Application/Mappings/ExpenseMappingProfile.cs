@@ -27,6 +27,8 @@ namespace WalletTracker.Application.Mappings
                 .ForMember(dto => dto.PaymentName, opt => opt.MapFrom(src => src.Payment.Name));
 
             CreateMap<Domain.Entities.Expense, EditExpenseByIdCommand>();
+
+            CreateMap<ExpenseCategoryAssignedToUser, CategoryLimitDto>();
         }
     }
 }

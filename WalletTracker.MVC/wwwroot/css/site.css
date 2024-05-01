@@ -125,11 +125,14 @@ tr td:last-child {
     text-decoration: underline;
 }
 
-.balance-green {
+.balance-green, .moneyLeftPlus {
     color: limegreen !important;
 }
 
-.balance-red {
+.balance-red, .moneyLeftMinus {
     color: red !important;
 }
 
+.hide-class {
+   display: none;
+}

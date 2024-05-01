@@ -18,27 +18,27 @@
                     <table class="table table-borderless mb-0 table-balance">
                         <tbody>
                             <tr>
-                                <td class="pt-0 pb-1">
+                                <td class="pt-0 pb-2">
                                     Limit info:
                                 </td>
-                                <td class="pt-0 pb-1" align="right">
-                                     PLN
+                                <td id="limitInfo" class="pt-0 pb-2" align="right">
+                                     
                                 </td>
                             </tr>
-                            <tr>
-                                <td class="py-1">
+                            <tr class="moneySpentRow hide-class">
+                                <td class="pt-0 pb-2">
                                     Money spent:
                                 </td>
-                                <td class="py-1" align="right">
-                                    money PLN
+                                <td id="moneySpent" class="pt-0 pb-2" align="right">
+
                                 </td>
                             </tr>
-                            <tr>
-                                <td class="py-1">
+                            <tr class="moneyLeftRow hide-class">
+                                <td class="pt-0 pb-2">
                                     Money left:
                                 </td>
-                                <td class="pt-1 pb-2" align="right">
-                                    money PLN
+                                <td id="moneyLeft" class="pt-0 pb-2" align="right">
+
                                 </td>
                             </tr>
                         </tbody>
@@ -91,8 +91,10 @@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 
+    <script src="~/js/preventCharactersInNumberField.js"></script>
     <script src="~/js/replaceDotsToCommas.js"></script>
     <script src="~/js/amountValidation.js"></script>
     <script src="~/js/dateValidation.js"></script>
     <script src="~/js/expenseFormValidation.js"></script>
+    <script src="~/js/killerFeature.js"></script>
 }

@@ -12,8 +12,9 @@
         </p>
     </div>
     <div class="col-md-10 mx-auto p-4 rounded-3 form-column">
-        <h3 class="text-center">Delete Personal Data</h3>
         <form id="delete-user" method="post">
+            <h2 class="text-center">Delete Personal Data</h2>
+            <hr />
             <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
             @if (Model.RequirePassword)
             {
