@@ -4,12 +4,16 @@
 @inject SignInManager<ApplicationUser> SignInManager
 
 @{
+    // Get current controller and action
     var currentController = ViewContext.RouteData.Values["Controller"]?.ToString();
     var currentAction = ViewContext.RouteData.Values["Action"]?.ToString();
+
+    // Convert passed notification
     var notification = TempData["Notification"] != null
         ? (Notification)JsonConvert.DeserializeObject<Notification>(TempData["Notification"]!.ToString()!)!
         : null;
 
+    // Set current month date range
     var todayDateTime = DateTime.Now;
     var today = DateOnly.FromDateTime(todayDateTime).ToString("yyyy-MM-dd");
     var firstDayOfCurrentMonth = DateOnly.FromDateTime(new DateTime(todayDateTime.Year, todayDateTime.Month, 1))
@@ -75,10 +79,12 @@
             &copy; 2024 - Wallet Tracker
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/lib/toastr.js/toastr.min.js"></script>
+
     @if (notification != null)
     {
         <script>

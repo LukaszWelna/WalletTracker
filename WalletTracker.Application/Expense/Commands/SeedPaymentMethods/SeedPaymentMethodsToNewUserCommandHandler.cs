@@ -21,6 +21,7 @@ namespace WalletTracker.Application.Expense.Commands.SeedPaymentMethods
             }
 
             var paymentMethodsAssignedToUserId = new List<PaymentMethodAssignedToUser>();
+
             var paymentMethodsDefault = await _paymentMethodRepository.GetDefaultPaymentMethods();
 
             foreach (var method in paymentMethodsDefault)

@@ -17,6 +17,7 @@ namespace WalletTracker.Application.ApplicationUser
             _httpContextAccessor = httpContextAccessor;
         }
 
+        // Get logged user data from Http Context
         public CurrentUser GetCurrentUser()
         {
             var user = _httpContextAccessor?.HttpContext?.User;

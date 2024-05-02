@@ -1,11 +1,9 @@
-/**
- * Add jQuery Validation plugin method for a amount
- * 
- * Valid amount must contain max 2 digits after decimal point
- * Valid amount must be greater than 0
- * Valid amount must be lower than 100000000
- * 
- */
+// Add jQuery Validation plugin method for a amount
+
+// Valid amount must contain max 2 digits after decimal point
+// Valid amount must be greater than 0
+// Limit must be greater or equal 0
+// Valid amount must be lower than 100000000
 
 $.validator.addMethod("decimalPlaces", function (value, element) {
     return (! /[0-9]*\,[0-9]{3,}/.test(value));

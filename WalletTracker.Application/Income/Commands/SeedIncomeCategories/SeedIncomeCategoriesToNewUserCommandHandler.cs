@@ -21,6 +21,7 @@ namespace WalletTracker.Application.Income.Commands.SeedIncomeCategories
             }
 
             var incomeCategoriesAssignedToUserId = new List<IncomeCategoryAssignedToUser>();
+
             var incomeCategoriesDefault = await _incomeCategoryRepository.GetDefaultCategories();
 
             foreach (var category in incomeCategoriesDefault)

@@ -16,6 +16,7 @@ namespace WalletTracker.Application.Settings.Commands.EditIncomeCategoryById
         {
             var incomeCategory = await _incomeCategoryRepository.GetById(request.Id);
 
+            // Edit current data by value specified in the view
             incomeCategory.Name = request.Name!;
 
             await _incomeCategoryRepository.Commit();

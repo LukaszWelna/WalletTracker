@@ -1,4 +1,4 @@
-﻿// Fill the form after selecting category
+﻿// Fill the form after selecting income category
 $(function () {
     $("#Id").on("change", function () {
         var selectedText = $("#Id option:selected").text();
@@ -9,7 +9,7 @@ $(function () {
     })   
 });
 
-// Validate form responsible for adding new income category
+// Validate form responsible for editing income category
 $("#editIncomeCategoryForm").validate({
     rules: {
         Id: {

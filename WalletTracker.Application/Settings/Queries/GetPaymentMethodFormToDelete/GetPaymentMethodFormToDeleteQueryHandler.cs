@@ -17,6 +17,7 @@ namespace WalletTracker.Application.Settings.Queries.GetPaymentMethodFormToDelet
             _mapper = mapper;
         }
 
+        // Return DeletePaymentMethodByIdCommand object with payment methods assigned to the logged user
         public async Task<DeletePaymentMethodByIdCommand> Handle(GetPaymentMethodFormToDeleteQuery request, CancellationToken cancellationToken)
         {
             var paymentMethodsAssignedToUser = await _paymentMethodRepository

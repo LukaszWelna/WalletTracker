@@ -1,4 +1,4 @@
-// Validate form responsible for adding new income
+// Validate form responsible for choosing dates
 $("#balanceForm").validate({
     rules: {
         StartDate: {

@@ -16,6 +16,7 @@ namespace WalletTracker.Application.Income.Queries.GetCategoriesAssignedToLogged
             _mapper = mapper;
         }
 
+        // Return CreateIncomeCommand object with categories assigned to the logged user
         public async Task<CreateIncomeCommand> Handle(GetDefaultIncomeFormDataQuery request, CancellationToken cancellationToken)
         {
             var categoriesAssignedToUser = await _incomeCategoryRepository

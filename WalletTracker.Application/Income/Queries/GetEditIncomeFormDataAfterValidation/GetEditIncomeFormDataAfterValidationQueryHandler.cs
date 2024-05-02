@@ -16,6 +16,7 @@ namespace WalletTracker.Application.Income.Queries.GetEditIncomeFormDataAfterVal
             _mapper = mapper;
         }
 
+        // Return EditIncomeByIdCommand object with categories assigned to the logged user
         public async Task<EditIncomeByIdCommand> Handle(GetEditIncomeFormDataAfterValidationQuery request, CancellationToken cancellationToken)
         {
             var categoriesAssignedToUser = await _incomeCategoryRepository

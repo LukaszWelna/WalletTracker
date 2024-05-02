@@ -62,8 +62,7 @@ namespace WalletTracker.Infrastructure.Repositories
         {
             var userId = _userContextService.GetCurrentUser().Id;
 
-            var totalAmountInCategories = await _dbContext
-                .Expenses
+            var totalAmountInCategories = await _dbContext.Expenses
                 .Include(e => e.Category)
                 .Where(e => e.UserId == userId && (e.ExpenseDate >= startDate && e.ExpenseDate <= endDate))
                 .GroupBy(e => e.Category.Name)

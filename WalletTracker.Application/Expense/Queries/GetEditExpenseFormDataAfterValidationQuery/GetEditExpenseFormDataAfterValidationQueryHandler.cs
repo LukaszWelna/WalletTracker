@@ -20,6 +20,7 @@ namespace WalletTracker.Application.Expense.Queries.GetEditExpenseFormDataAfterV
             _mapper = mapper;
         }
 
+        // Return EditExpenseByIdCommand object with categories and payment methods assigned to the logged user
         public async Task<EditExpenseByIdCommand> Handle(GetEditExpenseFormDataAfterValidationQuery request, CancellationToken cancellationToken)
         {
             var categoriesAssignedToUser = await _expenseCategoryRepository

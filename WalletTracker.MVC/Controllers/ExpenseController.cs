@@ -24,6 +24,7 @@ namespace WalletTracker.MVC.Controllers
             _mediator = mediator;
         }
 
+        // Manage creating of new expense
         [HttpGet]
         public async Task<IActionResult> Create()
         {
@@ -48,6 +49,7 @@ namespace WalletTracker.MVC.Controllers
             return RedirectToAction(nameof(Create));
         }
 
+        // Manage editing of the expense
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
@@ -73,6 +75,7 @@ namespace WalletTracker.MVC.Controllers
             return RedirectToAction("Index", "Balance");
         }
 
+        // Manage deleting of the expense
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
@@ -83,6 +86,7 @@ namespace WalletTracker.MVC.Controllers
             return RedirectToAction("Index", "Balance");
         }
 
+        // Get limit of defined category
         [HttpGet]
         public async Task<IActionResult> GetCategoryLimit(int id)
         {
@@ -91,6 +95,7 @@ namespace WalletTracker.MVC.Controllers
             return Ok(data);
         }
 
+        // Get money left in defined month based on selected expense category
         [HttpGet]
         [Route("Expense/GetMoneySpent/{categoryId}/{date}")]
         public async Task<IActionResult> GetMoneySpent(int categoryId, DateOnly date)

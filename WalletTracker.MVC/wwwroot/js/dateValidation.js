@@ -1,11 +1,8 @@
-/**
- * Add jQuery Validation plugin method for a date
- * 
- * Date must be valid (leap years etc.)
- * Date must be equal or earlier than current date
- * End Date must be equal or grater than start date
- * 
- */
+// Add jQuery Validation plugin method for a date
+ 
+// Date must be valid (leap years etc.)
+// Date must be equal or earlier than current date
+// End Date must be equal or grater than start date
 
 $.validator.addMethod("dateTime", function (value, element) {
     return (!isNaN(Date.parse(value)));
