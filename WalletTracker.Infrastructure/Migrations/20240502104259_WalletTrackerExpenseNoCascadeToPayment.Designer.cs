@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WalletTracker.Infrastructure.Persistence;
 
@@ -11,9 +12,11 @@ using WalletTracker.Infrastructure.Persistence;
 namespace WalletTracker.Infrastructure.Migrations
 {
     [DbContext(typeof(WalletTrackerDbContext))]
-    partial class WalletTrackerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240502104259_WalletTrackerExpenseNoCascadeToPayment")]
+    partial class WalletTrackerExpenseNoCascadeToPayment
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

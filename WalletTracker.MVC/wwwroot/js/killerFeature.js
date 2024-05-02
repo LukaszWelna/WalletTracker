@@ -5,7 +5,7 @@ $(function () {
         showMoneyLeft();
     })
 
-    $("#CategoryId").on("change", async function () {
+    $("#CategoryId, #ExpenseDate").on("change", async function () {
         await manageLimit();
         showMoneyLeft();
     });
@@ -53,18 +53,22 @@ $(function () {
         if ((categoryId == 0) || (date == "")) {
             $("#moneySpent").text("Category & date required");
         } else {
-            try {
-                const data = await $.ajax({
-                    url: `/Expense/GetMoneySpent/${categoryId}/${date}`,
-                    type: "get"
-                });
+            let limitInfo = $("#limitInfo").text();
 
-                let moneySpent = Number(data).toFixed(2);
-                $("#moneySpent").text(`${moneySpent.replace(/\./g, ',')} PLN`);
-                $(".moneySpentRow").removeClass("hide-class");
+            if (limitInfo != "No limit set") {
+                try {
+                    const data = await $.ajax({
+                        url: `/Expense/GetMoneySpent/${categoryId}/${date}`,
+                        type: "get"
+                    });
 
-            } catch (error) {
-                toastr["error"]("Something went wrong");
+                    let moneySpent = Number(data).toFixed(2);
+                    $("#moneySpent").text(`${moneySpent.replace(/\./g, ',')} PLN`);
+                    $(".moneySpentRow").removeClass("hide-class");
+
+                } catch (error) {
+                    toastr["error"]("Something went wrong");
+                }
             }
         }
     }
@@ -83,20 +87,22 @@ $(function () {
             let limitInfo = $("#limitInfo").text();
             let moneySpent = $("#moneySpent").text();
 
-            limitInfo = limitInfo.replace(/[^0-9\,]/g, "").replace(",", ".");
-            moneySpent = moneySpent.replace(/[^0-9\,]/g, "").replace(",", ".");
-            amount = amount.replace(",", ".");
+            if (limitInfo != "No limit set") {
+                limitInfo = limitInfo.replace(/[^0-9\,]/g, "").replace(",", ".");
+                moneySpent = moneySpent.replace(/[^0-9\,]/g, "").replace(",", ".");
+                amount = amount.replace(",", ".");
 
-            moneyLeft = limitInfo - moneySpent - amount;
+                moneyLeft = limitInfo - moneySpent - amount;
 
-            if (moneyLeft >= 0) {
-                $("#moneyLeft").addClass("moneyLeftPlus");
-            } else {
-                $("#moneyLeft").addClass("moneyLeftMinus");
-            }
+                if (moneyLeft >= 0) {
+                    $("#moneyLeft").addClass("moneyLeftPlus");
+                } else {
+                    $("#moneyLeft").addClass("moneyLeftMinus");
+                }
 
-            $("#moneyLeft").text(`${moneyLeft.toFixed(2)} PLN`);
-            $(".moneyLeftRow").removeClass("hide-class");
+                $("#moneyLeft").text(`${moneyLeft.toFixed(2)} PLN`);
+                $(".moneyLeftRow").removeClass("hide-class");
+            }  
         }
     }
 

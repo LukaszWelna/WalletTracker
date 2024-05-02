@@ -17,8 +17,4 @@
     <ProjectReference Include="..\WalletTracker.Domain\WalletTracker.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
-
 </Project>

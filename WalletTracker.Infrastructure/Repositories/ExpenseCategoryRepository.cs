@@ -49,7 +49,12 @@ namespace WalletTracker.Infrastructure.Repositories
         public async Task DeleteById(int id)
         {
             var category = await _dbContext.ExpenseCategoriesAssignedToUsers
-                .FirstAsync(c => c.Id == id);
+                .FirstOrDefaultAsync(c => c.Id == id);
+
+            if (category == null)
+            {
+                throw new InvalidOperationException("Expense category with specified id doesn't exist.");
+            }
 
             _dbContext.ExpenseCategoriesAssignedToUsers.Remove(category);
 
@@ -68,7 +73,16 @@ namespace WalletTracker.Infrastructure.Repositories
         }
 
         public async Task<ExpenseCategoryAssignedToUser> GetById(int id)
-            => await _dbContext.ExpenseCategoriesAssignedToUsers
-                .FirstAsync(c => c.Id == id);
+        {
+            var category = await _dbContext.ExpenseCategoriesAssignedToUsers
+                .FirstOrDefaultAsync(c => c.Id == id);
+
+            if (category == null)
+            {
+                throw new InvalidOperationException("Expense category with specified id doesn't exist.");
+            }
+
+            return category;
+        }
     }
 }

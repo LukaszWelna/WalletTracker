@@ -96,7 +96,8 @@ namespace WalletTracker.Infrastructure.Persistence
 
                 eb.HasOne(e => e.Payment)
                 .WithMany(p => p.Expenses)
-                .HasForeignKey(e => e.PaymentId);
+                .HasForeignKey(e => e.PaymentId)
+                .OnDelete(DeleteBehavior.NoAction);
 
                 eb.Property(e => e.Amount)
                 .HasPrecision(10, 2);
@@ -115,8 +116,7 @@ namespace WalletTracker.Infrastructure.Persistence
             {
                 eb.HasOne(p => p.User)
                 .WithMany()
-                .HasForeignKey(p => p.UserId)
-                .OnDelete(DeleteBehavior.NoAction);
+                .HasForeignKey(p => p.UserId);
 
                 eb.Property(p => p.Name)
                 .HasColumnType("varchar(25)");
