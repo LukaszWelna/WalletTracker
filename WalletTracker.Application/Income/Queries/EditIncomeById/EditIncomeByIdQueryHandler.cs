@@ -20,6 +20,7 @@ namespace WalletTracker.Application.Income.Queries.EditIncomeById
             _mapper = mapper;
         }
 
+        // Return EditIncomeByIdCommand object with categories assigned to the logged user
         public async Task<EditIncomeByIdCommand> Handle(EditIncomeByIdQuery request, CancellationToken cancellationToken)
         {
             var income = await _incomeRepository.GetIncomeById(request.IncomeId);

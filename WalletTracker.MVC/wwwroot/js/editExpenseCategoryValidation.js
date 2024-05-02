@@ -1,4 +1,4 @@
-﻿// Fill the form after selecting category
+﻿// Fill the form after selecting expense category
 $(function () {
     $("#Id").on("change", function () {
         var selectedText = $("#Id option:selected").text();

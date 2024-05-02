@@ -17,6 +17,7 @@ namespace WalletTracker.Application.Settings.Queries.GetExpenseCategoryFormToDel
             _mapper = mapper;
         }
 
+        // Return DeleteExpenseCategoryByIdCommand object with categories assigned to the logged user
         public async Task<DeleteExpenseCategoryByIdCommand> Handle(GetExpenseCategoryFormToDeleteQuery request, CancellationToken cancellationToken)
         {
             var categoriesAssignedToUser = await _expenseCategoryRepository

@@ -22,6 +22,7 @@ namespace WalletTracker.MVC.Controllers
             _mediator = mediator;
         }
 
+        // Manage creating of new income
         [HttpGet]
         public async Task<IActionResult> Create()
         {
@@ -46,6 +47,7 @@ namespace WalletTracker.MVC.Controllers
             return RedirectToAction(nameof(Create));
         }
 
+        // Manage editing of the income
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
@@ -71,6 +73,7 @@ namespace WalletTracker.MVC.Controllers
             return RedirectToAction("Index", "Balance");
         }
 
+        // Manage deleting of the income
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {

@@ -11,7 +11,7 @@ namespace WalletTracker.Application.Extensions
     {
         public static void AddApplication(this IServiceCollection services)
         {
-            // User context
+            // Add User context
             services.AddScoped<IUserContextService, UserContextService>();
 
             // Add Auto mapper
@@ -20,11 +20,10 @@ namespace WalletTracker.Application.Extensions
             // Add MediatR
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining(typeof(CreateIncomeCommand)));
 
-            // Fluent validation
+            // Add Fluent validation
             services.AddValidatorsFromAssemblyContaining<CreateIncomeCommandValidator>()
                     .AddFluentValidationAutoValidation()
                     .AddFluentValidationClientsideAdapters();
-
         }
     }
 }

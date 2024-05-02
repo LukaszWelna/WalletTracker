@@ -15,7 +15,6 @@ namespace WalletTracker.Application.Mappings
             CreateMap<ExpenseTotalAmountInCategoryDto, BalanceCanvasDto>()
                 .ForMember(b => b.label, opt => opt.MapFrom(src => src.CategoryName))
                 .ForMember(b => b.y, opt => opt.MapFrom(src => src.TotalAmount));
-
         }
     }
 }

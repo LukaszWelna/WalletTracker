@@ -16,6 +16,7 @@ namespace WalletTracker.Application.Settings.Commands.EditExpenseCategoryById
         {
             var expenseCategory = await _expenseCategoryRepository.GetById(request.Id);
 
+            // Edit current data by values specified in the view
             expenseCategory.Name = request.Name!;
             expenseCategory.Limit = request.Limit;
             expenseCategory.LimitIsActive = request.LimitIsActive;

@@ -17,6 +17,7 @@ namespace WalletTracker.Application.Settings.Queries.GetPaymentMethodFormToEdit
             _mapper = mapper;
         }
 
+        // Return EditPaymentMethodByIdCommand object with payment methods assigned to the logged user
         public async Task<EditPaymentMethodByIdCommand> Handle(GetPaymentMethodFormToEditQuery request, CancellationToken cancellationToken)
         {
             var paymentMethodsAssignedToUser = await _paymentMethodRepository

@@ -30,8 +30,7 @@ namespace WalletTracker.Infrastructure.Repositories
         {
             var userId = _userContextService.GetCurrentUser().Id;
 
-            var categoriesAssignedToUser = await _dbContext
-                .ExpenseCategoriesAssignedToUsers
+            var categoriesAssignedToUser = await _dbContext.ExpenseCategoriesAssignedToUsers
                 .Where(c => c.UserId == userId).ToListAsync();
 
             return categoriesAssignedToUser;
@@ -49,7 +48,8 @@ namespace WalletTracker.Infrastructure.Repositories
 
         public async Task DeleteById(int id)
         {
-            var category = await _dbContext.ExpenseCategoriesAssignedToUsers.FirstAsync(c => c.Id == id);
+            var category = await _dbContext.ExpenseCategoriesAssignedToUsers
+                .FirstAsync(c => c.Id == id);
 
             _dbContext.ExpenseCategoriesAssignedToUsers.Remove(category);
 

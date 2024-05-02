@@ -15,6 +15,7 @@ namespace WalletTracker.MVC.Controllers
             _mediator = mediator;
         }
 
+        // Show incomes, expenses and balance in defined range of dates
         [HttpGet]
         public async Task<IActionResult> Index(GetBalanceDataQuery query)
         {

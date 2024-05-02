@@ -18,6 +18,7 @@ namespace WalletTracker.Application.Settings.Queries.GetIncomeCategoriesAssigned
             _mapper = mapper;
         }
 
+        // Return DeleteIncomeCategoryByIdCommand object with categories assigned to the logged user
         public async Task<DeleteIncomeCategoryByIdCommand> Handle(GetIncomeCategoryFormToDeleteQuery request, CancellationToken cancellationToken)
         {
             var categoriesAssignedToUser = await _incomeCategoryRepository

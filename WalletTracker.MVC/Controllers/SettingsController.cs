@@ -34,6 +34,7 @@ namespace WalletTracker.MVC.Controllers
             _mediator = mediator;
         }
 
+        // Check if defined income category name already exists in the database
         [HttpPost]
         public async Task<IActionResult> CheckIncomeCategoryNameExists(int id, string name)
         {
@@ -49,6 +50,7 @@ namespace WalletTracker.MVC.Controllers
             }
         }
 
+        // Manage adding a new income category
         [HttpGet]
         public IActionResult AddIncomeCategory()
         {
@@ -70,6 +72,7 @@ namespace WalletTracker.MVC.Controllers
             return RedirectToAction(nameof(AddIncomeCategory));
         }
 
+        // Manage editing an income category
         [HttpGet]
         public async Task<IActionResult> EditIncomeCategory()
         {
@@ -95,6 +98,7 @@ namespace WalletTracker.MVC.Controllers
             return RedirectToAction(nameof(EditIncomeCategory));
         }
 
+        // Manage deleting an income category
         [HttpGet]
         public async Task<IActionResult> DeleteIncomeCategory()
         {
@@ -120,6 +124,7 @@ namespace WalletTracker.MVC.Controllers
             return RedirectToAction(nameof(DeleteIncomeCategory));
         }
 
+        // Check if defined expense category name already exists in the database
         [HttpPost]
         public async Task<IActionResult> CheckExpenseCategoryNameExists(int id, string name)
         {
@@ -135,6 +140,7 @@ namespace WalletTracker.MVC.Controllers
             }
         }
 
+        // Manage adding a new expense category
         [HttpGet]
         public IActionResult AddExpenseCategory()
         {
@@ -156,6 +162,7 @@ namespace WalletTracker.MVC.Controllers
             return RedirectToAction(nameof(AddExpenseCategory));
         }
 
+        // Manage editing a expense category
         [HttpGet]
         public async Task<IActionResult> EditExpenseCategory()
         {
@@ -181,6 +188,7 @@ namespace WalletTracker.MVC.Controllers
             return RedirectToAction(nameof(EditExpenseCategory));
         }
 
+        // Manage deleting a expense category
         [HttpGet]
         public async Task<IActionResult> DeleteExpenseCategory()
         {
@@ -206,6 +214,7 @@ namespace WalletTracker.MVC.Controllers
             return RedirectToAction(nameof(DeleteExpenseCategory));
         }
 
+        // Get expense category by defined id 
         [HttpGet]
         public async Task<IActionResult> GetExpenseCategoryById(int id)
         {
@@ -214,6 +223,7 @@ namespace WalletTracker.MVC.Controllers
             return Ok(data);
         }
 
+        // Check if defined payment method name already exists in the database
         [HttpPost]
         public async Task<IActionResult> CheckPaymentMethodNameExists(int id, string name)
         {
@@ -229,6 +239,7 @@ namespace WalletTracker.MVC.Controllers
             }
         }
 
+        // Manage adding a new payment method
         [HttpGet]
         public IActionResult AddPaymentMethod()
         {
@@ -250,6 +261,7 @@ namespace WalletTracker.MVC.Controllers
             return RedirectToAction(nameof(AddPaymentMethod));
         }
 
+        // Manage editing a payment method
         [HttpGet]
         public async Task<IActionResult> EditPaymentMethod()
         {
@@ -275,6 +287,7 @@ namespace WalletTracker.MVC.Controllers
             return RedirectToAction(nameof(EditPaymentMethod));
         }
 
+        // Manage deleting a payment method
         [HttpGet]
         public async Task<IActionResult> DeletePaymentMethod()
         {

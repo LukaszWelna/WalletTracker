@@ -1,5 +1,4 @@
-// Show category limits, spent money and calculate left money using AJAX
-
+// Show category limits, money spent and calculate money left
 $(function () {
     $(window).on("load", async function () {
         await manageLimit();
@@ -39,7 +38,6 @@ $(function () {
                     $("#limitInfo").text("No limit set");
                     hideElements();
                 } else {
-                    showElements();
                     let limit = Number(data["limit"]).toFixed(2);
                     $("#limitInfo").text(`${limit.replace(/\./g, ',')} PLN`);
                 }
@@ -63,21 +61,12 @@ $(function () {
 
                 let moneySpent = Number(data).toFixed(2);
                 $("#moneySpent").text(`${moneySpent.replace(/\./g, ',')} PLN`);
+                $(".moneySpentRow").removeClass("hide-class");
 
             } catch (error) {
                 toastr["error"]("Something went wrong");
             }
         }
-    }
-
-    const hideElements = () => {
-        $(".moneySpentRow").addClass("hide-class");
-        $(".moneyLeftRow").addClass("hide-class");
-    }
-
-    const showElements = () => {
-        $(".moneySpentRow").removeClass("hide-class");
-        $(".moneyLeftRow").removeClass("hide-class");
     }
 
     // Show left money in defined month
@@ -107,6 +96,12 @@ $(function () {
             }
 
             $("#moneyLeft").text(`${moneyLeft.toFixed(2)} PLN`);
+            $(".moneyLeftRow").removeClass("hide-class");
         }
+    }
+
+    const hideElements = () => {
+        $(".moneySpentRow").addClass("hide-class");
+        $(".moneyLeftRow").addClass("hide-class");
     }
 });

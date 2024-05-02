@@ -16,6 +16,7 @@ namespace WalletTracker.Application.Settings.Commands.EditPaymentMethodById
         {
             var paymentMethod = await _paymentMethodRepository.GetById(request.Id);
 
+            // Edit current data by value specified in the view
             paymentMethod.Name = request.Name!;
 
             await _paymentMethodRepository.Commit();

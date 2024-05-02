@@ -16,6 +16,7 @@ namespace WalletTracker.Application.Expense.Commands.EditExpenseById
         {
             var expense = await _expenseRepository.GetExpenseById(request.Id);
 
+            // Edit current data by values specified in the view
             expense.Amount = request.Amount;
             expense.ExpenseDate = request.ExpenseDate;
             expense.CategoryId = request.CategoryId;

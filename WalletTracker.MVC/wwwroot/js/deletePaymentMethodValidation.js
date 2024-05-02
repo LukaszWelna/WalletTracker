@@ -1,4 +1,4 @@
-// Validate form responsible for deleting income category
+// Validate form responsible for deleting payment method
 $("#deletePaymentMethodForm").validate({
     rules: {
         Id: {

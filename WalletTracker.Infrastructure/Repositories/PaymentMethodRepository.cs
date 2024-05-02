@@ -30,8 +30,7 @@ namespace WalletTracker.Infrastructure.Repositories
         {
             var userId = _userContextService.GetCurrentUser().Id;
 
-            var paymentMethodsAssignedToUser = await _dbContext
-                .PaymentMethodsAssignedToUsers
+            var paymentMethodsAssignedToUser = await _dbContext.PaymentMethodsAssignedToUsers
                 .Where(p => p.UserId == userId).ToListAsync();
 
             return paymentMethodsAssignedToUser;
@@ -46,7 +45,8 @@ namespace WalletTracker.Infrastructure.Repositories
 
         public async Task DeleteById(int id)
         {
-            var paymentMethod = await _dbContext.PaymentMethodsAssignedToUsers.FirstAsync(p => p.Id == id);
+            var paymentMethod = await _dbContext.PaymentMethodsAssignedToUsers
+                .FirstAsync(p => p.Id == id);
 
             _dbContext.PaymentMethodsAssignedToUsers.Remove(paymentMethod);
 

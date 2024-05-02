@@ -20,6 +20,7 @@ namespace WalletTracker.Application.Expense.Queries.GetDefaultExpenseFormData
             _mapper = mapper;
         }
 
+        // Return CreateExpenseCommand object with categories and payment methods assigned to the logged user
         public async Task<CreateExpenseCommand> Handle(GetDefaultExpenseFormDataQuery request, CancellationToken cancellationToken)
         {
             var categoriesAssignedToUser = await _expenseCategoryRepository
