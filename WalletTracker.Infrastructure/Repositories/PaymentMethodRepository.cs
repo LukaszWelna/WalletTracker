@@ -44,13 +44,42 @@ namespace WalletTracker.Infrastructure.Repositories
         }
 
         public async Task DeleteById(int id)
+        // Use transaction to perform 2 operations on the database
         {
-            var paymentMethod = await _dbContext.PaymentMethodsAssignedToUsers
-                .FirstAsync(p => p.Id == id);
+            using (var transaction = _dbContext.Database.BeginTransaction())
+            {
+                try
+                {
+                    var expenses = await _dbContext.Expenses
+                        .Where(e => e.PaymentId == id)
+                        .ToListAsync();
 
-            _dbContext.PaymentMethodsAssignedToUsers.Remove(paymentMethod);
+                    if (expenses != null && expenses.Count > 0)
+                    {
+                        _dbContext.Expenses.RemoveRange(expenses);
+                    }
 
-            await _dbContext.SaveChangesAsync();
+                    var paymentMethod = await _dbContext.PaymentMethodsAssignedToUsers
+                        .FirstOrDefaultAsync(p => p.Id == id);
+
+                    if (paymentMethod == null)
+                    {
+                        throw new InvalidOperationException("Payment method with specified id doesn't exist.");
+                    }
+
+                    _dbContext.PaymentMethodsAssignedToUsers.Remove(paymentMethod);
+
+                    await _dbContext.SaveChangesAsync();
+
+                    await transaction.CommitAsync();
+                }
+                catch (Exception e)
+                {
+                    transaction.Rollback();
+
+                    throw new InvalidOperationException("An Error occured while deleting the payment method.");
+                }
+            }  
         }
 
         public async Task Commit()
@@ -68,7 +97,16 @@ namespace WalletTracker.Infrastructure.Repositories
         }
 
         public async Task<PaymentMethodAssignedToUser> GetById(int id)
-            => await _dbContext.PaymentMethodsAssignedToUsers
-                .FirstAsync(p => p.Id == id);
+        {
+            var paymentMethod = await _dbContext.PaymentMethodsAssignedToUsers
+                .FirstOrDefaultAsync(p => p.Id == id);
+
+            if (paymentMethod == null)
+            {
+                throw new InvalidOperationException("Payment method with specified id doesn't exist.");
+            }
+
+            return paymentMethod;
+        }
     }
 }

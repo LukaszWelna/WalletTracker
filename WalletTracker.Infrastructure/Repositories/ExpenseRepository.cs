@@ -45,7 +45,12 @@ namespace WalletTracker.Infrastructure.Repositories
         public async Task DeleteExpenseById(int expenseId)
         {
             var expense = await _dbContext.Expenses
-                .FirstAsync(i => i.Id == expenseId);
+                .FirstOrDefaultAsync(i => i.Id == expenseId);
+
+            if (expense == null)
+            {
+                throw new InvalidOperationException("Expense with specified id doesn't exist.");
+            }
 
             _dbContext.Expenses.Remove(expense);
 
@@ -53,7 +58,16 @@ namespace WalletTracker.Infrastructure.Repositories
         }
 
         public async Task<Expense> GetExpenseById(int expenseId)
-            => await _dbContext.Expenses.FirstAsync(e => e.Id == expenseId);
+        {
+            var expense = await _dbContext.Expenses.FirstOrDefaultAsync(e => e.Id == expenseId);
+
+            if (expense == null)
+            {
+                throw new InvalidOperationException("Expense with specified id doesn't exist.");
+            }
+
+            return expense;
+        }
 
         public async Task Commit()
             => await _dbContext.SaveChangesAsync();

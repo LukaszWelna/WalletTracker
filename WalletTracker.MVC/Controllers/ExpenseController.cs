@@ -59,7 +59,7 @@ namespace WalletTracker.MVC.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, EditExpenseByIdCommand command)
+        public async Task<IActionResult> Edit(int id, EditExpenseByIdCommand command, string startDate, string endDate)
         {
             if (!ModelState.IsValid)
             {
@@ -72,18 +72,18 @@ namespace WalletTracker.MVC.Controllers
 
             this.SetNotification("success", "Expense edited");
 
-            return RedirectToAction("Index", "Balance");
+            return RedirectToAction("Index", "Balance", new { startDate, endDate });
         }
 
         // Manage deleting of the expense
         [HttpPost]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(int id, string startDate, string endDate)
         {
             await _mediator.Send(new DeleteExpenseByIdCommand(id));
 
             this.SetNotification("warning", "Expense deleted");
 
-            return RedirectToAction("Index", "Balance");
+            return RedirectToAction("Index", "Balance", new { startDate, endDate });
         }
 
         // Get limit of defined category

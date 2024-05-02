@@ -4,12 +4,14 @@
 @{
     ViewData["Title"] = "Edit expense";
     var today = DateOnly.FromDateTime(DateTime.UtcNow).ToString("yyyy-MM-dd");
+    var startDate = Context.Request.Query["startDate"];
+    var endDate = Context.Request.Query["endDate"];
 }
 
 <div class="container col-xl-10 col-xxl-10 px-4 py-5">
     <div class="row align-items-center">
         <div class="col-md-10 mx-auto col-lg-6 p-4 rounded-3 form-column">
-            <form id="expenseForm" asp-action="Edit" method="post">
+            <form id="expenseForm" asp-action="Edit" asp-route-startDate="@startDate" asp-route-endDate="@endDate" method="post">
                 <h2 class="form-header">Edit expense</h2>
                 <hr />
                 <div class="form-floating mb-3">

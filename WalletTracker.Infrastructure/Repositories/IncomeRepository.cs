@@ -42,16 +42,31 @@ namespace WalletTracker.Infrastructure.Repositories
 
         public async Task DeleteIncomeById(int incomeId)
         {
-            var income = await _dbContext.Incomes.FirstAsync(i => i.Id == incomeId);
+            var income = await _dbContext.Incomes.FirstOrDefaultAsync(i => i.Id == incomeId);
+
+            if (income == null)
+            {
+                throw new InvalidOperationException("Income with specified id doesn't exist."); 
+            }
 
             _dbContext.Incomes.Remove(income);
 
             await _dbContext.SaveChangesAsync();
+
         }
 
         public async Task<Income> GetIncomeById(int incomeId)
-            => await _dbContext.Incomes.FirstAsync(i => i.Id == incomeId);
+        {
+            var income = await _dbContext.Incomes.FirstOrDefaultAsync(i => i.Id == incomeId);
 
+            if (income == null)
+            {
+                throw new InvalidOperationException("Income with specified id doesn't exist.");
+            }
+
+            return income;
+        }
+            
         public async Task Commit()
             => await _dbContext.SaveChangesAsync();
 

@@ -57,7 +57,7 @@ namespace WalletTracker.MVC.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, EditIncomeByIdCommand command)
+        public async Task<IActionResult> Edit(int id, EditIncomeByIdCommand command, string startDate, string endDate)
         {
             if (!ModelState.IsValid)
             {
@@ -70,18 +70,18 @@ namespace WalletTracker.MVC.Controllers
 
             this.SetNotification("success", "Income edited");
 
-            return RedirectToAction("Index", "Balance");
+            return RedirectToAction("Index", "Balance", new { startDate, endDate });
         }
 
         // Manage deleting of the income
         [HttpPost]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(int id, string startDate, string endDate)
         {
             await _mediator.Send(new DeleteIncomeByIdCommand(id));
 
             this.SetNotification("warning", "Income deleted");
 
-            return RedirectToAction("Index", "Balance");
+            return RedirectToAction("Index", "Balance", new { startDate, endDate });
         }
     }
 }
