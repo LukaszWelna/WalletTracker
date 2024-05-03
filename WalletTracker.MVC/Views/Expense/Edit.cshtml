@@ -51,7 +51,7 @@
                     <label asp-for="Comment">Comment</label>
                 </div>
                 <button id="expenseSubmit" type="submit" class="w-100 btn btn-lg btn-primary mb-2">Save changes</button>
-                <a class="back" asp-action="Index">Back to balance</a>
+                <a class="back" asp-controller="Balance" asp-action="Index" asp-route-startDate="@startDate" asp-route-endDate="@endDate">Back to balance</a>
             </form>
         </div>
     </div>
