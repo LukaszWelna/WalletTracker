@@ -1,14 +1,8 @@
-﻿using Xunit;
-using WalletTracker.Application.ApplicationUser;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Security.Claims;
-using Moq;
+﻿using FluentAssertions;
 using Microsoft.AspNetCore.Http;
-using FluentAssertions;
+using Moq;
+using System.Security.Claims;
+using Xunit;
 
 namespace WalletTracker.Application.ApplicationUser.Tests
 {
@@ -52,7 +46,7 @@ namespace WalletTracker.Application.ApplicationUser.Tests
 
             httpContextAccessorMock.Setup(x => x.HttpContext).Returns(new DefaultHttpContext()
             {
-             
+
             });
 
             var userContext = new UserContextService(httpContextAccessorMock.Object);
