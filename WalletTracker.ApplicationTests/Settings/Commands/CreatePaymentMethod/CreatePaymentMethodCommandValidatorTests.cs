@@ -1,6 +1,5 @@
 ﻿using FluentValidation.TestHelper;
 using Moq;
-using WalletTracker.Application.Settings.Commands.CreateIncomeCategory;
 using WalletTracker.Domain.Entities;
 using WalletTracker.Domain.Interfaces;
 using Xunit;

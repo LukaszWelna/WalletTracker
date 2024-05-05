@@ -24,12 +24,12 @@ namespace WalletTracker.Application.ApplicationUser
 
             if (user == null)
             {
-                throw new InvalidOperationException("User context is not present");
+                throw new InvalidOperationException("User context is not present.");
             }
 
             if (user.Identity == null || !user.Identity.IsAuthenticated)
             {
-                throw new InvalidOperationException("User not logged in");
+                throw new InvalidOperationException("User not logged in.");
             }
 
             var id = user.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
