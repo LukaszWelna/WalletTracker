@@ -14,6 +14,11 @@ namespace WalletTracker.Application.Income.Commands.DeleteIncomeById
 
         public async Task Handle(DeleteIncomeByIdCommand request, CancellationToken cancellationToken)
         {
+            if (request.IncomeId <= 0)
+            {
+                throw new InvalidOperationException("Incorrect id value.");
+            }
+
             await _incomeRepository.DeleteIncomeById(request.IncomeId);
         }
     }

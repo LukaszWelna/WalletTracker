@@ -1,6 +1,4 @@
 ﻿using FluentValidation.TestHelper;
-using WalletTracker.Application.Settings.Commands.DeleteIncomeCategory;
-using WalletTracker.Application.Settings.Commands.DeleteIncomeCategoryById;
 using Xunit;
 
 namespace WalletTracker.Application.Settings.Commands.DeletePaymentMethodById.Tests
