@@ -2,9 +2,9 @@
 
 namespace WalletTracker.Application.Income.Commands.EditIncomeById
 {
-    public class EditIncomeByIdValidator : AbstractValidator<EditIncomeByIdCommand>
+    public class EditIncomeByIdCommandValidator : AbstractValidator<EditIncomeByIdCommand>
     {
-        public EditIncomeByIdValidator()
+        public EditIncomeByIdCommandValidator()
         {
             RuleFor(i => i.Amount)
                 .NotEmpty().WithMessage("This field is required.")
