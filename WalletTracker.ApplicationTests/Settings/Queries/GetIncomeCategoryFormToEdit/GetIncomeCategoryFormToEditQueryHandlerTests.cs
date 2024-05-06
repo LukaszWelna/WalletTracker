@@ -1,30 +1,20 @@
 ﻿using AutoMapper;
 using FluentAssertions;
 using Moq;
-using WalletTracker.Application.Income.Commands.EditIncomeById;
+using WalletTracker.Application.Income;
 using WalletTracker.Domain.Entities;
 using WalletTracker.Domain.Interfaces;
 using Xunit;
 
-namespace WalletTracker.Application.Income.Queries.GetEditIncomeFormDataAfterValidation.Tests
+namespace WalletTracker.Application.Settings.Queries.GetIncomeCategoryFormToEdit.Tests
 {
-    public class GetEditIncomeFormDataAfterValidationQueryHandlerTests
+    public class GetIncomeCategoryFormToEditQueryHandlerTests
     {
         [Fact()]
-        public async Task Handle_ForGivenCommand_ReturnUpdatedCommand()
+        public async Task Handle_ReturnCommand()
         {
             // Arrange
-            var command = new EditIncomeByIdCommand()
-            {
-                Id = 1,
-                CategoryId = 1,
-                Amount = 100,
-                IncomeDate = DateOnly.FromDateTime(DateTime.UtcNow),
-                UserCategoryDtos = new List<IncomeCategoryAssignedToUserDto>(),
-                Comment = "Comment"
-            };
-
-            var query = new GetEditIncomeFormDataAfterValidationQuery(command);
+            var query = new GetIncomeCategoryFormToEditQuery();
 
             var categoriesAssignedToUser = new List<IncomeCategoryAssignedToUser>()
             {
@@ -56,7 +46,7 @@ namespace WalletTracker.Application.Income.Queries.GetEditIncomeFormDataAfterVal
             mapperMock.Setup(m => m.Map<List<IncomeCategoryAssignedToUserDto>>(categoriesAssignedToUser))
                 .Returns(categoryAssignedToUserDtos);
 
-            var handler = new GetEditIncomeFormDataAfterValidationQueryHandler(incomeCategoryRepositoryMock.Object, mapperMock.Object);
+            var handler = new GetIncomeCategoryFormToEditQueryHandler(incomeCategoryRepositoryMock.Object, mapperMock.Object);
 
             // Act
             var result = await handler.Handle(query, CancellationToken.None);

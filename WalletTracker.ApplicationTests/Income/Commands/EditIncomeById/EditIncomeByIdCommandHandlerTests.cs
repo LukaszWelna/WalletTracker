@@ -51,7 +51,7 @@ namespace WalletTracker.Application.Income.Commands.EditIncomeById.Tests
             await handler.Handle(command, CancellationToken.None);
 
             // Assert
-            incomeRepositoryMock.Verify(i => i.Commit(), Times.Once());
+            incomeRepositoryMock.Verify(i => i.Commit(), Times.Once);
             income.CategoryId.Should().Be(command.CategoryId);
             income.Amount.Should().Be(command.Amount);
             income.IncomeDate.Should().Be(command.IncomeDate);
