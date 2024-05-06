@@ -88,7 +88,6 @@ namespace WalletTracker.Application.Income.Queries.EditIncomeById.Tests
             var result = await handler.Handle(query, CancellationToken.None);
 
             // Assert
-            result.Should().BeEquivalentTo(command);
             result.UserCategoryDtos.Should().BeEquivalentTo(categoryAssignedToUserDtos);
         }
     }

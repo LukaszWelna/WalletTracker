@@ -14,6 +14,11 @@ namespace WalletTracker.Application.Settings.Commands.DeleteExpenseCategoryById
 
         public async Task Handle(DeleteExpenseCategoryByIdCommand request, CancellationToken cancellationToken)
         {
+            if (request.Id <= 0)
+            {
+                throw new InvalidOperationException("Incorrect id value.");
+            }
+
             await _expenseCategoryRepository.DeleteById(request.Id);
         }
     }

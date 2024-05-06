@@ -14,6 +14,11 @@ namespace WalletTracker.Application.Settings.Commands.DeletePaymentMethodById
 
         public async Task Handle(DeletePaymentMethodByIdCommand request, CancellationToken cancellationToken)
         {
+            if (request.Id <= 0)
+            {
+                throw new InvalidOperationException("Incorrect id value.");
+            }
+
             await _paymentMethodRepository.DeleteById(request.Id);
         }
     }

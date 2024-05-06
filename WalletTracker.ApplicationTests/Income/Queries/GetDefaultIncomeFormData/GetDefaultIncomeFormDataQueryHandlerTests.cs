@@ -10,7 +10,7 @@ namespace WalletTracker.Application.Income.Queries.GetCategoriesAssignedToLogged
     public class GetDefaultIncomeFormDataQueryHandlerTests
     {
         [Fact()]
-        public async Task Handle_ForGivenId_ReturnCommand()
+        public async Task Handle_ReturnDefaultCommand()
         {
             // Arrange
             var query = new GetDefaultIncomeFormDataQuery();
