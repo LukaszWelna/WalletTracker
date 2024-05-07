@@ -10,8 +10,8 @@ namespace WalletTracker.Application.Settings.Commands.CreateExpenseCategory.Test
 {
     public class CreateExpenseCategoryCommandHandlerTests
     {
-        [Fact()]
-        public async Task Handle_WithValidCommand_CreateExpenseCategory()
+        [Fact]
+        public async Task Handle_WithValidCommand_ShouldCreateExpenseCategory()
         {
             // Arrange
             var command = new CreateExpenseCategoryCommand()

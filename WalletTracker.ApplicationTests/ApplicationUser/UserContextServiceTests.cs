@@ -8,7 +8,7 @@ namespace WalletTracker.Application.ApplicationUser.Tests
 {
     public class UserContextServiceTests
     {
-        [Fact()]
+        [Fact]
         public void GetCurrentUser_WithAuthenticatedUser_ShouldReturnCurrentUser()
         {
             // Arrange
@@ -20,6 +20,7 @@ namespace WalletTracker.Application.ApplicationUser.Tests
 
             var user = new ClaimsPrincipal(new ClaimsIdentity(claims, "Test"));
 
+            // Mock Http context accessor
             var httpContextAccessorMock = new Mock<IHttpContextAccessor>();
 
             httpContextAccessorMock.Setup(x => x.HttpContext).Returns(new DefaultHttpContext()
@@ -38,10 +39,12 @@ namespace WalletTracker.Application.ApplicationUser.Tests
             currentUser.Email.Should().Be("test@test.com");
         }
 
-        [Fact()]
+        [Fact]
         public void GetCurrentUser_WithEmptyUser_ShouldThrowException()
         {
             // Arrange
+
+            // Mock Http context accessor
             var httpContextAccessorMock = new Mock<IHttpContextAccessor>();
 
             httpContextAccessorMock.Setup(x => x.HttpContext).Returns(new DefaultHttpContext()
@@ -59,7 +62,7 @@ namespace WalletTracker.Application.ApplicationUser.Tests
                 .Should().Throw<InvalidOperationException>();
         }
 
-        [Fact()]
+        [Fact]
         public void GetCurrentUser_WithoutIdentity_ShouldThrowException()
         {
             // Arrange
@@ -71,6 +74,7 @@ namespace WalletTracker.Application.ApplicationUser.Tests
 
             var user = new ClaimsPrincipal(new ClaimsIdentity(claims));
 
+            // Mock Http context accessor
             var httpContextAccessorMock = new Mock<IHttpContextAccessor>();
 
             httpContextAccessorMock.Setup(x => x.HttpContext).Returns(new DefaultHttpContext()

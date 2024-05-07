@@ -8,8 +8,8 @@ namespace WalletTracker.Application.Settings.Commands.DeleteIncomeCategoryById.T
 {
     public class DeleteIncomeCategoryByIdCommandHandlerTests
     {
-        [Fact()]
-        public async Task Handle_WithValidId_DeleteIncomeCategory()
+        [Fact]
+        public async Task Handle_WithValidId_ShouldDeleteIncomeCategory()
         {
             // Arrange
             var command = new DeleteIncomeCategoryByIdCommand()
@@ -29,7 +29,7 @@ namespace WalletTracker.Application.Settings.Commands.DeleteIncomeCategoryById.T
             incomeCategoryRepositoryMock.Verify(i => i.DeleteById(command.Id), Times.Once);
         }
 
-        [Fact()]
+        [Fact]
         public void Handle_WithInvalidId_ShouldThrowException()
         {
             // Arrange

@@ -16,8 +16,8 @@ namespace WalletTracker.Application.Income.Queries.EditIncomeById.Tests
 {
     public class EditIncomeByIdQueryHandlerTests
     {
-        [Fact()]
-        public async Task Handle_ForGivenId_ReturnCommand()
+        [Fact]
+        public async Task Handle_ForGivenId_ShouldReturnCommand()
         {
             // Arrange 
             var query = new EditIncomeByIdQuery(1);

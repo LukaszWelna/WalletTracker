@@ -17,8 +17,8 @@ namespace WalletTracker.Application.Settings.Queries.GetPaymentMethodFormToEdit.
 {
     public class GetPaymentMethodFormToEditQueryHandlerTests
     {
-        [Fact()]
-        public async Task Handle_ReturnCommand()
+        [Fact]
+        public async Task Handle_ShouldReturnCommand()
         {
             // Arrange
             var query = new GetPaymentMethodFormToEditQuery();

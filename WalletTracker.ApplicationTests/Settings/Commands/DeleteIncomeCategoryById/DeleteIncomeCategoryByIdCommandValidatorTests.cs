@@ -6,7 +6,7 @@ namespace WalletTracker.Application.Settings.Commands.DeleteIncomeCategoryById.T
 {
     public class DeleteIncomeCategoryByIdCommandValidatorTests
     {
-        [Fact()]
+        [Fact]
         public void Validate_WithValidCommand_ShouldNotHaveValidationError()
         {
             // Arrange
@@ -24,7 +24,7 @@ namespace WalletTracker.Application.Settings.Commands.DeleteIncomeCategoryById.T
             result.ShouldNotHaveAnyValidationErrors();
         }
 
-        [Fact()]
+        [Fact]
         public void Validate_WithInvalidCommand_ShouldHaveValidationError()
         {
             // Arrange

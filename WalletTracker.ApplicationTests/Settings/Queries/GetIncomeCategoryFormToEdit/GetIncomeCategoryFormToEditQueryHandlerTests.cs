@@ -10,8 +10,8 @@ namespace WalletTracker.Application.Settings.Queries.GetIncomeCategoryFormToEdit
 {
     public class GetIncomeCategoryFormToEditQueryHandlerTests
     {
-        [Fact()]
-        public async Task Handle_ReturnCommand()
+        [Fact]
+        public async Task Handle_ShouldReturnCommand()
         {
             // Arrange
             var query = new GetIncomeCategoryFormToEditQuery();

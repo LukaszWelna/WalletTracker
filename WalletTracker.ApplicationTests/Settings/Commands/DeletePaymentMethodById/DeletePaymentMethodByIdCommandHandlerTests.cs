@@ -7,8 +7,8 @@ namespace WalletTracker.Application.Settings.Commands.DeletePaymentMethodById.Te
 {
     public class DeletePaymentMethodByIdCommandHandlerTests
     {
-        [Fact()]
-        public async Task Handle_WithValidId_DeletePaymentMethod()
+        [Fact]
+        public async Task Handle_WithValidId_ShouldDeletePaymentMethod()
         {
             // Arrange
             var command = new DeletePaymentMethodByIdCommand()
@@ -28,7 +28,7 @@ namespace WalletTracker.Application.Settings.Commands.DeletePaymentMethodById.Te
             paymentMethodRepositoryMock.Verify(p => p.DeleteById(command.Id), Times.Once);
         }
 
-        [Fact()]
+        [Fact]
         public void Handle_WithInvalidId_ShouldThrowException()
         {
             // Arrange

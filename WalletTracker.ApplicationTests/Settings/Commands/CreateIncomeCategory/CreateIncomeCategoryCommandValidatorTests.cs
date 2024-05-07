@@ -8,7 +8,7 @@ namespace WalletTracker.Application.Settings.Commands.CreateIncomeCategory.Tests
 {
     public class CreateIncomeCategoryCommandValidatorTests
     {
-        [Theory()]
+        [Theory]
         [InlineData("TestName")]
         [InlineData("TestNameLonger12345")]
         public void Validate_WithValidCommand_ShouldNotHaveValidationError(string name)
@@ -22,7 +22,7 @@ namespace WalletTracker.Application.Settings.Commands.CreateIncomeCategory.Tests
             // Mock GetByName method
             var incomeCategoryRepositoryMock = new Mock<IIncomeCategoryRepository>();
 
-            incomeCategoryRepositoryMock.Setup(e => e.GetByName(It.IsAny<String>()))
+            incomeCategoryRepositoryMock.Setup(i => i.GetByName(It.IsAny<String>()))
                 .ReturnsAsync(null as IncomeCategoryAssignedToUser);
 
             var validator = new CreateIncomeCategoryCommandValidator(incomeCategoryRepositoryMock.Object);
@@ -34,7 +34,7 @@ namespace WalletTracker.Application.Settings.Commands.CreateIncomeCategory.Tests
             result.ShouldNotHaveAnyValidationErrors();
         }
 
-        [Theory()]
+        [Theory]
         [InlineData("")]
         [InlineData("A")]
         [InlineData("TestCategoryNameTooLong12345")]
@@ -49,7 +49,7 @@ namespace WalletTracker.Application.Settings.Commands.CreateIncomeCategory.Tests
             // Mock GetByName method
             var incomeCategoryRepositoryMock = new Mock<IIncomeCategoryRepository>();
 
-            incomeCategoryRepositoryMock.Setup(e => e.GetByName(It.IsAny<String>()))
+            incomeCategoryRepositoryMock.Setup(i => i.GetByName(It.IsAny<String>()))
                 .ReturnsAsync(null as IncomeCategoryAssignedToUser);
 
             var validator = new CreateIncomeCategoryCommandValidator(incomeCategoryRepositoryMock.Object);
@@ -61,7 +61,7 @@ namespace WalletTracker.Application.Settings.Commands.CreateIncomeCategory.Tests
             result.ShouldHaveAnyValidationError();
         }
 
-        [Fact()]
+        [Fact]
         public void Validate_WithExistingName_ShouldHaveValidationError()
         {
             // Arrange
@@ -78,7 +78,7 @@ namespace WalletTracker.Application.Settings.Commands.CreateIncomeCategory.Tests
 
             var incomeCategoryRepositoryMock = new Mock<IIncomeCategoryRepository>();
 
-            incomeCategoryRepositoryMock.Setup(e => e.GetByName(It.IsAny<String>()))
+            incomeCategoryRepositoryMock.Setup(i => i.GetByName(It.IsAny<String>()))
                 .ReturnsAsync(incomeCategoryAssignedToUser);
 
             var validator = new CreateIncomeCategoryCommandValidator(incomeCategoryRepositoryMock.Object);

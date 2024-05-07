@@ -8,7 +8,7 @@ namespace WalletTracker.Application.Mappings.Tests
 {
     public class IncomeMappingProfileTests
     {
-        [Fact()]
+        [Fact]
         public void IncomeMappingProfile_ShouldMapIncomeToGetIncomeDto()
         {
             // Arrange

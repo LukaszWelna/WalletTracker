@@ -8,8 +8,8 @@ namespace WalletTracker.Application.Settings.Queries.GetIncomeCategoryByName.Tes
 {
     public class GetIncomeCategoryByNameQueryHandlerTests
     {
-        [Fact()]
-        public async Task Handle_ForGivenName_ReturnIncomeCategoryAssignedToUser()
+        [Fact]
+        public async Task Handle_ForGivenName_ShouldReturnIncomeCategoryAssignedToUser()
         {
             // Arrange 
             var query = new GetIncomeCategoryByNameQuery("Test name");

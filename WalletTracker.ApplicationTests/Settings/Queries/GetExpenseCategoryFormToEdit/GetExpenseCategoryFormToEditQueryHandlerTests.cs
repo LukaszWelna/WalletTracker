@@ -17,8 +17,8 @@ namespace WalletTracker.Application.Settings.Queries.GetExpenseCategoryFormToEdi
 {
     public class GetExpenseCategoryFormToEditQueryHandlerTests
     {
-        [Fact()]
-        public async Task Handle_ReturnCommand()
+        [Fact]
+        public async Task Handle_ShouldReturnCommand()
         {
             // Arrange
             var query = new GetExpenseCategoryFormToEditQuery();
@@ -44,7 +44,7 @@ namespace WalletTracker.Application.Settings.Queries.GetExpenseCategoryFormToEdi
             // Mock Expense category repository
             var expenseCategoryRepositoryMock = new Mock<IExpenseCategoryRepository>();
 
-            expenseCategoryRepositoryMock.Setup(i => i.GetCategoriesAssignedToLoggedUser())
+            expenseCategoryRepositoryMock.Setup(e => e.GetCategoriesAssignedToLoggedUser())
                 .ReturnsAsync(categoriesAssignedToUser);
 
             // Mock mapper

@@ -8,8 +8,8 @@ namespace WalletTracker.Application.Settings.Commands.EditIncomeCategoryById.Tes
 {
     public class EditIncomeCategoryByIdCommandHandlerTests
     {
-        [Fact()]
-        public async Task Handle_WithValidCommand_EditIncomeCategoryById()
+        [Fact]
+        public async Task Handle_WithValidCommand_ShouldEditIncomeCategoryById()
         {
             // Arrange
             var command = new EditIncomeCategoryByIdCommand()

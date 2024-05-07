@@ -27,7 +27,7 @@ namespace WalletTracker.Application.Balance.Queries.GetBalanceData
 
             var userIncomeDtos = _mapper.Map<List<List<GetIncomeDto>>>(userIncomes);
 
-            //Expenses data in defined date range
+            // Expenses data in defined date range
             var userExpenses = await _expenseRepository.GetUserExpensesFromPeriod(request.StartDate, request.EndDate);
 
             var userExpenseDtos = _mapper.Map<List<List<GetExpenseDto>>>(userExpenses);

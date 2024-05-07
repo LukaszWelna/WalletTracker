@@ -11,8 +11,8 @@ namespace WalletTracker.Application.Settings.Commands.CreateCategory.Tests
 {
     public class CreateIncomeCategoryCommandHandlerTests
     {
-        [Fact()]
-        public async Task Handle_WithValidCommand_CreateIncomeCategory()
+        [Fact]
+        public async Task Handle_WithValidCommand_ShouldCreateIncomeCategory()
         {
             // Arrange
             var command = new CreateIncomeCategoryCommand()

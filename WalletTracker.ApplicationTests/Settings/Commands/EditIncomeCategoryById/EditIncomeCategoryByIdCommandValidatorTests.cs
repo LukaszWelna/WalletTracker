@@ -37,7 +37,7 @@ namespace WalletTracker.Application.Settings.Commands.EditIncomeCategoryById.Tes
             // Mock GetByName method
             var incomeCategoryRepositoryMock = new Mock<IIncomeCategoryRepository>();
 
-            incomeCategoryRepositoryMock.Setup(e => e.GetByName(It.IsAny<String>()))
+            incomeCategoryRepositoryMock.Setup(i => i.GetByName(It.IsAny<String>()))
                 .ReturnsAsync(null as IncomeCategoryAssignedToUser);
 
             var validator = new EditIncomeCategoryByIdCommandValidator(incomeCategoryRepositoryMock.Object);
@@ -64,7 +64,7 @@ namespace WalletTracker.Application.Settings.Commands.EditIncomeCategoryById.Tes
             // Mock GetByName method
             var incomeCategoryRepositoryMock = new Mock<IIncomeCategoryRepository>();
 
-            incomeCategoryRepositoryMock.Setup(e => e.GetByName(It.IsAny<String>()))
+            incomeCategoryRepositoryMock.Setup(i => i.GetByName(It.IsAny<String>()))
                 .ReturnsAsync(null as IncomeCategoryAssignedToUser);
 
             var validator = new EditIncomeCategoryByIdCommandValidator(incomeCategoryRepositoryMock.Object);
@@ -96,7 +96,7 @@ namespace WalletTracker.Application.Settings.Commands.EditIncomeCategoryById.Tes
 
             var incomeCategoryRepositoryMock = new Mock<IIncomeCategoryRepository>();
 
-            incomeCategoryRepositoryMock.Setup(e => e.GetByName(It.IsAny<String>()))
+            incomeCategoryRepositoryMock.Setup(i => i.GetByName(It.IsAny<String>()))
                 .ReturnsAsync(incomeCategoryAssignedToUser);
 
             var validator = new EditIncomeCategoryByIdCommandValidator(incomeCategoryRepositoryMock.Object);

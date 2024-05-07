@@ -7,8 +7,8 @@ namespace WalletTracker.Application.Settings.Commands.DeleteExpenseCategoryById.
 {
     public class DeleteExpenseCategoryByIdCommandHandlerTests
     {
-        [Fact()]
-        public async Task Handle_WithValidId_DeleteExpenseCategory()
+        [Fact]
+        public async Task Handle_WithValidId_ShouldDeleteExpenseCategory()
         {
             // Arrange
             var command = new DeleteExpenseCategoryByIdCommand()
@@ -28,7 +28,7 @@ namespace WalletTracker.Application.Settings.Commands.DeleteExpenseCategoryById.
             expenseCategoryRepositoryMock.Verify(e => e.DeleteById(command.Id), Times.Once);
         }
 
-        [Fact()]
+        [Fact]
         public void Handle_WithInvalidId_ShouldThrowException()
         {
             // Arrange

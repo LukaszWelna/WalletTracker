@@ -12,8 +12,8 @@ namespace WalletTracker.Application.Expense.Queries.GetEditExpenseFormDataAfterV
 {
     public class GetEditExpenseFormDataAfterValidationQueryHandlerTests
     {
-        [Fact()]
-        public async void Handle_ForGivenCommand_ReturnUpdatedCommand()
+        [Fact]
+        public async void Handle_ForGivenCommand_ShouldReturnUpdatedCommand()
         {
             // Arrange
             var command = new EditExpenseByIdCommand()
@@ -69,7 +69,7 @@ namespace WalletTracker.Application.Expense.Queries.GetEditExpenseFormDataAfterV
             // Mock Expense category repository
             var expenseCategoryRepositoryMock = new Mock<IExpenseCategoryRepository>();
 
-            expenseCategoryRepositoryMock.Setup(i => i.GetCategoriesAssignedToLoggedUser())
+            expenseCategoryRepositoryMock.Setup(e => e.GetCategoriesAssignedToLoggedUser())
                 .ReturnsAsync(categoriesAssignedToUser);
 
             // Mock Payment method repository

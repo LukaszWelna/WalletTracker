@@ -8,7 +8,7 @@ namespace WalletTracker.Application.Settings.Commands.CreateExpenseCategory.Test
 {
     public class CreateExpenseCategoryCommandValidatorTests
     {
-        [Theory()]
+        [Theory]
         [InlineData("TestName")]
         [InlineData("TestNameLonger12345")]
         public void Validate_WithValidCommand_ShouldNotHaveValidationError(string name)
@@ -34,7 +34,7 @@ namespace WalletTracker.Application.Settings.Commands.CreateExpenseCategory.Test
             result.ShouldNotHaveAnyValidationErrors();
         }
 
-        [Theory()]
+        [Theory]
         [InlineData("")]
         [InlineData("A")]
         [InlineData("TestCategoryNameTooLong12345")]
@@ -61,7 +61,7 @@ namespace WalletTracker.Application.Settings.Commands.CreateExpenseCategory.Test
             result.ShouldHaveAnyValidationError();
         }
 
-        [Fact()]
+        [Fact]
         public void Validate_WithExistingName_ShouldHaveValidationError()
         {
             // Arrange

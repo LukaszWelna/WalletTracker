@@ -7,8 +7,8 @@ namespace WalletTracker.Application.Expense.Commands.EditExpenseById.Tests
 {
     public class EditExpenseByIdCommandHandlerTests
     {
-        [Fact()]
-        public async Task Handle_WithValidCommand_EditExpenseById()
+        [Fact]
+        public async Task Handle_WithValidCommand_ShouldEditExpenseById()
         {
             // Arrange
             var command = new EditExpenseByIdCommand()
@@ -35,7 +35,7 @@ namespace WalletTracker.Application.Expense.Commands.EditExpenseById.Tests
             // Mock Expense repository
             var expenseRepositoryMock = new Mock<IExpenseRepository>();
 
-            expenseRepositoryMock.Setup(i => i.GetExpenseById(It.IsAny<int>()))
+            expenseRepositoryMock.Setup(e => e.GetExpenseById(It.IsAny<int>()))
                 .ReturnsAsync(expense);
 
             var handler = new EditExpenseByIdCommandHandler(expenseRepositoryMock.Object);

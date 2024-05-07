@@ -37,7 +37,7 @@ namespace WalletTracker.Application.Settings.Commands.EditPaymentMethodById.Test
             // Mock GetByName method
             var paymentMethodRepositoryMock = new Mock<IPaymentMethodRepository>();
 
-            paymentMethodRepositoryMock.Setup(e => e.GetByName(It.IsAny<String>()))
+            paymentMethodRepositoryMock.Setup(p => p.GetByName(It.IsAny<String>()))
                 .ReturnsAsync(null as PaymentMethodAssignedToUser);
 
             var validator = new EditPaymentMethodByIdCommandValidator(paymentMethodRepositoryMock.Object);
@@ -64,7 +64,7 @@ namespace WalletTracker.Application.Settings.Commands.EditPaymentMethodById.Test
             // Mock GetByName method
             var paymentMethodRepositoryMock = new Mock<IPaymentMethodRepository>();
 
-            paymentMethodRepositoryMock.Setup(e => e.GetByName(It.IsAny<String>()))
+            paymentMethodRepositoryMock.Setup(p => p.GetByName(It.IsAny<String>()))
                 .ReturnsAsync(null as PaymentMethodAssignedToUser);
 
             var validator = new EditPaymentMethodByIdCommandValidator(paymentMethodRepositoryMock.Object);
@@ -96,7 +96,7 @@ namespace WalletTracker.Application.Settings.Commands.EditPaymentMethodById.Test
 
             var paymentMethodRepositoryMock = new Mock<IPaymentMethodRepository>();
 
-            paymentMethodRepositoryMock.Setup(e => e.GetByName(It.IsAny<String>()))
+            paymentMethodRepositoryMock.Setup(p => p.GetByName(It.IsAny<String>()))
                 .ReturnsAsync(paymentMethodAssignedToUser);
 
             var validator = new EditPaymentMethodByIdCommandValidator(paymentMethodRepositoryMock.Object);

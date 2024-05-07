@@ -16,7 +16,7 @@ namespace WalletTracker.Application.Mappings.Tests
 {
     public class BalanceMappingProfileTests
     {
-        [Fact()]
+        [Fact]
         public void BalanceMappingProfile_ShouldMapExpenseTotalAmountInCategoryDtoToBalanceCanvasDto()
         {
             // Arrange

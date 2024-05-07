@@ -13,8 +13,8 @@ namespace WalletTracker.Application.Settings.Queries.GetExpenseCategoryFormToDel
 {
     public class GetExpenseCategoryFormToDeleteQueryHandlerTests
     {
-        [Fact()]
-        public async Task Handle_ReturnCommand()
+        [Fact]
+        public async Task Handle_ShouldReturnCommand()
         {
             // Arrange
             var query = new GetExpenseCategoryFormToDeleteQuery();
@@ -40,7 +40,7 @@ namespace WalletTracker.Application.Settings.Queries.GetExpenseCategoryFormToDel
             // Mock Expense category repository
             var expenseCategoryRepositoryMock = new Mock<IExpenseCategoryRepository>();
 
-            expenseCategoryRepositoryMock.Setup(i => i.GetCategoriesAssignedToLoggedUser())
+            expenseCategoryRepositoryMock.Setup(e => e.GetCategoriesAssignedToLoggedUser())
                 .ReturnsAsync(categoriesAssignedToUser);
 
             // Mock mapper

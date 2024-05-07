@@ -10,8 +10,8 @@ namespace WalletTracker.Application.Settings.Commands.CreatePaymentMethod.Tests
 {
     public class CreatePaymentMethodCommandHandlerTests
     {
-        [Fact()]
-        public async Task Handle_WithValidCommand_CreatePaymentMethod()
+        [Fact]
+        public async Task Handle_WithValidCommand_ShouldCreatePaymentMethod()
         {
             // Arrange
             var command = new CreatePaymentMethodCommand()

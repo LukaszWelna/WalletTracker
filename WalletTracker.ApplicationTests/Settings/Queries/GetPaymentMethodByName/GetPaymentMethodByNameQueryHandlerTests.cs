@@ -8,8 +8,8 @@ namespace WalletTracker.Application.Settings.Queries.GetPaymentMethodByName.Test
 {
     public class GetPaymentMethodByNameQueryHandlerTests
     {
-        [Fact()]
-        public async Task Handle_ForGivenName_ReturnPaymentMethodAssignedToUser()
+        [Fact]
+        public async Task Handle_ForGivenName_ShouldReturnPaymentMethodAssignedToUser()
         {
             // Arrange 
             var query = new GetPaymentMethodByNameQuery("Test name");

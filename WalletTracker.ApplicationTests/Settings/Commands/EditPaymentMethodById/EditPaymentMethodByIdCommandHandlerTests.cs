@@ -8,8 +8,8 @@ namespace WalletTracker.Application.Settings.Commands.EditPaymentMethodById.Test
 {
     public class EditPaymentMethodByIdCommandHandlerTests
     {
-        [Fact()]
-        public async Task Handle_WithValidCommand_EditPaymentMethodById()
+        [Fact]
+        public async Task Handle_WithValidCommand_ShouldEditPaymentMethodById()
         {
             // Arrange
             var command = new EditPaymentMethodByIdCommand()
@@ -27,7 +27,7 @@ namespace WalletTracker.Application.Settings.Commands.EditPaymentMethodById.Test
             // Mock Payment method repository
             var paymentMethodRepositoryMock = new Mock<IPaymentMethodRepository>();
 
-            paymentMethodRepositoryMock.Setup(i => i.GetById(It.IsAny<int>()))
+            paymentMethodRepositoryMock.Setup(p => p.GetById(It.IsAny<int>()))
                 .ReturnsAsync(paymentMethod);
 
             var handler = new EditPaymentMethodByIdCommandHandler(paymentMethodRepositoryMock.Object);

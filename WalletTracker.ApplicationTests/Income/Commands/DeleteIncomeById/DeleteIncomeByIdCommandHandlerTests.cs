@@ -14,8 +14,8 @@ namespace WalletTracker.Application.Income.Commands.DeleteIncomeById.Tests
 {
     public class DeleteIncomeByIdCommandHandlerTests
     {
-        [Fact()]
-        public async Task Handle_WithValidId_DeleteIncome()
+        [Fact]
+        public async Task Handle_WithValidId_ShouldDeleteIncome()
         {
             // Arrange
             var command = new DeleteIncomeByIdCommand(1);
