@@ -20,6 +20,9 @@ namespace WalletTracker.Application.Income.Commands.CreateIncome
             RuleFor(i => i.CategoryId)
                 .NotEmpty().WithMessage("This field is required.")
                 .GreaterThan(0).WithMessage("This field is required");
+
+            RuleFor(i => i.Comment)
+                .MaximumLength(25).WithMessage("This field must contain less than 26 characters");
         }
     }
 }

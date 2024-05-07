@@ -19,6 +19,9 @@ $("#expenseForm").validate({
         CategoryId: {
             required: true,
             min: 1
+        },
+        Comment: {
+            maxlength: 25
         }
     },
     messages: {
@@ -30,6 +33,9 @@ $("#expenseForm").validate({
         },
         CategoryId: {
             min: "This field is required."
+        },
+        Comment: {
+            maxlength: "This field contain less than 26 characters."
         }
     },
     errorPlacement: function (error, element) {
@@ -40,7 +46,9 @@ $("#expenseForm").validate({
         else if ($(element).attr("name") == "PaymentId")
             $("#paymentIdSpan").text(error.text());
         else if ($(element).attr("name") == "CategoryId")
-            $("#categoryIdSpan").text(error.text());
+            $("#categoryIdSpan").text(error.text())
+        else if ($(element).attr("name") == "Comment")
+            $("#commentIdSpan").text(error.text());
     },
     success: function (label, element) {
         if ($(element).attr("name") == "Amount")
@@ -50,6 +58,8 @@ $("#expenseForm").validate({
         else if ($(element).attr("name") == "PaymentId")
             $("#paymentIdSpan").text("");
         else if ($(element).attr("name") == "CategoryId")
-            $("#categoryIdSpan").text("");
+            $("#categoryIdSpan").text("")
+        else if ($(element).attr("name") == "Comment")
+            $("#commentIdSpan").text("");
     }
 });

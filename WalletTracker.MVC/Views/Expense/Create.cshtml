@@ -76,9 +76,9 @@
                     <span asp-validation-for="CategoryId" class="text-danger" id="categoryIdSpan"></span>
                 </div>
                 <div class="form-floating mb-3">
-                    <textarea asp-for="Comment" class="form-control"
-                              placeholder="Comment" maxlength="25"></textarea>
+                    <input asp-for="Comment" class="form-control" placeholder="Comment"/>
                     <label asp-for="Comment">Comment</label>
+                    <span asp-validation-for="Comment" class="text-danger" id="commentIdSpan"></span>
                 </div>
                 <button id="expenseSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Add</button>
             </form>
