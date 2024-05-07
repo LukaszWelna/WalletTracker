@@ -49,7 +49,8 @@ namespace WalletTracker.Application.Income.Commands.CreateIncome.Tests
                 {
                     Amount = 0,
                     IncomeDate = DateOnly.FromDateTime(DateTime.MinValue),
-                    CategoryId = 0
+                    CategoryId = 0,
+                    Comment = "Too long text for a comment"
                 }
             };
 
@@ -58,7 +59,8 @@ namespace WalletTracker.Application.Income.Commands.CreateIncome.Tests
                 {
                     Amount = -10,
                     IncomeDate = DateOnly.FromDateTime(DateTime.MinValue),
-                    CategoryId = -10
+                    CategoryId = -10,
+                    Comment = "Too long text for a comment"
                 }
             };
 
@@ -67,7 +69,8 @@ namespace WalletTracker.Application.Income.Commands.CreateIncome.Tests
                 {
                     Amount = 1000000000,
                     IncomeDate = DateOnly.FromDateTime(new DateTime(1999, 1, 1)),
-                    CategoryId = -100
+                    CategoryId = -100,
+                    Comment = "Too long text for a comment"
                 }
             };
 
@@ -76,7 +79,8 @@ namespace WalletTracker.Application.Income.Commands.CreateIncome.Tests
                 {
                     Amount = 10.555m,
                     IncomeDate = DateOnly.FromDateTime(DateTime.UtcNow).AddDays(1),
-                    CategoryId = 0
+                    CategoryId = 0,
+                    Comment = "Too long text for a comment"
                 }
             };
         }
@@ -95,6 +99,7 @@ namespace WalletTracker.Application.Income.Commands.CreateIncome.Tests
             result.ShouldHaveValidationErrorFor(c => c.Amount);
             result.ShouldHaveValidationErrorFor(c => c.IncomeDate);
             result.ShouldHaveValidationErrorFor(c => c.CategoryId);
+            result.ShouldHaveValidationErrorFor(c => c.Comment);
         }
     }
 }
