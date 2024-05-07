@@ -10,8 +10,8 @@ namespace WalletTracker.Application.Income.Queries.GetEditIncomeFormDataAfterVal
 {
     public class GetEditIncomeFormDataAfterValidationQueryHandlerTests
     {
-        [Fact()]
-        public async Task Handle_ForGivenCommand_ReturnUpdatedCommand()
+        [Fact]
+        public async Task Handle_ForGivenCommand_ShouldReturnUpdatedCommand()
         {
             // Arrange
             var command = new EditIncomeByIdCommand()

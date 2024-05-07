@@ -8,7 +8,7 @@ namespace WalletTracker.Application.Settings.Commands.CreatePaymentMethod.Tests
 {
     public class CreatePaymentMethodCommandValidatorTests
     {
-        [Theory()]
+        [Theory]
         [InlineData("TestName")]
         [InlineData("TestNameLonger12345")]
         public void Validate_WithValidCommand_ShouldNotHaveValidationError(string name)
@@ -22,7 +22,7 @@ namespace WalletTracker.Application.Settings.Commands.CreatePaymentMethod.Tests
             // Mock GetByName method
             var paymentMethodRepositoryMock = new Mock<IPaymentMethodRepository>();
 
-            paymentMethodRepositoryMock.Setup(e => e.GetByName(It.IsAny<String>()))
+            paymentMethodRepositoryMock.Setup(p => p.GetByName(It.IsAny<String>()))
                 .ReturnsAsync(null as PaymentMethodAssignedToUser);
 
             var validator = new CreatePaymentMethodCommandValidator(paymentMethodRepositoryMock.Object);
@@ -34,7 +34,7 @@ namespace WalletTracker.Application.Settings.Commands.CreatePaymentMethod.Tests
             result.ShouldNotHaveAnyValidationErrors();
         }
 
-        [Theory()]
+        [Theory]
         [InlineData("")]
         [InlineData("A")]
         [InlineData("TestPaymentMethodNameTooLong")]
@@ -49,7 +49,7 @@ namespace WalletTracker.Application.Settings.Commands.CreatePaymentMethod.Tests
             // Mock GetByName method
             var paymentMethodRepositoryMock = new Mock<IPaymentMethodRepository>();
 
-            paymentMethodRepositoryMock.Setup(e => e.GetByName(It.IsAny<String>()))
+            paymentMethodRepositoryMock.Setup(p => p.GetByName(It.IsAny<String>()))
                 .ReturnsAsync(null as PaymentMethodAssignedToUser);
 
             var validator = new CreatePaymentMethodCommandValidator(paymentMethodRepositoryMock.Object);
@@ -61,7 +61,7 @@ namespace WalletTracker.Application.Settings.Commands.CreatePaymentMethod.Tests
             result.ShouldHaveAnyValidationError();
         }
 
-        [Fact()]
+        [Fact]
         public void Validate_WithExistingName_ShouldHaveValidationError()
         {
             // Arrange
@@ -78,7 +78,7 @@ namespace WalletTracker.Application.Settings.Commands.CreatePaymentMethod.Tests
 
             var paymentMethodRepositoryMock = new Mock<IPaymentMethodRepository>();
 
-            paymentMethodRepositoryMock.Setup(e => e.GetByName(It.IsAny<String>()))
+            paymentMethodRepositoryMock.Setup(p => p.GetByName(It.IsAny<String>()))
                 .ReturnsAsync(paymentMethodAssignedToUser);
 
             var validator = new CreatePaymentMethodCommandValidator(paymentMethodRepositoryMock.Object);

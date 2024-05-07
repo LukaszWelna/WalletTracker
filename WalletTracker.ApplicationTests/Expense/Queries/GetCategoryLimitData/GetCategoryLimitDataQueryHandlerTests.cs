@@ -9,8 +9,8 @@ namespace WalletTracker.Application.Expense.Queries.GetCategoryLimitData.Tests
 {
     public class GetCategoryLimitDataQueryHandlerTests
     {
-        [Fact()]
-        public async Task Handle_ForGivenCategoryId_ReturnCorrectCategoryLimitDto()
+        [Fact]
+        public async Task Handle_ForGivenCategoryId_ShouldReturnCorrectCategoryLimitDto()
         {
             // Arrange
             var query = new GetCategoryLimitDataQuery(1);

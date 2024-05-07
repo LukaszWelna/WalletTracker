@@ -1,23 +1,14 @@
-﻿using Xunit;
-using WalletTracker.Application.Income.Commands.EditIncomeById;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using FluentAssertions;
 using Moq;
-using WalletTracker.Application.ApplicationUser;
-using WalletTracker.Application.Income.Commands.CreateIncome;
 using WalletTracker.Domain.Interfaces;
-using FluentAssertions;
+using Xunit;
 
 namespace WalletTracker.Application.Income.Commands.EditIncomeById.Tests
 {
     public class EditIncomeByIdCommandHandlerTests
     {
-        [Fact()]
-        public async Task Handle_WithValidCommand_EditIncomeById()
+        [Fact]
+        public async Task Handle_WithValidCommand_ShouldEditIncomeById()
         {
             // Arrange
             var command = new EditIncomeByIdCommand()

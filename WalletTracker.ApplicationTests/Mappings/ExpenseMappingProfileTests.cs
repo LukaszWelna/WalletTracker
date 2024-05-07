@@ -8,7 +8,7 @@ namespace WalletTracker.Application.Mappings.Tests
 {
     public class ExpenseMappingProfileTests
     {
-        [Fact()]
+        [Fact]
         public void ExpenseMappingProfile_ShouldMapExpenseToGetExpenseDto()
         {
             // Arrange

@@ -9,8 +9,8 @@ namespace WalletTracker.Application.Expense.Queries.GetDefaultExpenseFormData.Te
 {
     public class GetDefaultExpenseFormDataQueryHandlerTests
     {
-        [Fact()]
-        public async Task Handle_ReturnDefaultCommand()
+        [Fact]
+        public async Task Handle_ShouldReturnDefaultCommand()
         {
             // Arrange
             var query = new GetDefaultExpenseFormDataQuery();
@@ -54,7 +54,7 @@ namespace WalletTracker.Application.Expense.Queries.GetDefaultExpenseFormData.Te
             // Mock Expense category repository
             var expenseCategoryRepositoryMock = new Mock<IExpenseCategoryRepository>();
 
-            expenseCategoryRepositoryMock.Setup(i => i.GetCategoriesAssignedToLoggedUser())
+            expenseCategoryRepositoryMock.Setup(e => e.GetCategoriesAssignedToLoggedUser())
                 .ReturnsAsync(categoriesAssignedToUser);
 
             // Mock Payment method repository

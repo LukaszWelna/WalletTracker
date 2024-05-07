@@ -16,8 +16,8 @@ namespace WalletTracker.Application.Settings.Queries.GetExpenseCategoryByName.Te
 {
     public class GetExpenseCategoryByNameQueryHandlerTests
     {
-        [Fact()]
-        public async Task Handle_ForGivenName_ReturnExpenseCategoryAssignedToUser()
+        [Fact]
+        public async Task Handle_ForGivenName_ShouldReturnExpenseCategoryAssignedToUser()
         {
             // Arrange 
             var query = new GetExpenseCategoryByNameQuery("Test name");

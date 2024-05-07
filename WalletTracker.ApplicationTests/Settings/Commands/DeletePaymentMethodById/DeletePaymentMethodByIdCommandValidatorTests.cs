@@ -5,7 +5,7 @@ namespace WalletTracker.Application.Settings.Commands.DeletePaymentMethodById.Te
 {
     public class DeletePaymentMethodByIdCommandValidatorTests
     {
-        [Fact()]
+        [Fact]
         public void Validate_WithValidCommand_ShouldNotHaveValidationError()
         {
             // Arrange
@@ -23,7 +23,7 @@ namespace WalletTracker.Application.Settings.Commands.DeletePaymentMethodById.Te
             result.ShouldNotHaveAnyValidationErrors();
         }
 
-        [Fact()]
+        [Fact]
         public void Validate_WithInvalidCommand_ShouldHaveValidationError()
         {
             // Arrange

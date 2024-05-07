@@ -15,8 +15,8 @@ namespace WalletTracker.Application.Income.Commands.CreateIncome.Tests
 {
     public class CreateIncomeCommandHandlerTests
     {
-        [Fact()]
-        public async Task Handle_WithValidCommand_CreateIncome()
+        [Fact]
+        public async Task Handle_WithValidCommand_ShouldCreateIncome()
         {
             // Arrange
             var command = new CreateIncomeCommand()

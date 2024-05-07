@@ -10,8 +10,8 @@ namespace WalletTracker.Application.Expense.Queries.EditExpenseById.Tests
 {
     public class EditExpenseByIdQueryHandlerTests
     {
-        [Fact()]
-        public async Task Handle_ForGivenId_ReturnCommand()
+        [Fact]
+        public async Task Handle_ForGivenId_ShouldReturnCommand()
         {
             // Arrange 
             var query = new EditExpenseByIdQuery(1);

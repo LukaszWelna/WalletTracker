@@ -5,7 +5,7 @@ namespace WalletTracker.Application.Settings.Commands.DeleteExpenseCategoryById.
 {
     public class DeleteExpenseCategoryByIdCommandValidatorTests
     {
-        [Fact()]
+        [Fact]
         public void Validate_WithValidCommand_ShouldNotHaveValidationError()
         {
             // Arrange
@@ -23,7 +23,7 @@ namespace WalletTracker.Application.Settings.Commands.DeleteExpenseCategoryById.
             result.ShouldNotHaveAnyValidationErrors();
         }
 
-        [Fact()]
+        [Fact]
         public void Validate_WithInvalidCommand_ShouldHaveValidationError()
         {
             // Arrange

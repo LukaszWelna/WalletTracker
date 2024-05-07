@@ -9,8 +9,8 @@ namespace WalletTracker.Application.Settings.Queries.GetExpenseCategoryById.Test
 {
     public class GetExpenseCategoryByIdQueryHandlerTests
     {
-        [Fact()]
-        public async Task Handle_ForGivenId_ReturnExpenseCategorySettingDto()
+        [Fact]
+        public async Task Handle_ForGivenId_ShouldReturnExpenseCategorySettingDto()
         {
             // Arrange 
             var query = new GetExpenseCategoryByIdQuery(1);

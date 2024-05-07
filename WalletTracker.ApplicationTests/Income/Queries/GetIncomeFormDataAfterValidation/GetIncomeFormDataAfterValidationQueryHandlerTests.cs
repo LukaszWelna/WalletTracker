@@ -11,8 +11,8 @@ namespace WalletTracker.Application.Income.Queries.GetCategoriesAssignedToUser.T
 {
     public class GetIncomeFormDataAfterValidationQueryHandlerTests
     {
-        [Fact()]
-        public async Task Handle_ForGivenCommand_ReturnUpdatedCommand()
+        [Fact]
+        public async Task Handle_ForGivenCommand_ShouldReturnUpdatedCommand()
         {
             // Arrange
             var command = new CreateIncomeCommand()

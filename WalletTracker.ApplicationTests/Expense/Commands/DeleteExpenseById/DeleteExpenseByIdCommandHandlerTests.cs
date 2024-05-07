@@ -7,8 +7,8 @@ namespace WalletTracker.Application.Expense.Commands.DeleteExpenseById.Tests
 {
     public class DeleteExpenseByIdCommandHandlerTests
     {
-        [Fact()]
-        public async Task Handle_WithValidId_DeleteExpense()
+        [Fact]
+        public async Task Handle_WithValidId_ShouldDeleteExpense()
         {
             // Arrange
             var command = new DeleteExpenseByIdCommand(1);
@@ -25,7 +25,7 @@ namespace WalletTracker.Application.Expense.Commands.DeleteExpenseById.Tests
             expenseRepositoryMock.Verify(e => e.DeleteExpenseById(command.ExpenseId), Times.Once);
         }
 
-        [Fact()]
+        [Fact]
         public void Handle_WithInvalidId_ShouldThrowException()
         {
             // Arrange

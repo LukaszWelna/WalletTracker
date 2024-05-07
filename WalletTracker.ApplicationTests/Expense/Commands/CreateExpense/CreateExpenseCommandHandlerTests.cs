@@ -9,8 +9,8 @@ namespace WalletTracker.Application.Expense.Commands.CreateExpense.Tests
 {
     public class CreateExpenseCommandHandlerTests
     {
-        [Fact()]
-        public async Task Handle_WithValidCommand_CreateExpense()
+        [Fact]
+        public async Task Handle_WithValidCommand_ShouldCreateExpense()
         {
             // Arrange
             var command = new CreateExpenseCommand()
